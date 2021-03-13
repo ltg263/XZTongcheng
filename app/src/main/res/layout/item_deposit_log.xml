@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+    <TextView
+        android:id="@+id/realityAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/black33"
+        android:textStyle="bold"
+        android:includeFontPadding="false"
+        android:text="到账100"/>
+
+    <TextView
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray99"
+        android:text="(提现100，其实0为平台手续费)"
+        android:includeFontPadding="false"
+        android:textSize="12sp"
+        android:layout_alignBottom="@id/realityAmount"
+        android:layout_toEndOf="@id/realityAmount"/>
+    
+    <TextView
+        android:id="@+id/time"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2019-07-15"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black33"
+        android:text="提现成功"/>
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:text="取消提现"
+        android:visibility="gone"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_radius_theme_full"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp" />
+</RelativeLayout>

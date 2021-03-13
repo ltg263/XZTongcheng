@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.MultiExpressActivity">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/my_toolbar" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_express"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/include"
+        android:layout_above="@id/rl_btm"
+        android:orientation="vertical"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    <RelativeLayout
+        android:id="@+id/rl_btm"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/cn_yf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="9dp"
+            android:text="运费"
+            android:textColor="#ff333333"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_toRightOf="@+id/cn_yf"
+            android:text="￥56"
+            android:textColor="#fff01f06"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cn_yf"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="1dp"
+            android:text="以快递上门为准"
+            android:textColor="#ff999999"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="102dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_radius_theme_22dp"
+            android:gravity="center"
+            android:text="接单"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+</RelativeLayout>

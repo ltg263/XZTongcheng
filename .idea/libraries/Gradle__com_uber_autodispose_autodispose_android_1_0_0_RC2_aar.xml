@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.uber.autodispose:autodispose-android:1.0.0-RC2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05c54696e48726aa9d7cc2de768a1393/autodispose-android-1.0.0-RC2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05c54696e48726aa9d7cc2de768a1393/autodispose-android-1.0.0-RC2/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.uber.autodispose/autodispose-android/1.0.0-RC2/5794c6d6a148dfdea3c274748fc92905d9f2594a/autodispose-android-1.0.0-RC2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.uber.autodispose/autodispose-android/1.0.0-RC2/c96137fbcb031f414b9e98a1ebf5dbfe9c844042/autodispose-android-1.0.0-RC2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
