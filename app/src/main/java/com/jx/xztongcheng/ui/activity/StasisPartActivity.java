@@ -43,7 +43,7 @@ public class StasisPartActivity extends BaseActivity {
     public void initView() {
         BarUtils.setStatusBarColor(this, getResources().getColor(R.color.theme_color));
         setToolbar(mToolbar, "数量统计", true);
-        mToolbar.setNavigationIcon(R.mipmap.icon_common_back);
+        mToolbar.setNavigationIcon(R.mipmap.ic_back);
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) mToolbar.getLayoutParams();
         params.topMargin = BarUtils.getStatusBarHeight();
         mFragments = new ArrayList<>();

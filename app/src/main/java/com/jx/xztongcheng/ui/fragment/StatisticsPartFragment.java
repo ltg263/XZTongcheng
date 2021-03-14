@@ -161,14 +161,14 @@ public class StatisticsPartFragment extends BaseFragment {
         loadData(2);
     }
 
-    private void loadData(int dataType) {
+    private void loadData(int dateType) {
         Observable<BaseResponse<StatisResponse>> observable;
         if (type == 1) {
-            observable = RetrofitManager.build().create(OrderService.class).orderStatistic(dataType, beginDaeString, endDataString);
+            observable = RetrofitManager.build().create(OrderService.class).orderStatistic(dateType, beginDaeString, endDataString);
         } else if (type == 2) {
-            observable = RetrofitManager.build().create(OrderService.class).incomeStatistic(dataType, beginDaeString, endDataString);
+            observable = RetrofitManager.build().create(OrderService.class).incomeStatistic(dateType, beginDaeString, endDataString);
         } else {
-            observable = RetrofitManager.build().create(OrderService.class).customerStatistic(dataType, beginDaeString, endDataString);
+            observable = RetrofitManager.build().create(OrderService.class).customerStatistic(dateType, beginDaeString, endDataString);
         }
         observable
                 .compose(RxScheduler.<BaseResponse<StatisResponse>>observeOnMainThread())
@@ -197,12 +197,15 @@ public class StatisticsPartFragment extends BaseFragment {
                 break;
             case R.id.tv_week:
                 setUI(tvWeek, tvMonth, tvYear);
+                loadData(1);
                 break;
             case R.id.tv_month:
                 setUI(tvMonth, tvWeek, tvYear);
+                loadData(2);
                 break;
             case R.id.tv_year:
                 setUI(tvYear, tvMonth, tvWeek);
+                loadData(3);
                 break;
         }
     }

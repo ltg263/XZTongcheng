@@ -1,6 +1,7 @@
 package com.jx.xztongcheng.net.service;
 
 import com.jx.xztongcheng.bean.clazz.UserInfo;
+import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.GrabStatusResponse;
@@ -14,6 +15,7 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -74,8 +76,8 @@ public interface UserService {
     @POST("user/api/v1/user/cash/out/account/save")
     Observable<BaseResponse<EmptyResponse>> addCard(@Body RequestBody body);
 
-    @GET("user/api/v1/feign/user/cash/out/account/list")
-    Observable<BaseResponse<EmptyResponse>> getBankCard();
+    @GET("user/api/v1/user/cash/out/account/list")
+    Observable<BaseResponse<AccountLists>> getBankCard();
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/update/current/grab")
@@ -84,5 +86,24 @@ public interface UserService {
     @GET("order/api/v1/user/courier/current/grab")
     Observable<BaseResponse<GrabStatusResponse>> getGrab();
 
+    @GET("user/api/v1/user/cash/out/account/get")
+    Observable<BaseResponse<AccountLists.ListBean>> getAcconunt(@Query("id") String id);
 
+
+
+    @FormUrlEncoded
+    @POST("user/api/v1/user/cash/out/account/save")
+    Observable<BaseResponse<EmptyResponse>> addCard(@Field("accountNo") String accountNo,@Field("bank") String bank,
+                                                    @Field("mobile") String mobile,@Field("name") String name,
+                                                    @Field("status") String status,@Field("cashOutType") String cashOutType);
+
+    @POST("user/api/v1/user/cash/out/account/update")
+    Observable<BaseResponse<EmptyResponse>> addCardUpdate(@Body RequestBody body);
+
+    @POST("user/api/v1/user/cash/out/account/update/status")
+    Observable<BaseResponse<EmptyResponse>> addCardUpdatestatus(@Body RequestBody body);
+
+
+    @DELETE("user/api/v1/user/cash/out/account/remove")
+    Observable<BaseResponse> deleteCard(@Query("id") int id);
 }

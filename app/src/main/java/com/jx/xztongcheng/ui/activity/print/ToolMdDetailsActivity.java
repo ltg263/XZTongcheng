@@ -1,18 +1,13 @@
 package com.jx.xztongcheng.ui.activity.print;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,15 +42,14 @@ public class ToolMdDetailsActivity extends BaseActivity {
     TextView mTitle;
     @BindView(R.id.button_send)
     Button mSendButton;
-    private static final String TAG = "MainActivity";
-    private static PrintPP_CPCL printPP_cpcl;
-    private static final boolean D = true;
-    private static boolean isConnected = false;
-    private static final int REQUEST_CONNECT_DEVICE = 1;
-    private static final int REQUEST_ENABLE_BT = 2;
-    private static String address = "";
-    private static String name = "";
-    private static BluetoothAdapter mBluetoothAdapter = null;
+    public static PrintPP_CPCL printPP_cpcl;
+    public static final boolean D = true;
+    public static boolean isConnected = false;
+    public static final int REQUEST_CONNECT_DEVICE = 1;
+    public static final int REQUEST_ENABLE_BT = 2;
+    public static String address = "";
+    public static String name = "";
+    public static BluetoothAdapter mBluetoothAdapter = null;
     @BindView(R.id.tv_zdh)
     TextView mTvZdh;
     @BindView(R.id.iv)
@@ -91,7 +85,6 @@ public class ToolMdDetailsActivity extends BaseActivity {
     // Layout Views
     private int interval;
     private boolean isSending = false;
-    private Bitmap bj = null;
     OrderSheetInfo coreOrderList;
     @Override
     public int intiLayout() {
@@ -180,7 +173,6 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         mTvSl.setText("数量："+coreOrderList.getExpressNum());
                         mTvZl.setText("重量："+coreOrderList.getExpressWeight()+"kg");
                         mTvGm1.setText("重量："+coreOrderList.getExpressWeight()+"kg");
-                        bj = createViewBitmap(ll_bj);
                     }
 
                     @Override
@@ -190,17 +182,17 @@ public class ToolMdDetailsActivity extends BaseActivity {
                 });
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // If BT is not on, request that it be enabled
-        // setupChat() will then be called during onActivityRe//sultsetupChat
-        if (!mBluetoothAdapter.isEnabled()) {
-            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-        }
-
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // If BT is not on, request that it be enabled
+//        // setupChat() will then be called during onActivityRe//sultsetupChat
+//        if (!mBluetoothAdapter.isEnabled()) {
+//            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
+//        }
+//
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -235,41 +227,6 @@ public class ToolMdDetailsActivity extends BaseActivity {
         }
     }
 
-    @SuppressLint("ResourceType")
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.layout.option_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.scan:
-                Intent serverIntent = new Intent(this, DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
-                return true;
-            case R.id.discoverable:
-                ensureDiscoverable();
-                return true;
-        }
-        return false;
-    }
-
-
-    private void ensureDiscoverable() {
-        if (D) {
-            Log.d(TAG, "ensure discoverable");
-        }
-        if (mBluetoothAdapter.getScanMode() !=
-                BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
-            Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-            startActivity(discoverableIntent);
-        }
-    }
-
     @OnClick({R.id.search, R.id.button_send, R.id.button_dk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -292,7 +249,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                             isSending = true;
                             if (isConnected) {
                                 PrintLabel pl = new PrintLabel();
-                                pl.Lable(printPP_cpcl,coreOrderList,bitmap);
+                                pl.Lable(printPP_cpcl,coreOrderList);
                             }
                             try {
                                 interval = 0;
@@ -306,14 +263,6 @@ public class ToolMdDetailsActivity extends BaseActivity {
                 }
                 break;
         }
-    }
-
-    public Bitmap createViewBitmap(View v) {
-        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        v.draw(canvas);
-        return bitmap;
     }
 }
 

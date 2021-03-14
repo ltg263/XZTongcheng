@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
         android:gravity="right">
 
         <ImageView
@@ -79,7 +80,7 @@
                 android:id="@+id/tv_jrsj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12"
+                android:text="0"
                 android:textColor="#FFC107"
                 android:textSize="16sp" />
 
@@ -87,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="今日收件"
+                android:text="总收件"
                 android:textColor="@color/color_666666"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -104,7 +105,7 @@
                 android:id="@+id/tv_jrsk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12"
+                android:text="0"
                 android:textColor="#FFC107"
                 android:textSize="16sp" />
 
@@ -112,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="今日收入"
+                android:text="总收入"
                 android:textColor="@color/color_666666"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -129,7 +130,7 @@
                 android:id="@+id/tv_khs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12"
+                android:text="0"
                 android:textColor="#FFC107"
                 android:textSize="16sp" />
 
@@ -155,6 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFC107"
+                android:text="0"
                 android:textSize="16sp" />
 
             <TextView

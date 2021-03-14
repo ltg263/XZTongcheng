@@ -70,6 +70,16 @@
             android:textSize="14sp" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/iv_isprint"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        android:layout_marginEnd="15dp"
+        android:src="@mipmap/ic_circle_no" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

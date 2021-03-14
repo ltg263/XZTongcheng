@@ -1,8 +1,6 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,22 +8,24 @@ import android.view.View;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
+import com.jx.xztongcheng.bean.event.AccountLists;
+import com.jx.xztongcheng.bean.request.BankCardRequest;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.adpter.BankCardAdapter;
-
-import java.util.ArrayList;
+import com.jx.xztongcheng.utils.DialogUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class BankCardManageActivity extends BaseActivity {
-
 
 
     @BindView(R.id.include)
@@ -34,7 +34,7 @@ public class BankCardManageActivity extends BaseActivity {
     RecyclerView cardRv;
 
     BankCardAdapter adapter;
-//    List<BankCardBean.ListBean> listBeans = new ArrayList<>();
+    //    List<BankCardBean.ListBean> listBeans = new ArrayList<>();
     boolean isSelect = false;
 
     @Override
@@ -45,7 +45,7 @@ public class BankCardManageActivity extends BaseActivity {
     @Override
     public void initView() {
 
-        setToolbar(myToolbar,"银行卡管理",true);
+        setToolbar(myToolbar, "银行卡管理", true);
 
         isSelect = getIntent().getBooleanExtra("isSelect",false);
         adapter = new BankCardAdapter(null);
@@ -54,19 +54,19 @@ public class BankCardManageActivity extends BaseActivity {
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                    Intent intent = new Intent();
-//                    intent.putExtra("item",listBeans.get(position));
-//                    setResult(2,intent);
-//                    finish();
+                    Intent intent = new Intent(BankCardManageActivity.this,AddBankCardActivity.class);
+                    intent.putExtra("item",BankCardManageActivity.this.adapter.getData().get(position));
+                    setResult(2,intent);
+                    finish();
                 }
             });
         } else {
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    Intent intent = new Intent(BankCardManageActivity.this,AddBankCardActivity.class);
-//                    intent.putExtra("isUpdate",true);
-//                    intent.putExtra("id",listBeans.get(position).getId());
+                    Intent intent = new Intent(BankCardManageActivity.this, AddBankCardActivity.class);
+                    intent.putExtra("isUpdate", true);
+                    intent.putExtra("id", BankCardManageActivity.this.adapter.getData().get(position).getId());
                     startActivity(intent);
                 }
             });
@@ -75,24 +75,43 @@ public class BankCardManageActivity extends BaseActivity {
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(final BaseQuickAdapter adapter, View view, final int position) {
-//                new XPopup.Builder(BankCardManageActivity.this)
-//                        .asConfirm("删除银行卡", "删除银行卡将无法恢复，确认删除吗",
-//                                new OnConfirmListener() {
-//                                    @Override
-//                                    public void onConfirm() {
-//                                        RetrofitManager.build().deleteCard(listBeans.get(position).getId())
-//                                                .compose(RxSchedulers.<BaseData<Object>>compose())
-//                                                .as(RxSchedulers.<BaseData<Object>>bindLifecycle(BankCardManageActivity.this))
-//                                                .subscribe(new BaseObserver<Object>() {
-//                                                    @Override
-//                                                    public void onHandleSuccess(BaseData<Object> t) throws Exception {
-//                                                        listBeans.remove(position);
-//                                                        adapter.remove(position);
-//                                                        ToastUtils.showShort("删除成功");
-//                                                    }
-//                                                });
-//                                    }
-//                                }).show();
+                if(view.getId()==R.id.iv_mr){
+                    if(BankCardManageActivity.this.adapter.getData().get(position).getStatus()==1){
+                        return;
+                    }
+                    BankCardRequest request = new BankCardRequest();
+                    request.setId(BankCardManageActivity.this.adapter.getData().get(position).getId());
+                    request.setStatus(1);
+
+                    RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"),new Gson().toJson(request));
+                    RetrofitManager.build().create(UserService.class).addCardUpdatestatus(body)
+                            .compose(RxScheduler.observeOnMainThread())
+                            .as(RxScheduler.bindLifecycle(BankCardManageActivity.this))
+                            .subscribe(new BaseObserver() {
+                                @Override
+                                public void onSuccess(Object str) {
+                                    aaa();
+                                    ToastUtils.showShort("修改成功");
+                                }
+                            });
+                    return;
+                }
+                DialogUtils.showDialogHint(BankCardManageActivity.this, "删除银行卡将无法恢复，确认删除吗",
+                        false, () -> {
+                            RetrofitManager.build().create(UserService.class).deleteCard(
+                                    BankCardManageActivity.this.adapter.getData().get(position).getId())
+                                    .compose(RxScheduler.observeOnMainThread())
+                                    .as(RxScheduler.bindLifecycle(BankCardManageActivity.this))
+                                    .subscribe(new BaseObserver() {
+                                        @Override
+                                        public void onSuccess(Object str) {
+                                            BankCardManageActivity.this.adapter.remove(position);
+                                            BankCardManageActivity.this.adapter.notifyDataSetChanged();
+                                            ToastUtils.showShort("删除成功");
+                                        }
+                                    });
+                        });
+
 
             }
         });
@@ -110,15 +129,7 @@ public class BankCardManageActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RetrofitManager.build().create(UserService.class).getBankCard()
-                .compose(RxScheduler.observeOnMainThread())
-                .as(RxScheduler.bindLifecycle(this))
-                .subscribe(new BaseObserver<EmptyResponse>() {
-                    @Override
-                    public void onSuccess(EmptyResponse emptyResponse) {
-
-                    }
-                });
+        aaa();
 //
 //                .subscribe(new BaseObserver<BankCardBean>() {
 //                    @Override
@@ -127,5 +138,18 @@ public class BankCardManageActivity extends BaseActivity {
 //                        adapter.setNewData(listBeans);
 //                    }
 //                });
+    }
+
+    private void aaa() {
+
+        RetrofitManager.build().create(UserService.class).getBankCard()
+                .compose(RxScheduler.observeOnMainThread())
+                .as(RxScheduler.bindLifecycle(this))
+                .subscribe(new BaseObserver<AccountLists>() {
+                    @Override
+                    public void onSuccess(AccountLists emptyResponse) {
+                        adapter.setNewData(emptyResponse.getList());
+                    }
+                });
     }
 }

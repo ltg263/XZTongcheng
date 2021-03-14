@@ -12,8 +12,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="20dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -74,9 +74,9 @@
 
             <RelativeLayout
                 android:id="@+id/rl_wx"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:id="@+id/iv_wx"
@@ -130,8 +130,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="40dp"
                 android:layout_centerVertical="true"
+                android:layout_marginTop="40dp"
                 android:layout_marginRight="20dp">
 
                 <RadioButton
@@ -147,7 +147,16 @@
 
         </RelativeLayout>
 
+
     </LinearLayout>
 
-
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:background="@drawable/shape_radius_theme_full_8dp"
+        android:text="去支付"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 </LinearLayout>

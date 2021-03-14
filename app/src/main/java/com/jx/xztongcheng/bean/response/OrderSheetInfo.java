@@ -135,4 +135,23 @@ public class OrderSheetInfo {
     public void setExpressWeight(String expressWeight) {
         this.expressWeight = expressWeight;
     }
+
+    @Override
+    public String toString() {
+        return "OrderSheetInfo{" +
+                "websiteNo='" + websiteNo + '\'' +
+                ", websiteName='" + websiteName + '\'' +
+                ", parcelAffiliation='" + parcelAffiliation + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", consigneeName='" + consigneeName + '\'' +
+                ", consigneeMobile='" + consigneeMobile + '\'' +
+                ", consigneeAddress='" + consigneeAddress + '\'' +
+                ", mailingName='" + mailingName + '\'' +
+                ", mailingMobile='" + mailingMobile + '\'' +
+                ", mailingAddress='" + mailingAddress + '\'' +
+                ", expressName='" + expressName + '\'' +
+                ", expressNum='" + expressNum + '\'' +
+                ", expressWeight='" + expressWeight + '\'' +
+                '}';
+    }
 }

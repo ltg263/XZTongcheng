@@ -1,5 +1,6 @@
 package com.jx.xztongcheng.bean.request;
 
+
 /**
  * Create by Sxl on 2020/12/21.
  */
@@ -20,14 +21,14 @@ public class BankCardRequest {
 
     private String accountNo;
     private String bank;
-    private int bankNo;
-    private int cashOutType;
+    private Integer bankNo;
+    private Integer cashOutType;
     private String createTime;
-    private int id;
+    private Integer id;
     private String mobile;
     private String name;
-    private int status;
-    private int userId;
+    private Integer status;
+    private Integer userId;
 
     public String getAccountNo() {
         return accountNo;
@@ -45,19 +46,19 @@ public class BankCardRequest {
         this.bank = bank;
     }
 
-    public int getBankNo() {
+    public Integer getBankNo() {
         return bankNo;
     }
 
-    public void setBankNo(int bankNo) {
+    public void setBankNo(Integer bankNo) {
         this.bankNo = bankNo;
     }
 
-    public int getCashOutType() {
+    public Integer getCashOutType() {
         return cashOutType;
     }
 
-    public void setCashOutType(int cashOutType) {
+    public void setCashOutType(Integer cashOutType) {
         this.cashOutType = cashOutType;
     }
 
@@ -69,11 +70,11 @@ public class BankCardRequest {
         this.createTime = createTime;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -93,19 +94,19 @@ public class BankCardRequest {
         this.name = name;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 }

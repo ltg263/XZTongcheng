@@ -1,20 +1,34 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.request.RechargeSaveBean;
+import com.jx.xztongcheng.net.BaseObserver;
+import com.jx.xztongcheng.net.RetrofitManager;
+import com.jx.xztongcheng.net.RxScheduler;
+import com.jx.xztongcheng.net.service.OrderService;
+import com.jx.xztongcheng.pay.alipay.PaymentContract;
+import com.jx.xztongcheng.pay.alipay.PaymentParameterBean;
+import com.jx.xztongcheng.pay.alipay.PaymentPresenter;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
-public class PayBZJActivity extends BaseActivity {
+public class PayBZJActivity extends BaseActivity  implements PaymentContract.View {
 
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
@@ -32,7 +46,14 @@ public class PayBZJActivity extends BaseActivity {
     RadioButton rbZfb;
     @BindView(R.id.rgb_pay)
     RadioGroup rgbPay;
+    @BindView(R.id.button_send)
+    Button button_send;
 
+    private IWXAPI api;
+    int payType = 0;
+
+    public static String WX_ID="wx08a41293a322c4a0";
+    private PaymentPresenter paymentPresenter;
     @Override
     public int intiLayout() {
         return R.layout.activity_pay_bzj;
@@ -41,25 +62,168 @@ public class PayBZJActivity extends BaseActivity {
     @Override
     public void initView() {
         setToolbar(myToolbar, "保证金", true);
+        api = WXAPIFactory.createWXAPI(this, WX_ID);
+        paymentPresenter = new PaymentPresenter(this, PayBZJActivity.this);
 
         rgbPay.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (radioGroup.getId()) {
                     case R.id.rb_wx:
+                        payType = 1;
                         ToastUtils.showShort("去微信支付");
                         break;
                     case R.id.rb_zfb:
+                        payType = 2;
                         ToastUtils.showShort("去支付宝支付");
                         break;
                 }
             }
         });
+        button_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLoading();
+                appPay();
+            }
+        });
+    }
+
+    private void appPay() {
+        payType = 2;
+        if(rbWx.isChecked()){
+            payType = 1;
+        }
+        RechargeSaveBean mRechargeSaveBean = new RechargeSaveBean();
+        mRechargeSaveBean.setAmount(200);
+        mRechargeSaveBean.setRechargeType(2);
+        if(payType==1){
+            mRechargeSaveBean.setPayType("WXAPP");
+        }else{
+            mRechargeSaveBean.setPayType("ALIAPP");
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mRechargeSaveBean));
+        RetrofitManager.build().create(OrderService.class)
+                .OrderRecharge(body)
+                .compose(RxScheduler.observeOnMainThread())
+                .as(RxScheduler.bindLifecycle(this))
+                .subscribe(new BaseObserver<Integer>() {
+                    @Override
+                    public void onSuccess(Integer id) {
+//                        payOrder(id);
+
+                        if(payType==1){
+//                            weCahtPay(null);
+                        }else{
+                            appPayZfb("");
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
+                        hideLoading();
+                    }
+                });
+    }
+    private void payOrder(Integer id) {
+
+        RechargeSaveBean mRechargeSaveBean = new RechargeSaveBean();
+        mRechargeSaveBean.setOrderId(id);
+        if(payType==1){
+            mRechargeSaveBean.setPayType("WXAPP");
+        }else{
+            mRechargeSaveBean.setPayType("ALIAPP");
+        }
+        RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mRechargeSaveBean));
+        RetrofitManager.build().create(OrderService.class)
+                .OrderPay(body)
+                .compose(RxScheduler.observeOnMainThread())
+                .as(RxScheduler.bindLifecycle(this))
+                .subscribe(new BaseObserver<Integer>() {
+                    @Override
+                    public void onSuccess(Integer id) {
+                        if(payType==1){
+//                            weCahtPay(null);
+                        }else{
+                            appPayZfb("");
+                        }
+                        hideLoading();
+                    }
+
+                    @Override
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
+                        hideLoading();
+                    }
+                });
+
     }
 
     @Override
     public void initData() {
 
+    }
+
+
+//    private void weCahtPay(PayOrderResponse.DataBean.PayStrBean payStr){
+//        PayReq req = new PayReq();
+//        req.appId = payStr.getAppid();
+//        req.partnerId = payStr.getPartnerid();
+//        req.prepayId = payStr.getPrepayid();
+//        req.nonceStr = payStr.getNoncestr();
+//        req.timeStamp = payStr.getTimestamp();
+//        req.packageValue = payStr.getPackageValue();
+//        req.sign = payStr.getSign();
+//        req.extData = "app data";
+//        api.sendReq(req);
+//    }
+    private void appPayZfb(String data) {
+        PaymentParameterBean mPaymentParameterBean1 = new PaymentParameterBean();
+        mPaymentParameterBean1.setOrderInfo(data);
+        paymentPresenter.doAliPay(mPaymentParameterBean1);
+    }
+
+
+    @Override
+    public void onWXPaySuccess() {
+
+    }
+
+    @Override
+    public void onAliPaySuccess() {
+        ToastUtils.showShort( "支付成功!");
+    }
+
+    @Override
+    public void onWxPayFailure() {
+
+    }
+
+    @Override
+    public void onAliPayFailure() {
+        ToastUtils.showShort( "支付未成功!");
+        paymentResultCallback(false);
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void dismissProgress() {
+
+    }
+    /*支付结果的回调*/
+    private void paymentResultCallback(boolean flag) {
+//        ActivityCollector.getAppManager().finishotherActivity(MainActivity.activity, ShoppingPaymentActivity.this);
+//        if (flag) {
+//            IntentUtils.getInstence().intent(ShoppingPaymentActivity.this, MyOrderActivity.class, "position", 0);
+//        } else {
+//            IntentUtils.getInstence().intent(ShoppingPaymentActivity.this, MyOrderActivity.class, "position", 1);
+//        }
+        finish();
     }
 
 }

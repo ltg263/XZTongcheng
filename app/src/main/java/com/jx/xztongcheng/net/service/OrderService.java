@@ -104,13 +104,17 @@ public interface OrderService {
     Observable<BaseResponse<EmptyResponse>> transfer(@Field("expressOrderId") int expressOrderId);
 
     @GET("order/api/v1/user/courier/order/statistic")
-    Observable<BaseResponse<StatisResponse>> orderStatistic(@Query("dataType") int dataType, @Query("startDate") String startDate, @Query("endDate") String endDate);
+    Observable<BaseResponse<StatisResponse>> orderStatistic(@Query("dateType") int dateType, @Query("startDate") String startDate, @Query("endDate") String endDate);
 
     @GET("order/api/v1/user/courier/income/statistic")
-    Observable<BaseResponse<StatisResponse>> incomeStatistic(@Query("dataType") int dataType, @Query("startDate") String startDate, @Query("endDate") String endDate);
+    Observable<BaseResponse<StatisResponse>> incomeStatistic(@Query("dateType") int dateType, @Query("startDate") String startDate, @Query("endDate") String endDate);
 
     @GET("order/api/v1/user/courier/customer/statistic")
-    Observable<BaseResponse<StatisResponse>> customerStatistic(@Query("dataType") int dataType, @Query("startDate") String startDate, @Query("endDate") String endDate);
+    Observable<BaseResponse<StatisResponse>> customerStatistic(@Query("dateType") int dateType, @Query("startDate") String startDate, @Query("endDate") String endDate);
 
+    @POST("order/api/v1/order/recharge/save")
+    Observable<BaseResponse<Integer>> OrderRecharge(@Body RequestBody body);
 
+    @POST("order/api/v1/order/recharge/pay")
+    Observable<BaseResponse<Integer>> OrderPay(@Body RequestBody body);
 }

@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg_gray"
+    android:orientation="vertical"
     tools:context=".ui.activity.AddBankCardActivity">
 
-    <include layout="@layout/my_toolbar" android:id="@+id/include" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/my_toolbar" />
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
 
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
             <TextView
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="请绑定持卡人本人的银行卡"/>
+                android:padding="10dp"
+                android:text="请绑定持卡人本人的银行卡" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,9 +57,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:paddingStart="20dp"
                 android:paddingTop="16dp"
@@ -82,9 +86,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:paddingStart="20dp"
                 android:paddingTop="16dp"
@@ -111,9 +115,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:paddingStart="20dp"
                 android:paddingTop="16dp"
@@ -139,25 +143,47 @@
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <TextView
-                android:padding="10dp"
-                android:layout_marginStart="20dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="*请上传本人银行卡号，并仔细核对"/>
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dp_10">
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/ic_circle_no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:text="默认银行卡" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:padding="10dp"
+                android:text="*请上传本人银行卡号，并仔细核对" />
+
 
             <ImageView
                 android:id="@+id/cardImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:visibility="gone" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
-            </LinearLayout>
+                android:layout_weight="1"></LinearLayout>
 
             <Button
                 android:id="@+id/btnSubmit"

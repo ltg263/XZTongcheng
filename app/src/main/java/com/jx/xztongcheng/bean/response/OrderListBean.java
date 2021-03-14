@@ -40,6 +40,15 @@ public class OrderListBean implements Serializable {
     private String cost;
     private int transferStatus;
     private String transferMobile;
+    private int isPrint = -1;
+
+    public void setIsPrint(int isPrint) {
+        this.isPrint = isPrint;
+    }
+
+    public int getIsPrint() {
+        return isPrint;
+    }
 
     public int getTransferStatus() {
         return transferStatus;

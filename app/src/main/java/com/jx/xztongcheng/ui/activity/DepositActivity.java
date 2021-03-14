@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.utils.CommonUtils;
@@ -35,7 +36,7 @@ public class DepositActivity extends BaseActivity {
     @BindView(R.id.selectCard)
     TextView selectCard;
 
-//    BankCardBean.ListBean card;
+    int card =0;
     int type;
     double money;
     @BindView(R.id.slogon)
@@ -122,11 +123,11 @@ public class DepositActivity extends BaseActivity {
                 if (CommonUtils.isFastDoubleClick()) {
                     return;
                 }
-//                if (card == null || Double.parseDouble(etAmount.getText().toString()) == 0) {
-//                    ToastUtils.showShort("请正确填写信息");
-//                    return;
-//                }
-
+                if (card == 0 || Double.parseDouble(etAmount.getText().toString()) == 0) {
+                    ToastUtils.showShort("请正确填写信息");
+                    return;
+                }
+//
 //                RetrofitManager.build().setDefaultCard(card.getId())
 //                        .compose(RxSchedulers.<BaseData<Object>>compose())
 //                        .as(RxSchedulers.<BaseData<Object>>bindLifecycle(this))
@@ -156,10 +157,11 @@ public class DepositActivity extends BaseActivity {
         switch (resultCode) {
             case 2:
                 if (data != null) {
-//                    if (data.hasExtra("item")) {
-//                        card = (BankCardBean.ListBean) data.getSerializableExtra("item");
-//                        selectCard.setText(card.getRemark() + card.getAccountNo());
-//                    }
+                    if (data.hasExtra("item")) {
+                        AccountLists.ListBean  bean = (AccountLists.ListBean) data.getSerializableExtra("item");
+                        selectCard.setText(bean.getBank() + bean.getAccountNo());
+                        card = bean.getId();
+                    }
                 }
                 break;
         }

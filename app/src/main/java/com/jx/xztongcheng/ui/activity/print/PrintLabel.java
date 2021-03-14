@@ -1,12 +1,17 @@
 package com.jx.xztongcheng.ui.activity.print;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.qr.print.PrintPP_CPCL;
 
 public class PrintLabel {
-    public static void Lable(PrintPP_CPCL iPrinter, OrderSheetInfo coreOrderList, Bitmap bitmap) {
+    public static void Lable(PrintPP_CPCL iPrinter, OrderSheetInfo coreOrderList) {
+        Log.w("coreOrderList","coreOrderList:"+coreOrderList.toString());
+//        if(true){
+//            return;
+//        }
 
         iPrinter.pageSetup(585, 1050);
 

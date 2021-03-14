@@ -2,9 +2,8 @@ package com.jx.xztongcheng.ui.activity;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +14,9 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.bean.request.BankCardRequest;
+import com.jx.xztongcheng.bean.response.AddAccount;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -26,8 +27,6 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.uber.autodispose.AutoDispose;
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.io.File;
 import java.util.List;
@@ -55,7 +54,10 @@ public class AddBankCardActivity extends BaseActivity {
     ImageView cardImage;
     @BindView(R.id.btnSubmit)
     Button btnSubmit;
+    @BindView(R.id.iv)
+    ImageView mIv;
 
+    int status = 1;
     boolean isUpdate = false;
     int id;
     BankCardRequest request = new BankCardRequest();
@@ -76,29 +78,47 @@ public class AddBankCardActivity extends BaseActivity {
     @Override
     public void initData() {
         if (isUpdate) {
-//            RetrofitManager.build().getCardDetail(id)
-//                    .compose(RxSchedulers.<BaseData<BankCardRequest>>compose())
-//                    .as(RxSchedulers.<BaseData<BankCardRequest>>bindLifecycle(this))
-//                    .subscribe(new BaseObserver<BankCardRequest>() {
-//                        @Override
-//                        public void onHandleSuccess(BaseData<BankCardRequest> t) throws Exception {
-//                            request = t.getData();
-//                            username.setText(request.getRealName());
-//                            phone.setText(request.getMobile());
-//                            cardNo.setText(request.getAccountNo());
-//                            bankName.setText(request.getRemark());
+            RetrofitManager.build().create(UserService.class).getAcconunt(id+"")
+                    .compose(RxScheduler.observeOnMainThread())
+                    .as(RxScheduler.bindLifecycle(this))
+                    .subscribe(new BaseObserver<AccountLists.ListBean>() {
+                        @Override
+                        public void onSuccess(AccountLists.ListBean request) {
+                            hideLoading();
+                            username.setText(request.getName());
+                            phone.setText(request.getMobile());
+                            cardNo.setText(request.getAccountNo());
+                            bankName.setText(request.getBank());
+                            status = request.getStatus();
+                            if(request.getStatus()==1){
+                                mIv.setImageDrawable(getResources().getDrawable(R.mipmap.ic_circle_yes_l));
+                            }
 //                            GlideImageLoader.loadImageAndDefault(AddBankCardActivity.this,request.getImgUrl(),cardImage);
-//
-//                        }
-//                    });
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            hideLoading();
+                        }
+                    });
         }
     }
 
-    @OnClick({R.id.cardImage, R.id.btnSubmit})
+    @OnClick({R.id.cardImage, R.id.btnSubmit,R.id.iv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cardImage:
                 selectImage();
+                break;
+            case R.id.iv:
+                if(status == 1){
+                    status = 2;
+                    mIv.setImageDrawable(getResources().getDrawable(R.mipmap.ic_circle_no));
+                }else{
+                    status = 1;
+                    mIv.setImageDrawable(getResources().getDrawable(R.mipmap.ic_circle_yes_l));
+                }
                 break;
             case R.id.btnSubmit:
                 String mobile = phone.getText().toString();
@@ -118,37 +138,42 @@ public class AddBankCardActivity extends BaseActivity {
                     return;
                 }
                 request.setMobile(mobile);
+                request.setStatus(status);
                 request.setName(realName);
                 request.setAccountNo(accountNo);
                 request.setBank(bank);
+                request.setCashOutType(1);
+                request.setId(id);
 //                request.setImgUrl(request.getImgUrl());
 //                if (isUpdate)
 //                    request.setId(id);
+
+                Log.w("--->>>","new Gson().toJson(request):"+new Gson().toJson(request));
                 RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"),new Gson().toJson(request));
                 if (isUpdate) {
                     showLoading();
-//                    RetrofitManager.build().updateCard(body)
-//                            .compose(RxSchedulers.<BaseData<Object>>compose())
-//                            .as(RxSchedulers.<BaseData<Object>>bindLifecycle(this))
-//                            .subscribe(new BaseObserver<Object>() {
-//                                @Override
-//                                public void onHandleSuccess(BaseData<Object> t) throws Exception {
-//                                    hideLoading();
-//                                    ToastUtils.showShort("修改成功");
-//                                    finish();
-//                                }
-//
-//                                @Override
-//                                public void onHandleError(String msg) {
-//                                    super.onHandleError(msg);
-//                                    hideLoading();
-//                                }
-//                            });
+                    RetrofitManager.build().create(UserService.class).addCardUpdate(body)
+                            .compose(RxScheduler.observeOnMainThread())
+                            .as(RxScheduler.bindLifecycle(this))
+                            .subscribe(new BaseObserver<EmptyResponse>() {
+                                @Override
+                                public void onSuccess(EmptyResponse emptyResponse) {
+                                    hideLoading();
+                                    ToastUtils.showShort("添加成功");
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    super.onError(e);
+                                    hideLoading();
+                                }
+                            });
 
                 } else {
-
                     showLoading();
-                    RetrofitManager.build().create(UserService.class).addCard(body)
+                    RetrofitManager.build().create(UserService.class).addCard(request.getAccountNo(),request.getBank(),
+                            request.getMobile(),request.getName(),request.getStatus()+"",1+"")
                             .compose(RxScheduler.observeOnMainThread())
                             .as(RxScheduler.bindLifecycle(this))
                             .subscribe(new BaseObserver<EmptyResponse>() {
