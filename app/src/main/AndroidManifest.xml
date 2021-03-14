@@ -6,9 +6,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -33,6 +31,15 @@
 
     <permission android:name="android.permission.DELETE_PACKAGES" />
 
+    <!-- 蓝牙权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+
+    <!-- 安卓6蓝牙权限，必须打开定位权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -52,6 +59,9 @@
         <activity android:name=".ui.activity.PayForImageActivity" />
         <activity android:name=".ui.activity.PayBZJActivity" />
         <activity android:name=".ui.activity.ChangePhoneActivity" />
+        <activity android:name=".ui.activity.ToolRkListActivity" />
+        <activity android:name=".ui.activity.ToolCkListActivity" />
+        <activity android:name=".ui.activity.ToolCarListActivity" />
         <activity android:name=".ui.activity.NameAuthenticationActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity
@@ -63,12 +73,19 @@
         <service android:name=".MapService" />
         <service android:name="com.amap.api.location.APSService" /> <!-- Since JCore2.0.0 Required SDK核心功能 -->
         <activity android:name=".ui.activity.ExpressManageActivity" />
+        <activity android:name=".ui.activity.ToolMdListActivity" />
+        <activity android:name=".ui.activity.print.ToolMdDetailsActivity" />
         <activity android:name=".ui.activity.AddBankCardActivity" />
         <activity android:name=".ui.activity.BankCardManageActivity" />
         <activity android:name=".ui.activity.DepositLogActivity" />
         <activity android:name=".ui.activity.DepositActivity" />
         <activity android:name=".ui.activity.MyWalletActivity" />
         <activity android:name=".ui.activity.ForgetPasswordActivity" />
+        <activity
+            android:name=".ui.activity.print.DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ui.activity.LoginActivity"
             android:launchMode="singleInstance" />

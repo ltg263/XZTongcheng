@@ -8,10 +8,9 @@ import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jx.xztongcheng.R;
-import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.CarListBean;
 import com.jx.xztongcheng.bean.response.CoreOrderList;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.OrderListBean;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
@@ -27,7 +26,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 
-public class ToolMdListActivity extends BaseActivity {
+public class ToolCarListActivity extends BaseActivity {
     @BindView(R.id.include)
     Toolbar mToolbar;
     @BindView(R.id.rv_data)
@@ -46,7 +45,7 @@ public class ToolMdListActivity extends BaseActivity {
     @Override
     public void initView() {
 //        BarUtils.setStatusBarColor(this, getResources().getColor(R.color.theme_color));
-        setToolbar(mToolbar, "面单统计", true);
+        setToolbar(mToolbar, "车辆列表", true);
         mToolbar.setNavigationIcon(R.mipmap.icon_common_back);
 
     }
@@ -58,7 +57,7 @@ public class ToolMdListActivity extends BaseActivity {
         timeDataAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent mIntent = new Intent(ToolMdListActivity.this, ToolMdDetailsActivity.class);
+                Intent mIntent = new Intent(ToolCarListActivity.this, ToolMdDetailsActivity.class);
                 mIntent.putExtra("id",timeDataAdapter.getItem(position).getExpressOrderDTOS().get(0).getExpressOrderId()+"");
                 startActivity(mIntent);
             }
@@ -92,30 +91,27 @@ public class ToolMdListActivity extends BaseActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("page", page);
         map.put("pageSize", pageSize);
-        map.put("orderType", 1);
-        map.put("expressType", 1);
-        map.put("orderStatus", 2);
-        RetrofitManager.build().create(OrderService.class).myOrderList(map)
-                .compose(RxScheduler.<BaseResponse<CoreOrderList>>observeOnMainThread())
-                .as(RxScheduler.<BaseResponse<CoreOrderList>>bindLifecycle(this))
-                .subscribe(new BaseObserver<CoreOrderList>() {
+        RetrofitManager.build().create(OrderService.class).getCarList(map)
+                .compose(RxScheduler.<BaseResponse<CarListBean>>observeOnMainThread())
+                .as(RxScheduler.<BaseResponse<CarListBean>>bindLifecycle(this))
+                .subscribe(new BaseObserver<CarListBean>() {
                     @Override
-                    public void onSuccess(CoreOrderList coreOrderList) {
-                        if (page == 1) {
-                            beanList = coreOrderList.getList();
-                            timeDataAdapter.setNewData(beanList);
-                            if (refresh.isRefreshing()) {
-                                refresh.setRefreshing(false);
-                            }
-                        } else {
-                            if (coreOrderList.getList().size() == 0) {
-                                timeDataAdapter.loadMoreEnd();
-                            } else {
-                                timeDataAdapter.loadMoreComplete();
-                                beanList.addAll(coreOrderList.getList());
-                                timeDataAdapter.addData(beanList);
-                            }
-                        }
+                    public void onSuccess(CarListBean coreOrderList) {
+//                        if (page == 1) {
+//                            beanList = coreOrderList.getList();
+//                            timeDataAdapter.setNewData(beanList);
+//                            if (refresh.isRefreshing()) {
+//                                refresh.setRefreshing(false);
+//                            }
+//                        } else {
+//                            if (coreOrderList.getList().size() == 0) {
+//                                timeDataAdapter.loadMoreEnd();
+//                            } else {
+//                                timeDataAdapter.loadMoreComplete();
+//                                beanList.addAll(coreOrderList.getList());
+//                                timeDataAdapter.addData(beanList);
+//                            }
+//                        }
                     }
 
                     @Override

@@ -1,10 +1,10 @@
 package com.jx.xztongcheng.net.service;
 
-import com.jx.xztongcheng.app.App;
+import com.jx.xztongcheng.bean.event.CarListBean;
+import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.CoreOrderList;
 import com.jx.xztongcheng.bean.response.OrderListBean;
-import com.jx.xztongcheng.bean.response.SettingResposne;
 import com.jx.xztongcheng.bean.response.StatisResponse;
 import com.jx.xztongcheng.bean.response.WebSiteReponse;
 import com.jx.xztongcheng.net.BaseResponse;
@@ -36,8 +36,17 @@ public interface OrderService {
     @GET("order/api/v1/user/general/order/core/list")
     Observable<BaseResponse<CoreOrderList>> coreList(@QueryMap Map<String, Object> map);
 
+    @GET("order/api/v1/feign/express/order/get")
+    Observable<BaseResponse<EmptyResponse>> orderDetail1(@Query("id") int id);
+
     @GET("order/api/v1/user/general/order/core/current/list")
     Observable<BaseResponse<CoreOrderList>> myOrderList(@QueryMap Map<String, Object> map);
+
+    @GET("order/api/v1/user/courier/express/core/express/sheet/info")
+    Observable<BaseResponse<OrderSheetInfo>> myOrderSheetInfo(@Query("expressOrderId") String expressOrderId);
+
+    @GET("order/api/v1/user/courier/express/core/express/sheet/barcode")
+    Observable<ResponseBody> myOrderBarcodeInfo(@Query("expressOrderId") String expressOrderId);
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/receive/express")
@@ -49,6 +58,14 @@ public interface OrderService {
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/user/pickup")
     Observable<BaseResponse<EmptyResponse>> pickupOrder(@Field("expressOrderId") int expressOrderId, @Field("code") String code);
+
+    @FormUrlEncoded
+    @POST("order/api/v1/user/courier/express/core/storage")
+    Observable<BaseResponse<Object>> coreStorage(@Field("expressOrderNo") String expressOrderNo, @Field("weight") String weight);
+
+    @FormUrlEncoded
+    @POST("order/api/v1/user/courier/express/core/out/warehouse")
+    Observable<BaseResponse<Object>> outWarehouse(@Field("expressOrderNo") String expressOrderNo, @Field("websiteCarId") String websiteCarId);
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/user/pickup")
@@ -67,6 +84,9 @@ public interface OrderService {
 
     @GET("order/api/v1/user/express/courier/qr")
     Observable<ResponseBody> getQrCode(@Query("type") int type, @Query("id") Integer expressOrderId);
+
+    @GET("order/api/v1/order/website/car/list")
+    Observable<BaseResponse<CarListBean>> getCarList(@QueryMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/update/current/website")

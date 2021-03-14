@@ -15,13 +15,11 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseFragment;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -29,7 +27,9 @@ import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.activity.ExpressManageActivity;
 import com.jx.xztongcheng.ui.activity.LoginActivity;
+import com.jx.xztongcheng.ui.activity.ToolCkListActivity;
 import com.jx.xztongcheng.ui.activity.ToolMdListActivity;
+import com.jx.xztongcheng.ui.activity.ToolRkListActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
 import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.widget.FullScreenDialog;
@@ -43,7 +43,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class HomeFragment extends BaseFragment {
 
@@ -224,10 +223,16 @@ public class HomeFragment extends BaseFragment {
                     startActivity(intent);
                     break;
                 case R.id.tv_rk:
-
+                    intent = new Intent(getActivity(), ToolRkListActivity.class);
+                    intent.putExtra("expressType", 1);
+                    intent.putExtra("fastStatus", 1);
+                    startActivity(intent);
                     break;
                 case R.id.tv_ck:
-
+                    intent = new Intent(getActivity(), ToolCkListActivity.class);
+                    intent.putExtra("expressType", 1);
+                    intent.putExtra("fastStatus", 1);
+                    startActivity(intent);
                     break;
             }
         }
