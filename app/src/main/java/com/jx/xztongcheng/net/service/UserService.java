@@ -77,6 +77,9 @@ public interface UserService {
     @POST("user/api/v1/user/cash/out/account/save")
     Observable<BaseResponse<EmptyResponse>> addCard(@Body RequestBody body);
 
+    @POST("user/api/v1/user/cashout/save")
+    Observable<BaseResponse<EmptyResponse>> addCashoutSave(@Body RequestBody body);
+
     @GET("user/api/v1/user/cash/out/account/list")
     Observable<BaseResponse<AccountLists>> getBankCard();
 

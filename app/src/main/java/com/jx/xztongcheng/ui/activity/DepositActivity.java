@@ -13,15 +13,25 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
+import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.event.AccountLists;
+import com.jx.xztongcheng.bean.request.CashoutSaveBean;
+import com.jx.xztongcheng.bean.request.SaveAuthRequest;
+import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
+import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
+import com.jx.xztongcheng.net.RxScheduler;
+import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.utils.CommonUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class DepositActivity extends BaseActivity {
 
@@ -38,7 +48,7 @@ public class DepositActivity extends BaseActivity {
 
     int card =0;
     int type;
-    double money;
+    String money;
     @BindView(R.id.slogon)
     TextView slogon;
 
@@ -54,7 +64,7 @@ public class DepositActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        money = getIntent().getDoubleExtra("money", 0);
+        money = App.getInstance().getUserInfo().getBalance();
         type = getIntent().getIntExtra("type", 0);
 
         etAmount.setText(money + "");
@@ -74,37 +84,11 @@ public class DepositActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!StringUtils.isEmpty(s))
-                    if (Double.parseDouble(s.toString()) > money) {
-                        etAmount.setText(money + "");
+                    if (Double.parseDouble(s.toString()) > Double.valueOf(money)) {
+                        etAmount.setText(money);
                     }
             }
         });
-
-//        if (type == 5) {
-//            RetrofitManager.build().withdrawalRule()
-//                    .compose(RxSchedulers.<BaseData<Rule>>compose())
-//                    .as(RxSchedulers.<BaseData<Rule>>bindLifecycle(this))
-//                    .subscribe(new BaseObserver<Rule>() {
-//                        @Override
-//                        public void onHandleSuccess(BaseData<Rule> t) throws Exception {
-//                            Rule rule = t.getData();
-//                            slogon.setText(rule.getExt1()+"："+"\n"+rule.getExt2());
-//                        }
-//                    });
-//        }
-//
-//        RetrofitManager.build().getDefaultCard()
-//                .compose(RxSchedulers.<BaseData<BankCardBean.ListBean>>compose())
-//                .as(RxSchedulers.<BaseData<BankCardBean.ListBean>>bindLifecycle(this))
-//                .subscribe(new BaseObserver<BankCardBean.ListBean>() {
-//                    @Override
-//                    public void onHandleSuccess(BaseData<BankCardBean.ListBean> t) throws Exception {
-//                        if (t.getData()!=null) {
-//                            card = t.getData();
-//                            selectCard.setText(card.getRemark() + card.getAccountNo());
-//                        }
-//                    }
-//                });
 
     }
 
@@ -117,7 +101,7 @@ public class DepositActivity extends BaseActivity {
                 startActivityForResult(intent, 1);
                 break;
             case R.id.allDeposit:
-                etAmount.setText(money + "");
+                etAmount.setText(money);
                 break;
             case R.id.btnDeposit:
                 if (CommonUtils.isFastDoubleClick()) {
@@ -127,27 +111,29 @@ public class DepositActivity extends BaseActivity {
                     ToastUtils.showShort("请正确填写信息");
                     return;
                 }
-//
-//                RetrofitManager.build().setDefaultCard(card.getId())
-//                        .compose(RxSchedulers.<BaseData<Object>>compose())
-//                        .as(RxSchedulers.<BaseData<Object>>bindLifecycle(this))
-//                        .subscribe(new BaseObserver<Object>() {
-//                            @Override
-//                            public void onHandleSuccess(BaseData<Object> t) throws Exception {
-//                                RetrofitManager.build().goDeposit(
-//                                        Double.parseDouble(StringUtils.isEmpty(etAmount.getText().toString()) ? "0" : etAmount.getText().toString())
-//                                        , type, card.getId())
-//                                        .compose(RxSchedulers.<BaseData<Object>>compose())
-//                                        .as(RxSchedulers.<BaseData<Object>>bindLifecycle(DepositActivity.this))
-//                                        .subscribe(new BaseObserver<Object>() {
-//                                            @Override
-//                                            public void onHandleSuccess(BaseData<Object> t) throws Exception {
-//                                                ToastUtils.showShort("申请成功");
-//                                                finish();
-//                                            }
-//                                        });
-//                            }
-//                        });
+
+                CashoutSaveBean request = new CashoutSaveBean();
+                request.setRealAmount(etAmount.getText().toString());
+                request.setType("1");
+                request.setAccountId(card+"");
+                RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(request));
+
+                RetrofitManager.build().create(UserService.class)
+                        .addCashoutSave(requestBody)
+                        .compose(RxScheduler.observeOnMainThread())
+                        .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
+                        .subscribe(new BaseObserver<EmptyResponse>() {
+                            @Override
+                            public void onSuccess(EmptyResponse emptyResponse) {
+                                ToastUtils.showShort("申请成功");
+                                finish();
+                            }
+
+                            @Override
+                            public void onFail(int code, String error) {
+
+                            }
+                        });
                 break;
         }
     }
