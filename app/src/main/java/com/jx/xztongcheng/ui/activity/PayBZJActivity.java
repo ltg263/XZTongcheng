@@ -110,13 +110,13 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                 .subscribe(new BaseObserver<Integer>() {
                     @Override
                     public void onSuccess(Integer id) {
-//                        payOrder(id);
+                        payOrder(id);
 
-                        if(payType==1){
-//                            weCahtPay(null);
-                        }else{
-                            appPayZfb("");
-                        }
+//                        if(payType==1){
+////                            weCahtPay(null);
+//                        }else{
+//                            appPayZfb("");
+//                        }
                     }
 
                     @Override
@@ -144,7 +144,7 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                     @Override
                     public void onSuccess(Integer id) {
                         if(payType==1){
-//                            weCahtPay(null);
+                            weCahtPay(null);
                         }else{
                             appPayZfb("");
                         }
@@ -155,6 +155,7 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                     public void onFail(int code, String msg) {
                         super.onFail(code, msg);
                         hideLoading();
+                        weCahtPay(null);
                     }
                 });
 
@@ -166,8 +167,8 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
     }
 
 
-//    private void weCahtPay(PayOrderResponse.DataBean.PayStrBean payStr){
-//        PayReq req = new PayReq();
+    private void weCahtPay(String payStr){
+        PayReq req = new PayReq();
 //        req.appId = payStr.getAppid();
 //        req.partnerId = payStr.getPartnerid();
 //        req.prepayId = payStr.getPrepayid();
@@ -176,8 +177,16 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
 //        req.packageValue = payStr.getPackageValue();
 //        req.sign = payStr.getSign();
 //        req.extData = "app data";
-//        api.sendReq(req);
-//    }
+        req.appId = "wx08a41293a322c4a0";
+        req.partnerId = "";
+        req.prepayId = "";
+        req.nonceStr = "";
+        req.timeStamp = "";
+        req.packageValue = "";
+        req.sign = "";
+        req.extData = "app data";
+        api.sendReq(req);
+    }
     private void appPayZfb(String data) {
         PaymentParameterBean mPaymentParameterBean1 = new PaymentParameterBean();
         mPaymentParameterBean1.setOrderInfo(data);

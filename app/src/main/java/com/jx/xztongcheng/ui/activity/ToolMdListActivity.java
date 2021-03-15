@@ -3,6 +3,8 @@ package com.jx.xztongcheng.ui.activity;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -102,6 +104,7 @@ public class ToolMdListActivity extends BaseActivity {
     }
 
     private void startPrint() {
+        Bitmap bitmap = ((BitmapDrawable)getResources().getDrawable(R.mipmap.banner_yellow)).getBitmap();
         ToolMdDetailsActivity.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //If the Bluetooth adapter is not supported,programmer is over
         if (ToolMdDetailsActivity.mBluetoothAdapter == null) {
@@ -136,7 +139,8 @@ public class ToolMdListActivity extends BaseActivity {
                                 list.setMailingAddress(data.getExpressAddressDTOS().getMailAddress());
                                 list.setExpressName(data.getExpressDTO().getExpressName());
                                 PrintLabel pl = new PrintLabel();
-                                pl.Lable(ToolMdDetailsActivity.printPP_cpcl, list);
+
+                                pl.Lable(ToolMdDetailsActivity.printPP_cpcl,bitmap ,list);
                             }
                             a++;
                             Thread.sleep(1000);

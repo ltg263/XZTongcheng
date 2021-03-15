@@ -6,6 +6,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -82,10 +84,17 @@ public class ToolMdDetailsActivity extends BaseActivity {
     TextView tv_websiteName;
     @BindView(R.id.ll_bj)
     LinearLayout ll_bj;
+    @BindView(R.id.tv_xf)
+    TextView mTvXf;
+    @BindView(R.id.tv_daif)
+    TextView mTvDaif;
+    @BindView(R.id.tv_df)
+    TextView mTvDf;
     // Layout Views
     private int interval;
     private boolean isSending = false;
     OrderSheetInfo coreOrderList;
+
     @Override
     public int intiLayout() {
         return R.layout.activity_tool_md_details;
@@ -114,10 +123,14 @@ public class ToolMdDetailsActivity extends BaseActivity {
             printPP_cpcl = new PrintPP_CPCL();
         }
     }
+
     Bitmap bitmap;
+    Bitmap bitmapR;
+
     @Override
     public void initData() {
 
+        bitmapR = ((BitmapDrawable) getResources().getDrawable(R.mipmap.banner_yellow)).getBitmap();
         RetrofitManager.build().create(OrderService.class)
                 .myOrderBarcodeInfo(getIntent().getStringExtra("id"))
                 .compose(RxScheduler.observeOnMainThread())
@@ -156,8 +169,8 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         ToolMdDetailsActivity.this.coreOrderList = coreOrderList;
                         mTvZdh.setText("享指同城");//站点
                         tv_websiteName.setText(coreOrderList.getWebsiteName());
-                        String sjyxx = coreOrderList.getConsigneeName()+"  "+coreOrderList.getConsigneeMobile()+"\n"+coreOrderList.getMailingAddress();
-                        String jjyxx = coreOrderList.getMailingName()+"  "+coreOrderList.getMailingMobile()+"\n"+coreOrderList.getMailingAddress();
+                        String sjyxx = coreOrderList.getConsigneeName() + "  " + coreOrderList.getConsigneeMobile() + "\n" + coreOrderList.getMailingAddress();
+                        String jjyxx = coreOrderList.getMailingName() + "  " + coreOrderList.getMailingMobile() + "\n" + coreOrderList.getMailingAddress();
                         mTvSjr1.setText(sjyxx);//收件人
                         mTvJjr1.setText(jjyxx);//寄件人
                         mTvSjr2.setText(sjyxx);//收件人
@@ -166,13 +179,13 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         mTvJjr3.setText(jjyxx);//寄件人
 
 //                        mTvDdxx.setText("运单号：123456   □订单号：Ltp13245");
-                        mTvDdxx.setText("运单编号号："+coreOrderList.getOrderNo());
+                        mTvDdxx.setText("运单编号号：" + coreOrderList.getOrderNo());
                         mTvJjnr.setText(coreOrderList.getExpressName());//"内容品名"
                         mTvJrsm.setText(coreOrderList.getExpressName());//"内容品名"
-                        mTvSm1.setText("数量："+coreOrderList.getExpressNum());
-                        mTvSl.setText("数量："+coreOrderList.getExpressNum());
-                        mTvZl.setText("重量："+coreOrderList.getExpressWeight()+"kg");
-                        mTvGm1.setText("重量："+coreOrderList.getExpressWeight()+"kg");
+                        mTvSm1.setText("数量：" + coreOrderList.getExpressNum());
+                        mTvSl.setText("数量：" + coreOrderList.getExpressNum());
+                        mTvZl.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
+                        mTvGm1.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
                     }
 
                     @Override
@@ -242,14 +255,15 @@ public class ToolMdDetailsActivity extends BaseActivity {
                 }
                 break;
             case R.id.button_send:
-                if (!isSending &&coreOrderList !=null &&bitmap!=null) {
+                if (!isSending && coreOrderList != null && bitmap != null) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             isSending = true;
                             if (isConnected) {
                                 PrintLabel pl = new PrintLabel();
-                                pl.Lable(printPP_cpcl,coreOrderList);
+                                bitmapR = zoomImage(bitmapR,100,40);
+                                pl.Lable(printPP_cpcl, bitmapR, coreOrderList);
                             }
                             try {
                                 interval = 0;
@@ -263,6 +277,22 @@ public class ToolMdDetailsActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    public static Bitmap zoomImage(Bitmap bgimage, double newWidth,double newHeight) {
+        // 获取这个图片的宽和高
+        float width = bgimage.getWidth();
+        float height = bgimage.getHeight();
+        // 创建操作图片用的matrix对象
+        Matrix matrix = new Matrix();
+        // 计算宽高缩放率
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 缩放图片动作
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap bitmap = Bitmap.createBitmap(bgimage, 0, 0, (int) width,
+                (int) height, matrix, true);
+        return bitmap;
     }
 }
 
