@@ -2,6 +2,7 @@ package com.jx.xztongcheng.net.service;
 
 import com.jx.xztongcheng.bean.clazz.UserInfo;
 import com.jx.xztongcheng.bean.event.AccountLists;
+import com.jx.xztongcheng.bean.event.CourierListBaen;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.GrabStatusResponse;
@@ -85,6 +86,9 @@ public interface UserService {
 
     @GET("order/api/v1/user/courier/current/grab")
     Observable<BaseResponse<GrabStatusResponse>> getGrab();
+
+    @GET("user/api/v1/user/cashout/current/list")
+    Observable<BaseResponse<CourierListBaen>> getCourierList();
 
     @GET("user/api/v1/user/cash/out/account/get")
     Observable<BaseResponse<AccountLists.ListBean>> getAcconunt(@Query("id") String id);

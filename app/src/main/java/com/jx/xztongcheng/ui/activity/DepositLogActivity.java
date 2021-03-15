@@ -9,13 +9,23 @@ import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.CourierListBaen;
+import com.jx.xztongcheng.bean.request.ForgetPasswordRequest;
+import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
+import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
+import com.jx.xztongcheng.net.RxScheduler;
+import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.adpter.DepositLogAdapter;
+import com.jx.xztongcheng.utils.DialogUtils;
 
 import butterknife.BindView;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class DepositLogActivity extends BaseActivity {
 
@@ -36,9 +46,9 @@ public class DepositLogActivity extends BaseActivity {
     public void initView() {
         setToolbar(myToolbar,"提现列表",true);
 
-//        adapter = new DepositLogAdapter(null);
-//        logRv.setAdapter(adapter);
-//
+        adapter = new DepositLogAdapter(null);
+        logRv.setAdapter(adapter);
+
 //        logRv.addItemDecoration(new DefaultItemDecoration(getResources().getColor(R.color.line_gray)));
 //        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
 //            @Override
@@ -69,14 +79,20 @@ public class DepositLogActivity extends BaseActivity {
 
     @Override
     public void initData() {
-//        RetrofitManager.build().getDepositLog()
-//                .compose(RxSchedulers.<BaseData<DepositLogBean>>compose())
-//                .as(RxSchedulers.<BaseData<DepositLogBean>>bindLifecycle(this))
-//                .subscribe(new BaseObserver<DepositLogBean>() {
-//                    @Override
-//                    public void onHandleSuccess(BaseData<DepositLogBean> t) throws Exception {
-//                        adapter.setNewData(t.getData().getList());
-//                    }
-//                });
+        RetrofitManager.build().create(UserService.class)
+                .getCourierList()
+                .compose(RxScheduler.<BaseResponse<CourierListBaen>>observeOnMainThread())
+                .as(RxScheduler.<BaseResponse<CourierListBaen>>bindLifecycle(this))
+                .subscribe(new BaseObserver<CourierListBaen>() {
+                    @Override
+                    public void onSuccess(CourierListBaen emptyResponse) {
+                        adapter.setNewData(emptyResponse.getList());
+                    }
+
+                    @Override
+                    public void onFail(int code, String error) {
+
+                    }
+                });
     }
 }
