@@ -18,7 +18,7 @@ import java.lang.Override;
 public class MultiExpressActivity_ViewBinding implements Unbinder {
   private MultiExpressActivity target;
 
-  private View view2131231233;
+  private View view2131231239;
 
   @UiThread
   public MultiExpressActivity_ViewBinding(MultiExpressActivity target) {
@@ -35,7 +35,7 @@ public class MultiExpressActivity_ViewBinding implements Unbinder {
     target.cnYf = Utils.findRequiredViewAsType(source, R.id.cn_yf, "field 'cnYf'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tv_status, "field 'tvStatus' and method 'onViewClicked'");
     target.tvStatus = Utils.castView(view, R.id.tv_status, "field 'tvStatus'", TextView.class);
-    view2131231233 = view;
+    view2131231239 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -60,7 +60,7 @@ public class MultiExpressActivity_ViewBinding implements Unbinder {
     target.rlBtm = null;
     target.tvPrice = null;
 
-    view2131231233.setOnClickListener(null);
-    view2131231233 = null;
+    view2131231239.setOnClickListener(null);
+    view2131231239 = null;
   }
 }

@@ -115,10 +115,13 @@ dependencies {
     implementation files('libs/umeng-share-wechat-full-7.0.0.jar')
     implementation files('libs/umeng-shareboard-widget-7.0.0.jar')
     implementation files('libs/umeng-sharetool-7.0.0.jar')
+    implementation files('libs/fastjson-1.2.62.jar')
     implementation files('libs/wechat-sdk-android-without-mta-5.4.3.jar')
     implementation(name: 'alipaySdk-15.7.5-20200422171619', ext: 'aar')
 
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex:rxandroid:1.2.1'
+
+    implementation 'com.github.addappcn:android-pickers:1.0.3'
 }

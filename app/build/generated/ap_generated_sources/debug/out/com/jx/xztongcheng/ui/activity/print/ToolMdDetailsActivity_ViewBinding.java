@@ -21,7 +21,7 @@ public class ToolMdDetailsActivity_ViewBinding implements Unbinder {
 
   private View view2131230786;
 
-  private View view2131231070;
+  private View view2131231072;
 
   private View view2131230784;
 
@@ -66,7 +66,7 @@ public class ToolMdDetailsActivity_ViewBinding implements Unbinder {
     target.mTvDaif = Utils.findRequiredViewAsType(source, R.id.tv_daif, "field 'mTvDaif'", TextView.class);
     target.mTvDf = Utils.findRequiredViewAsType(source, R.id.tv_df, "field 'mTvDf'", TextView.class);
     view = Utils.findRequiredView(source, R.id.search, "method 'onViewClicked'");
-    view2131231070 = view;
+    view2131231072 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -115,8 +115,8 @@ public class ToolMdDetailsActivity_ViewBinding implements Unbinder {
 
     view2131230786.setOnClickListener(null);
     view2131230786 = null;
-    view2131231070.setOnClickListener(null);
-    view2131231070 = null;
+    view2131231072.setOnClickListener(null);
+    view2131231072 = null;
     view2131230784.setOnClickListener(null);
     view2131230784 = null;
   }

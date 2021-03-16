@@ -15,11 +15,11 @@ import java.lang.Override;
 public class SwitchMapFragment_ViewBinding implements Unbinder {
   private SwitchMapFragment target;
 
-  private View view2131230879;
+  private View view2131230881;
 
   private View view2131230760;
 
-  private View view2131231256;
+  private View view2131231262;
 
   private View view2131230788;
 
@@ -30,7 +30,7 @@ public class SwitchMapFragment_ViewBinding implements Unbinder {
     View view;
     view = Utils.findRequiredView(source, R.id.gaodeTv, "field 'gaodeTv' and method 'onViewClicked'");
     target.gaodeTv = Utils.castView(view, R.id.gaodeTv, "field 'gaodeTv'", TextView.class);
-    view2131230879 = view;
+    view2131230881 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -48,7 +48,7 @@ public class SwitchMapFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.txTv, "field 'txTv' and method 'onViewClicked'");
     target.txTv = Utils.castView(view, R.id.txTv, "field 'txTv'", TextView.class);
-    view2131231256 = view;
+    view2131231262 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -76,12 +76,12 @@ public class SwitchMapFragment_ViewBinding implements Unbinder {
     target.baiduTv = null;
     target.txTv = null;
 
-    view2131230879.setOnClickListener(null);
-    view2131230879 = null;
+    view2131230881.setOnClickListener(null);
+    view2131230881 = null;
     view2131230760.setOnClickListener(null);
     view2131230760 = null;
-    view2131231256.setOnClickListener(null);
-    view2131231256 = null;
+    view2131231262.setOnClickListener(null);
+    view2131231262 = null;
     view2131230788.setOnClickListener(null);
     view2131230788 = null;
   }

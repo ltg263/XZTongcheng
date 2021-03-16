@@ -17,9 +17,9 @@ import java.lang.Override;
 public class PayForImageActivity_ViewBinding implements Unbinder {
   private PayForImageActivity target;
 
-  private View view2131230911;
+  private View view2131230913;
 
-  private View view2131230868;
+  private View view2131230870;
 
   @UiThread
   public PayForImageActivity_ViewBinding(PayForImageActivity target) {
@@ -38,7 +38,7 @@ public class PayForImageActivity_ViewBinding implements Unbinder {
     target.tvPrice = Utils.findRequiredViewAsType(source, R.id.tv_price, "field 'tvPrice'", TextView.class);
     view = Utils.findRequiredView(source, R.id.iv_camera, "field 'ivCamera' and method 'onViewClicked'");
     target.ivCamera = Utils.castView(view, R.id.iv_camera, "field 'ivCamera'", ImageView.class);
-    view2131230911 = view;
+    view2131230913 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -46,7 +46,7 @@ public class PayForImageActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.finishGet, "method 'onViewClicked'");
-    view2131230868 = view;
+    view2131230870 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -69,9 +69,9 @@ public class PayForImageActivity_ViewBinding implements Unbinder {
     target.tvPrice = null;
     target.ivCamera = null;
 
-    view2131230911.setOnClickListener(null);
-    view2131230911 = null;
-    view2131230868.setOnClickListener(null);
-    view2131230868 = null;
+    view2131230913.setOnClickListener(null);
+    view2131230913 = null;
+    view2131230870.setOnClickListener(null);
+    view2131230870 = null;
   }
 }

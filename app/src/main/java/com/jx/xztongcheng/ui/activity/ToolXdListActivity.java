@@ -1,14 +1,15 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.utils.AddressPickTask;
 import com.jx.xztongcheng.utils.PickerViewUtils;
 
 import java.text.SimpleDateFormat;
@@ -16,8 +17,10 @@ import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.addapp.pickers.entity.City;
+import cn.addapp.pickers.entity.County;
+import cn.addapp.pickers.entity.Province;
 
 public class ToolXdListActivity extends BaseActivity {
 
@@ -63,10 +66,10 @@ public class ToolXdListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_addressj:
-
+                onAddressPicker(mTvAddressj);
                 break;
             case R.id.tv_addresss:
-
+                onAddressPicker(mTvAddresss);
                 break;
             case R.id.tv_time:
                 PickerViewUtils.selectorDate(ToolXdListActivity.this,
@@ -82,5 +85,32 @@ public class ToolXdListActivity extends BaseActivity {
 //                mSv1.isChecked()
                 break;
         }
+    }
+
+    public void onAddressPicker(TextView mTvAddress) {
+        AddressPickTask task = new AddressPickTask(this);
+        task.setHideProvince(false);
+        task.setHideCounty(false);
+        task.setCallback(new AddressPickTask.Callback() {
+
+            @Override
+            public void onAddressInitFailed() {
+                Toast.makeText(ToolXdListActivity.this, "数据初始化失败", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAddressPicked(Province province, City city, County county) {
+                if (county == null) {
+                    mTvAddress.setText(province.getAreaName() + city.getAreaName());
+//                    addressData.setRegions(province.getAreaName() + city.getAreaName());
+//                    addressData.setDistrictId(city.getAreaId());
+                } else {
+                    mTvAddress.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+//                    addressData.setRegions(province.getAreaName() + city.getAreaName() + county.getAreaName());
+//                    addressData.setDistrictId(county.getAreaId());
+                }
+            }
+        });
+        task.execute("北京", "北京", "北京");
     }
 }

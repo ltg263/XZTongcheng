@@ -141,6 +141,7 @@ attr buttonStyle
 attr buttonStyleSmall
 attr buttonTint
 attr buttonTintMode
+attr canLoop
 attr cardBackgroundColor
 attr cardCornerRadius
 attr cardElevation
@@ -148,6 +149,7 @@ attr cardMaxElevation
 attr cardPreventCornerOverlap
 attr cardUseCompatPadding
 attr cardViewStyle
+attr centerTextColor
 attr chainUseRtl
 attr checkboxStyle
 attr checkedChip
@@ -232,6 +234,7 @@ attr divider
 attr dividerHorizontal
 attr dividerPadding
 attr dividerVertical
+attr drawItemCount
 attr drawableSize
 attr drawerArrowStyle
 attr dropDownListViewStyle
@@ -312,6 +315,7 @@ attr indicator_drawable_unselected
 attr indicator_height
 attr indicator_margin
 attr indicator_width
+attr initPosition
 attr initialActivityCount
 attr insetForeground
 attr isLightTheme
@@ -394,8 +398,10 @@ attr layout_optimizationLevel
 attr layout_scrollFlags
 attr layout_scrollInterpolator
 attr liftOnScroll
+attr lineColor
 attr lineHeight
 attr lineSpacing
+attr lineSpacingMultiplier
 attr listChoiceBackgroundIndicator
 attr listDividerAlertDialog
 attr listItemLayout
@@ -421,6 +427,34 @@ attr navigationContentDescription
 attr navigationIcon
 attr navigationMode
 attr navigationViewStyle
+attr npv_AlternativeHint
+attr npv_AlternativeTextArrayWithMeasureHint
+attr npv_AlternativeTextArrayWithoutMeasureHint
+attr npv_DividerColor
+attr npv_DividerHeight
+attr npv_DividerMarginLeft
+attr npv_DividerMarginRight
+attr npv_EmptyItemHint
+attr npv_HintText
+attr npv_ItemPaddingHorizontal
+attr npv_ItemPaddingVertical
+attr npv_MarginEndOfHint
+attr npv_MarginStartOfHint
+attr npv_MaxValue
+attr npv_MinValue
+attr npv_RespondChangeInMainThread
+attr npv_RespondChangeOnDetached
+attr npv_ShowCount
+attr npv_ShowDivider
+attr npv_TextArray
+attr npv_TextColorHint
+attr npv_TextColorNormal
+attr npv_TextColorSelected
+attr npv_TextEllipsize
+attr npv_TextSizeHint
+attr npv_TextSizeNormal
+attr npv_TextSizeSelected
+attr npv_WrapSelectorWheel
 attr numericModifiers
 attr overlapAnchor
 attr paddingBottomNoButtons
@@ -575,6 +609,7 @@ attr textColorAlertDialogListItem
 attr textColorSearchUrl
 attr textEndPadding
 attr textInputStyle
+attr textSize
 attr textStartPadding
 attr theme
 attr thickness
@@ -608,6 +643,7 @@ attr toolbarStyle
 attr tooltipForegroundColor
 attr tooltipFrameBackground
 attr tooltipText
+attr topBottomTextColor
 attr track
 attr trackTint
 attr trackTintMode
@@ -630,6 +666,7 @@ attr ucrop_show_grid
 attr ucrop_show_oval_crop_frame
 attr useCompatPadding
 attr viewInflaterClass
+attr view_gravity
 attr voiceIcon
 attr wheelview_dividerColor
 attr wheelview_gravity
@@ -703,7 +740,9 @@ color bright_foreground_inverse_material_dark
 color bright_foreground_inverse_material_light
 color bright_foreground_material_dark
 color bright_foreground_material_light
+color btn_cancel_color
 color btn_common_color
+color btn_confirm_color
 color button_material_dark
 color button_material_light
 color cardview_dark_background
@@ -1083,6 +1122,7 @@ dimen abc_text_size_subhead_material
 dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
+dimen btn_text_size
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
@@ -1256,6 +1296,7 @@ dimen ucrop_size_dot_scale_text_view
 dimen ucrop_size_wrapper_rotate_button
 dimen ucrop_text_size_widget_text
 dimen ucrop_width_horizontal_wheel_progress_line
+dimen view_text_size
 drawable abc_ab_share_pack_mtrl_alpha
 drawable abc_action_bar_item_background_material
 drawable abc_btn_borderless_material
@@ -1575,6 +1616,8 @@ id enterAlways
 id enterAlwaysCollapsed
 id etAmount
 id et_account
+id et_addressj
+id et_addresss
 id et_bj_amount
 id et_bj_price
 id et_code
@@ -1887,11 +1930,15 @@ id transition_layout_save
 id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
+id tv1
+id tv2
 id tvAmount
 id tvTitle
 id tv_PlayPause
 id tv_Quit
 id tv_Stop
+id tv_addressj
+id tv_addresss
 id tv_amount
 id tv_balance
 id tv_begin_time
@@ -2949,6 +2996,7 @@ styleable LinearConstraintLayout android_orientation
 styleable LinearLayoutCompat android_gravity android_orientation android_baselineAligned android_baselineAlignedChildIndex android_weightSum divider dividerPadding measureWithLargestChild showDividers
 styleable LinearLayoutCompat_Layout android_layout_gravity android_layout_width android_layout_height android_layout_weight
 styleable ListPopupWindow android_dropDownHorizontalOffset android_dropDownVerticalOffset
+styleable LoopView canLoop centerTextColor drawItemCount initPosition lineColor lineSpacingMultiplier npv_AlternativeHint npv_AlternativeTextArrayWithMeasureHint npv_AlternativeTextArrayWithoutMeasureHint npv_DividerColor npv_DividerHeight npv_DividerMarginLeft npv_DividerMarginRight npv_EmptyItemHint npv_HintText npv_ItemPaddingHorizontal npv_ItemPaddingVertical npv_MarginEndOfHint npv_MarginStartOfHint npv_MaxValue npv_MinValue npv_RespondChangeInMainThread npv_RespondChangeOnDetached npv_ShowCount npv_ShowDivider npv_TextArray npv_TextColorHint npv_TextColorNormal npv_TextColorSelected npv_TextEllipsize npv_TextSizeHint npv_TextSizeNormal npv_TextSizeSelected npv_WrapSelectorWheel textSize topBottomTextColor view_gravity
 styleable MaterialButton android_insetLeft android_insetRight android_insetTop android_insetBottom backgroundTint backgroundTintMode cornerRadius icon iconGravity iconPadding iconSize iconTint iconTintMode rippleColor strokeColor strokeWidth
 styleable MaterialCardView strokeColor strokeWidth
 styleable MaterialComponentsTheme bottomSheetDialogTheme bottomSheetStyle chipGroupStyle chipStandaloneStyle chipStyle colorAccent colorBackgroundFloating colorPrimary colorPrimaryDark colorSecondary editTextStyle floatingActionButtonStyle materialButtonStyle materialCardViewStyle navigationViewStyle scrimBackground snackbarButtonStyle tabStyle textAppearanceBody1 textAppearanceBody2 textAppearanceButton textAppearanceCaption textAppearanceHeadline1 textAppearanceHeadline2 textAppearanceHeadline3 textAppearanceHeadline4 textAppearanceHeadline5 textAppearanceHeadline6 textAppearanceOverline textAppearanceSubtitle1 textAppearanceSubtitle2 textInputStyle
