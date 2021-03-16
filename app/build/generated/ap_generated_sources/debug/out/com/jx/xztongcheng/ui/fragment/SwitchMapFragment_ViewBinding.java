@@ -19,7 +19,7 @@ public class SwitchMapFragment_ViewBinding implements Unbinder {
 
   private View view2131230760;
 
-  private View view2131231249;
+  private View view2131231252;
 
   private View view2131230788;
 
@@ -48,7 +48,7 @@ public class SwitchMapFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.txTv, "field 'txTv' and method 'onViewClicked'");
     target.txTv = Utils.castView(view, R.id.txTv, "field 'txTv'", TextView.class);
-    view2131231249 = view;
+    view2131231252 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -80,8 +80,8 @@ public class SwitchMapFragment_ViewBinding implements Unbinder {
     view2131230878 = null;
     view2131230760.setOnClickListener(null);
     view2131230760 = null;
-    view2131231249.setOnClickListener(null);
-    view2131231249 = null;
+    view2131231252.setOnClickListener(null);
+    view2131231252 = null;
     view2131230788.setOnClickListener(null);
     view2131230788 = null;
   }

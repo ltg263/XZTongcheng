@@ -31,13 +31,41 @@
         android:layout_height="1dp"
         android:background="@color/line_gray" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_wdy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_blue_theme"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="未打印"
+            android:textColor="@color/color_ffffff" />
+
+        <TextView
+            android:id="@+id/tv_ydy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/color_ffffff"
+            android:gravity="center"
+            android:padding="@dimen/dp_10"
+            android:text="已打印"
+            android:textColor="@color/color_blue_theme" />
+
+    </LinearLayout>
+
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:background="@color/color_eeeeee"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="@color/color_eeeeee">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_data"
@@ -47,6 +75,7 @@
             android:overScrollMode="never"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
     </android.support.v4.widget.SwipeRefreshLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"

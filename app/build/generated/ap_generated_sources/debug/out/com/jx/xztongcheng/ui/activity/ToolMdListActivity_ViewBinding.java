@@ -32,6 +32,8 @@ public class ToolMdListActivity_ViewBinding implements Unbinder {
     target.mRvData = Utils.findRequiredViewAsType(source, R.id.rv_data, "field 'mRvData'", RecyclerView.class);
     target.refresh = Utils.findRequiredViewAsType(source, R.id.refresh, "field 'refresh'", SwipeRefreshLayout.class);
     target.mTitle = Utils.findRequiredViewAsType(source, R.id.title_right_text, "field 'mTitle'", TextView.class);
+    target.mTvYdy = Utils.findRequiredViewAsType(source, R.id.tv_ydy, "field 'mTvYdy'", TextView.class);
+    target.mTvWdy = Utils.findRequiredViewAsType(source, R.id.tv_wdy, "field 'mTvWdy'", TextView.class);
   }
 
   @Override
@@ -47,5 +49,7 @@ public class ToolMdListActivity_ViewBinding implements Unbinder {
     target.mRvData = null;
     target.refresh = null;
     target.mTitle = null;
+    target.mTvYdy = null;
+    target.mTvWdy = null;
   }
 }

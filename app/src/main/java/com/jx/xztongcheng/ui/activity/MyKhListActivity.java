@@ -8,8 +8,6 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
-import com.jx.xztongcheng.bean.event.CarListBean;
-import com.jx.xztongcheng.bean.response.CoreOrderList;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.OrderListBean;
 import com.jx.xztongcheng.net.BaseObserver;

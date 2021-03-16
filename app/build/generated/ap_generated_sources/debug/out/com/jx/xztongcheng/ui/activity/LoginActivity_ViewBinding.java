@@ -19,15 +19,15 @@ public class LoginActivity_ViewBinding implements Unbinder {
 
   private View view2131230758;
 
-  private View view2131231211;
+  private View view2131231212;
 
   private View view2131231163;
 
-  private View view2131231179;
+  private View view2131231180;
 
-  private View view2131231218;
+  private View view2131231219;
 
-  private View view2131231198;
+  private View view2131231199;
 
   @UiThread
   public LoginActivity_ViewBinding(LoginActivity target) {
@@ -55,7 +55,7 @@ public class LoginActivity_ViewBinding implements Unbinder {
     target.tvInfo = Utils.findRequiredViewAsType(source, R.id.tv_info, "field 'tvInfo'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tv_phone, "field 'tvPhone' and method 'onViewClicked'");
     target.tvPhone = Utils.castView(view, R.id.tv_phone, "field 'tvPhone'", TextView.class);
-    view2131231211 = view;
+    view2131231212 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -72,7 +72,7 @@ public class LoginActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_forget, "method 'onViewClicked'");
-    view2131231179 = view;
+    view2131231180 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -80,7 +80,7 @@ public class LoginActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_register, "method 'onViewClicked'");
-    view2131231218 = view;
+    view2131231219 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -88,7 +88,7 @@ public class LoginActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_login, "method 'onViewClicked'");
-    view2131231198 = view;
+    view2131231199 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -115,15 +115,15 @@ public class LoginActivity_ViewBinding implements Unbinder {
 
     view2131230758.setOnClickListener(null);
     view2131230758 = null;
-    view2131231211.setOnClickListener(null);
-    view2131231211 = null;
+    view2131231212.setOnClickListener(null);
+    view2131231212 = null;
     view2131231163.setOnClickListener(null);
     view2131231163 = null;
-    view2131231179.setOnClickListener(null);
-    view2131231179 = null;
-    view2131231218.setOnClickListener(null);
-    view2131231218 = null;
-    view2131231198.setOnClickListener(null);
-    view2131231198 = null;
+    view2131231180.setOnClickListener(null);
+    view2131231180 = null;
+    view2131231219.setOnClickListener(null);
+    view2131231219 = null;
+    view2131231199.setOnClickListener(null);
+    view2131231199 = null;
   }
 }

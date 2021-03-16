@@ -19,9 +19,9 @@ public class ToolCkListActivity_ViewBinding implements Unbinder {
 
   private View view2131231161;
 
-  private View view2131231221;
+  private View view2131231222;
 
-  private View view2131231220;
+  private View view2131231221;
 
   @UiThread
   public ToolCkListActivity_ViewBinding(ToolCkListActivity target) {
@@ -45,7 +45,7 @@ public class ToolCkListActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_sao, "method 'onViewClicked'");
-    view2131231221 = view;
+    view2131231222 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,7 +53,7 @@ public class ToolCkListActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_rk, "method 'onViewClicked'");
-    view2131231220 = view;
+    view2131231221 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -75,9 +75,9 @@ public class ToolCkListActivity_ViewBinding implements Unbinder {
 
     view2131231161.setOnClickListener(null);
     view2131231161 = null;
+    view2131231222.setOnClickListener(null);
+    view2131231222 = null;
     view2131231221.setOnClickListener(null);
     view2131231221 = null;
-    view2131231220.setOnClickListener(null);
-    view2131231220 = null;
   }
 }

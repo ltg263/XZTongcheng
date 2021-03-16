@@ -213,9 +213,9 @@ public class MineFragment extends BaseFragment {
                         @Override
                         public void onSuccess(UserInfo userInfo) {
                             App.getInstance().setUserInfo(new Gson().toJson(userInfo));
-                            tvName.setText(userInfo.getNickname());
                             if (tvName != null) {
-                                tv_dh.setText(userInfo.getUsername());
+//                                tvName.setText(userInfo.getNickname());
+                                tvName.setText(userInfo.getUsername());
                             } else {
                                 return;
                             }

@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -37,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ToolMdListActivity extends BaseActivity {
     @BindView(R.id.include)
@@ -53,8 +55,15 @@ public class ToolMdListActivity extends BaseActivity {
     TextView mTitle;
     ToolMdAdapter timeDataAdapter;
     int page = 1, pageSize = 20;
+    @BindView(R.id.tv_ydy)
+    TextView mTvYdy;
+    @BindView(R.id.tv_wdy)
+    TextView mTvWdy;
     private List<OrderListBean> beanList;
     private List<OrderListBean> beanListDy = new ArrayList<>();
+
+    boolean isDy = false;
+
 
     @Override
     public int intiLayout() {
@@ -101,10 +110,43 @@ public class ToolMdListActivity extends BaseActivity {
                 startPrint();
             }
         });
+
+        mTvYdy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isDy){
+                    isDy = true;
+                    mTvYdy.setBackgroundColor(getResources().getColor(R.color.color_blue_theme));
+                    mTvYdy.setTextColor(getResources().getColor(R.color.color_ffffff));
+                    mTvWdy.setBackgroundColor(getResources().getColor(R.color.color_ffffff));
+                    mTvWdy.setTextColor(getResources().getColor(R.color.color_blue_theme));
+                    tv_print.setText("批量打印");
+                    bnt_print.setVisibility(View.GONE);
+                    page = 1;
+                    loadData();
+                }
+            }
+        });
+        mTvWdy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isDy){
+                    isDy = false;
+                    mTvWdy.setBackgroundColor(getResources().getColor(R.color.color_blue_theme));
+                    mTvWdy.setTextColor(getResources().getColor(R.color.color_ffffff));
+                    mTvYdy.setBackgroundColor(getResources().getColor(R.color.color_ffffff));
+                    mTvYdy.setTextColor(getResources().getColor(R.color.color_blue_theme));
+                    tv_print.setText("批量打印");
+                    bnt_print.setVisibility(View.GONE);
+                    page = 1;
+                    loadData();
+                }
+            }
+        });
     }
 
     private void startPrint() {
-        Bitmap bitmap = ((BitmapDrawable)getResources().getDrawable(R.mipmap.banner_yellow)).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.banner_yellow)).getBitmap();
         ToolMdDetailsActivity.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //If the Bluetooth adapter is not supported,programmer is over
         if (ToolMdDetailsActivity.mBluetoothAdapter == null) {
@@ -122,9 +164,10 @@ public class ToolMdListActivity extends BaseActivity {
         } else {
             new Thread(new Runnable() {
                 int a = 0;
+
                 @Override
                 public void run() {
-                    while (a<beanListDy.size()) {
+                    while (a < beanListDy.size()) {
                         try {
                             if (ToolMdDetailsActivity.isConnected) {
                                 OrderSheetInfo list = new OrderSheetInfo();
@@ -140,7 +183,7 @@ public class ToolMdListActivity extends BaseActivity {
                                 list.setExpressName(data.getExpressDTO().getExpressName());
                                 PrintLabel pl = new PrintLabel();
                                 Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 100 + PrintLabel.y, 40 + PrintLabel.y);
-                                pl.Lable(ToolMdDetailsActivity.printPP_cpcl,bitmapY ,list);
+                                pl.Lable(ToolMdDetailsActivity.printPP_cpcl, bitmapY, list);
                             }
                             a++;
                             Thread.sleep(1000);
@@ -278,6 +321,13 @@ public class ToolMdListActivity extends BaseActivity {
 
 
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
 //{"websiteNo":"990101",
