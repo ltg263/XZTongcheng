@@ -1,9 +1,13 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jx.xztongcheng.R;
@@ -16,6 +20,7 @@ import com.jx.xztongcheng.net.service.OrderService;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
 
 public class ToolRkListActivity extends BaseActivity {
 
@@ -40,7 +45,27 @@ public class ToolRkListActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        mEtDdh.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // 输入过程中，还在内存里，没到屏幕上
+                LogUtils.w("CharSequence---------------"+s);
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // 在输入之前会触发的
+                LogUtils.w("beforeTextChanged---------------"+s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // 输入完将要显示到屏幕上时会触发
+                boolean isEmpty = s.toString().trim().isEmpty();
+                LogUtils.w("beforeTextChanged---------------"+s);
+            }
+        });
     }
 
     @OnClick({R.id.tv_sao, R.id.tv_weight, R.id.tv_rk})
@@ -69,7 +94,8 @@ public class ToolRkListActivity extends BaseActivity {
                 .subscribe(new BaseObserver() {
                     @Override
                     public void onSuccess(Object o) {
-                        ToastUtils.showShort("出库成功");
+
+                        ToastUtils.showShort("入库成功");
                     }
 
                     @Override

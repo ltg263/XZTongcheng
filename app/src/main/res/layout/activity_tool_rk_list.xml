@@ -14,7 +14,7 @@
         android:layout_marginTop="@dimen/dp_10">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_10"
             android:text="订单号："
@@ -37,7 +37,7 @@
             android:id="@+id/tv_sao"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_marginEnd="@dimen/dp_10"
             android:background="@drawable/shape_radius_theme_full_8dp"
             android:gravity="center"
@@ -58,10 +58,10 @@
         android:layout_marginTop="@dimen/dp_10">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_10"
-            android:text="重量："
+            android:text="重  量："
             android:textColor="@color/black33"
             android:textSize="16sp" />
 
@@ -85,6 +85,7 @@
             android:background="@drawable/shape_radius_theme_full_8dp"
             android:gravity="center"
             android:text="称重"
+            android:visibility="gone"
             android:textColor="@color/white" />
 
     </LinearLayout>

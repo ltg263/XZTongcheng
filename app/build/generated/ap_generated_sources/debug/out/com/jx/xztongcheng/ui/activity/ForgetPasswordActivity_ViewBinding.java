@@ -19,7 +19,7 @@ public class ForgetPasswordActivity_ViewBinding implements Unbinder {
 
   private View view2131230758;
 
-  private View view2131231170;
+  private View view2131231171;
 
   @UiThread
   public ForgetPasswordActivity_ViewBinding(ForgetPasswordActivity target) {
@@ -46,7 +46,7 @@ public class ForgetPasswordActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_done, "field 'tvDone' and method 'onViewClicked'");
     target.tvDone = Utils.castView(view, R.id.tv_done, "field 'tvDone'", TextView.class);
-    view2131231170 = view;
+    view2131231171 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -75,7 +75,7 @@ public class ForgetPasswordActivity_ViewBinding implements Unbinder {
 
     view2131230758.setOnClickListener(null);
     view2131230758 = null;
-    view2131231170.setOnClickListener(null);
-    view2131231170 = null;
+    view2131231171.setOnClickListener(null);
+    view2131231171 = null;
   }
 }

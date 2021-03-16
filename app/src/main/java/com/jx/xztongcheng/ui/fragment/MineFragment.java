@@ -26,6 +26,8 @@ import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.activity.ExpressManageActivity;
 import com.jx.xztongcheng.ui.activity.LoginActivity;
+import com.jx.xztongcheng.ui.activity.MyInfoActivity;
+import com.jx.xztongcheng.ui.activity.MyKhListActivity;
 import com.jx.xztongcheng.ui.activity.MyQrCodeActivity;
 import com.jx.xztongcheng.ui.activity.MyWalletActivity;
 import com.jx.xztongcheng.ui.activity.PayBZJActivity;
@@ -58,6 +60,8 @@ public class MineFragment extends BaseFragment {
     TextView tvJrsj;
     @BindView(R.id.tv_jrsk)
     TextView tvJrsk;
+    @BindView(R.id.tv_dh)
+    TextView tv_dh;
     @BindView(R.id.tv_khs)
     TextView tvKhs;
     @BindView(R.id.tv_balance)
@@ -163,9 +167,10 @@ public class MineFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.ll_khs:
-                intent = new Intent(getActivity(), StasisPartActivity.class);
-                intent.putExtra("index", 2);
-                startActivity(intent);
+//                intent = new Intent(getActivity(), StasisPartActivity.class);
+//                intent.putExtra("index", 2);
+//                startActivity(intent);
+                ActivityUtils.startActivity(MyKhListActivity.class);
                 break;
             case R.id.ll_code:
             case R.id.iv_code:
@@ -208,8 +213,9 @@ public class MineFragment extends BaseFragment {
                         @Override
                         public void onSuccess(UserInfo userInfo) {
                             App.getInstance().setUserInfo(new Gson().toJson(userInfo));
+                            tvName.setText(userInfo.getNickname());
                             if (tvName != null) {
-                                tvName.setText(userInfo.getUsername());
+                                tv_dh.setText(userInfo.getUsername());
                             } else {
                                 return;
                             }

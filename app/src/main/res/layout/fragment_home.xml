@@ -9,208 +9,223 @@
     tools:context=".ui.fragment.HomeFragment">
 
     <include layout="@layout/my_toolbar" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/line_gray"/>
+        android:background="@color/line_gray" />
 
-    <android.support.v7.widget.CardView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="0dp">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner_home"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:background="@mipmap/banner_yellow" />
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp">
-
-        <LinearLayout
-            android:id="@+id/ll_kjgl1"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_kjgl1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:src="@mipmap/ic_ywj" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:background="@mipmap/banner_yellow" />
+            </android.support.v7.widget.CardView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:orientation="vertical">
+                android:layout_marginTop="40dp">
 
-                <TextView
-                    android:id="@+id/tv_kjgl1"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_kjgl1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="快件管理"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:layout_weight="1">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <ImageView
+                        android:id="@+id/iv_kjgl1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="30dp"
+                        android:src="@mipmap/ic_ywj" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_kjgl1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="快件管理"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="1小时内取件"
+                            android:textColor="@color/black66"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_zpjgl2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="1小时内取件"
-                    android:textColor="@color/black66"
-                    android:textSize="12sp" />
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_zpjgl2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_zdgl" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_zpjgl2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="指派件管理"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="便捷寄多个快件"
+                            android:textColor="@color/black66"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_zpjgl2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/iv_zpjgl2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:src="@mipmap/ic_zdgl" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_jjgl3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_jjgl3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="30dp"
+                        android:src="@mipmap/ic_jjgl" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_jjgl3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="急件管理"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="文件/手机/鲜花"
+                            android:textColor="@color/black66"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@color/line_color" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_zpjgl2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="指派件管理"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="便捷寄多个快件"
-                    android:textColor="@color/black66"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
-
-        <LinearLayout
-            android:id="@+id/ll_jjgl3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/iv_jjgl3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:src="@mipmap/ic_jjgl" />
+                android:paddingStart="15dp"
+                android:paddingTop="15dp"
+                android:text="常用工具" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/dp_10">
 
                 <TextView
-                    android:id="@+id/tv_jjgl3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="急件管理"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:id="@+id/tv_md"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:background="@drawable/shape_radius_theme_full_8dp"
+                    android:gravity="center"
+                    android:text="打印面单"
+                    android:textColor="@color/white" />
+
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="文件/手机/鲜花"
-                    android:textColor="@color/black66"
-                    android:textSize="12sp" />
+                    android:id="@+id/tv_rk"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:background="@drawable/shape_radius_theme_full_8dp"
+                    android:gravity="center"
+                    android:text="入库"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_ck"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:background="@drawable/shape_radius_theme_full_8dp"
+                    android:gravity="center"
+                    android:text="出库"
+                    android:textColor="@color/white" />
+
             </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="@dimen/dp_10"
-        android:background="@color/line_color" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="15dp"
-        android:paddingTop="15dp"
-        android:text="常用工具" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_10">
-
-        <TextView
-            android:id="@+id/tv_md"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:background="@drawable/shape_radius_theme_full_8dp"
-            android:gravity="center"
-            android:text="打印面单"
-            android:textColor="@color/white" />
-
-
-        <TextView
-            android:id="@+id/tv_rk"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:background="@drawable/shape_radius_theme_full_8dp"
-            android:gravity="center"
-            android:text="入库"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tv_ck"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:background="@drawable/shape_radius_theme_full_8dp"
-            android:gravity="center"
-            android:text="出库"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

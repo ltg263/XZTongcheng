@@ -79,6 +79,7 @@
         <activity android:name=".ui.activity.BankCardManageActivity" />
         <activity android:name=".ui.activity.DepositLogActivity" />
         <activity android:name=".ui.activity.DepositActivity" />
+        <activity android:name=".ui.activity.MyKhListActivity" />
         <activity android:name=".ui.activity.MyWalletActivity" />
         <activity android:name=".ui.activity.ForgetPasswordActivity" />
         <activity

@@ -1904,8 +1904,11 @@ id tv_daif
 id tv_ddmh
 id tv_ddxx
 id tv_df
+id tv_dh
 id tv_done
 id tv_duration
+id tv_dz_j
+id tv_dz_s
 id tv_empty
 id tv_end_time
 id tv_express
@@ -1975,6 +1978,7 @@ id tv_week
 id tv_weight
 id tv_weight_price
 id tv_xf
+id tv_ydmh
 id tv_year
 id tv_zdh
 id tv_zl
@@ -2069,6 +2073,7 @@ layout activity_login
 layout activity_main
 layout activity_multi_express
 layout activity_my_info
+layout activity_my_kh_list
 layout activity_my_qr_code
 layout activity_my_wallet
 layout activity_name_authentication

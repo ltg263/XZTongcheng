@@ -13,13 +13,13 @@ public class ToolMdAdapter extends BaseQuickAdapter<OrderListBean, BaseViewHolde
     public ToolMdAdapter(List data) {
         super(R.layout.item_tool_md, data);
     }
-
+    //.setText(R.id.tv_phone_j,"电话："+dtos.getMailMobile()).setText(R.id.tv_phone_s,"电话："+dtos.getToMobile())
     @Override
     protected void convert(BaseViewHolder helper, OrderListBean item) {
         ExpressAddressDTOS dtos = item.getExpressOrderDTOS().get(0).getExpressAddressDTOS();
-        helper.setText(R.id.tv_ddmh, item.getGeneralOrderNo()).setGone(R.id.iv_isprint,false)
-                .setText(R.id.tv_name_j,"收件人："+dtos.getMailName()).setText(R.id.tv_phone_j,"电话："+dtos.getMailMobile())
-                .setText(R.id.tv_name_s,"寄件人："+dtos.getToName()).setText(R.id.tv_phone_s,"电话："+dtos.getToMobile());
+        helper.setText(R.id.tv_ydmh, "运单号：123456789").setText(R.id.tv_ddmh, "订单号："+item.getGeneralOrderNo()).setGone(R.id.iv_isprint,false)
+                .setText(R.id.tv_name_j,"寄件人："+dtos.getMailName()+"   "+dtos.getMailMobile()).setText(R.id.tv_dz_j,dtos.getMailAddress())
+                .setText(R.id.tv_name_s,"收件人："+dtos.getToName()+"   "+dtos.getToMobile()).setText(R.id.tv_dz_s,dtos.getToAddress());
         if(item.getIsPrint()!=-1){
             helper.setGone(R.id.iv_isprint,true);
             if(item.getIsPrint() == 0){

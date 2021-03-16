@@ -52,6 +52,7 @@ public class MineFragment_ViewBinding implements Unbinder {
     target.bannerMine = Utils.findRequiredViewAsType(source, R.id.banner_mine, "field 'bannerMine'", Banner.class);
     target.tvJrsj = Utils.findRequiredViewAsType(source, R.id.tv_jrsj, "field 'tvJrsj'", TextView.class);
     target.tvJrsk = Utils.findRequiredViewAsType(source, R.id.tv_jrsk, "field 'tvJrsk'", TextView.class);
+    target.tv_dh = Utils.findRequiredViewAsType(source, R.id.tv_dh, "field 'tv_dh'", TextView.class);
     target.tvKhs = Utils.findRequiredViewAsType(source, R.id.tv_khs, "field 'tvKhs'", TextView.class);
     target.tvBalance = Utils.findRequiredViewAsType(source, R.id.tv_balance, "field 'tvBalance'", TextView.class);
     target.cvBanner = Utils.findRequiredViewAsType(source, R.id.cv_banner, "field 'cvBanner'", CardView.class);
@@ -165,6 +166,7 @@ public class MineFragment_ViewBinding implements Unbinder {
     target.bannerMine = null;
     target.tvJrsj = null;
     target.tvJrsk = null;
+    target.tv_dh = null;
     target.tvKhs = null;
     target.tvBalance = null;
     target.cvBanner = null;

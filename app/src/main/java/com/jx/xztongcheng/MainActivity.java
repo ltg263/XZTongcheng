@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
     @Override
     public void initView() {
         SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=60042f2b");
+//        SpeechUtility.createUtility(this, SpeechConstant.APPID + "=60042f2b"+ SpeechConstant.FORCE_LOGIN + "=true");
         EventBus.getDefault().register(this);
         bottomView.enableAnimation(false);
         bottomView.enableShiftingMode(false);
@@ -191,6 +192,7 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
     @Override
     public void onBackPressed() {
         ToastUtils.showShort("再按一次退出程序");
+//        TTSUtils.getInstance().speak("再按一次退出程序");
         if (CommonUtils.isSlowDoubleClick()) {
             this.finish();
             System.exit(0);

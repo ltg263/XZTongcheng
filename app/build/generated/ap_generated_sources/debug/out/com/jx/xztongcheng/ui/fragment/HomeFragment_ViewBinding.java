@@ -25,9 +25,9 @@ public class HomeFragment_ViewBinding implements Unbinder {
 
   private View view2131230948;
 
-  private View view2131231198;
+  private View view2131231201;
 
-  private View view2131231217;
+  private View view2131231220;
 
   private View view2131231161;
 
@@ -73,7 +73,7 @@ public class HomeFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_md, "method 'onViewClicked'");
-    view2131231198 = view;
+    view2131231201 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -81,7 +81,7 @@ public class HomeFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_rk, "method 'onViewClicked'");
-    view2131231217 = view;
+    view2131231220 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -124,10 +124,10 @@ public class HomeFragment_ViewBinding implements Unbinder {
     view2131230965 = null;
     view2131230948.setOnClickListener(null);
     view2131230948 = null;
-    view2131231198.setOnClickListener(null);
-    view2131231198 = null;
-    view2131231217.setOnClickListener(null);
-    view2131231217 = null;
+    view2131231201.setOnClickListener(null);
+    view2131231201 = null;
+    view2131231220.setOnClickListener(null);
+    view2131231220 = null;
     view2131231161.setOnClickListener(null);
     view2131231161 = null;
   }

@@ -22,7 +22,7 @@ public class SettingActivity_ViewBinding implements Unbinder {
 
   private View view2131230801;
 
-  private View view2131231196;
+  private View view2131231199;
 
   private View view2131230771;
 
@@ -59,7 +59,7 @@ public class SettingActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_logout, "field 'tvLogout' and method 'onViewClicked'");
     target.tvLogout = Utils.castView(view, R.id.tv_logout, "field 'tvLogout'", TextView.class);
-    view2131231196 = view;
+    view2131231199 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -104,8 +104,8 @@ public class SettingActivity_ViewBinding implements Unbinder {
     view2131230802 = null;
     view2131230801.setOnClickListener(null);
     view2131230801 = null;
-    view2131231196.setOnClickListener(null);
-    view2131231196 = null;
+    view2131231199.setOnClickListener(null);
+    view2131231199 = null;
     view2131230771.setOnClickListener(null);
     view2131230771 = null;
     view2131230962.setOnClickListener(null);

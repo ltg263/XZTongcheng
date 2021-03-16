@@ -88,6 +88,9 @@ public interface OrderService {
     @GET("order/api/v1/order/website/car/list")
     Observable<BaseResponse<CarListBean>> getCarList(@QueryMap Map<String, Object> map);
 
+    @GET("order/api/v1/order/website/car/list")
+    Observable<BaseResponse<EmptyResponse>> getMyKh(@QueryMap Map<String, Object> map);
+
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/update/current/website")
     Observable<BaseResponse<EmptyResponse>> addSite(@Field("websiteId") int websiteId);

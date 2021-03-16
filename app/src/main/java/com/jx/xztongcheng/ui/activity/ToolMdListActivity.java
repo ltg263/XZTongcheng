@@ -64,7 +64,7 @@ public class ToolMdListActivity extends BaseActivity {
     @Override
     public void initView() {
 //        BarUtils.setStatusBarColor(this, getResources().getColor(R.color.theme_color));
-        setToolbar(mToolbar, "面单统计", true);
+        setToolbar(mToolbar, "订单管理", true);
         mToolbar.setNavigationIcon(R.mipmap.icon_common_back);
 
         tv_print.setOnClickListener(new View.OnClickListener() {
