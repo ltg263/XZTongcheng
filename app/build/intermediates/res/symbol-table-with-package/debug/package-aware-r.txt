@@ -1589,6 +1589,7 @@ id et_package_price
 id et_pass
 id et_password
 id et_password2
+id et_pm
 id et_price
 id et_verify
 id et_weight
@@ -1846,6 +1847,8 @@ id status_bar_latest_event_content
 id stretch
 id submenuarrow
 id submit_area
+id sv_1
+id sv_2
 id sv_qishou
 id tab1
 id tab2
@@ -1979,6 +1982,7 @@ id tv_websiteName
 id tv_week
 id tv_weight
 id tv_weight_price
+id tv_xd
 id tv_xf
 id tv_ydmh
 id tv_ydy
@@ -2090,6 +2094,7 @@ layout activity_tool_ck_list
 layout activity_tool_md_details
 layout activity_tool_md_list
 layout activity_tool_rk_list
+layout activity_tool_xd_list
 layout activity_web_view_with_back
 layout banner
 layout brvah_quick_view_load_more

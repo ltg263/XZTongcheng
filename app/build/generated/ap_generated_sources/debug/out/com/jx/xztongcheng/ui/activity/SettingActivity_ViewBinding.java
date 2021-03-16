@@ -22,11 +22,11 @@ public class SettingActivity_ViewBinding implements Unbinder {
 
   private View view2131230801;
 
-  private View view2131231200;
+  private View view2131231203;
 
   private View view2131230771;
 
-  private View view2131230962;
+  private View view2131230963;
 
   @UiThread
   public SettingActivity_ViewBinding(SettingActivity target) {
@@ -59,7 +59,7 @@ public class SettingActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_logout, "field 'tvLogout' and method 'onViewClicked'");
     target.tvLogout = Utils.castView(view, R.id.tv_logout, "field 'tvLogout'", TextView.class);
-    view2131231200 = view;
+    view2131231203 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -77,7 +77,7 @@ public class SettingActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.ll_verify, "method 'onViewClicked'");
-    view2131230962 = view;
+    view2131230963 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -104,11 +104,11 @@ public class SettingActivity_ViewBinding implements Unbinder {
     view2131230802 = null;
     view2131230801.setOnClickListener(null);
     view2131230801 = null;
-    view2131231200.setOnClickListener(null);
-    view2131231200 = null;
+    view2131231203.setOnClickListener(null);
+    view2131231203 = null;
     view2131230771.setOnClickListener(null);
     view2131230771 = null;
-    view2131230962.setOnClickListener(null);
-    view2131230962 = null;
+    view2131230963.setOnClickListener(null);
+    view2131230963 = null;
   }
 }

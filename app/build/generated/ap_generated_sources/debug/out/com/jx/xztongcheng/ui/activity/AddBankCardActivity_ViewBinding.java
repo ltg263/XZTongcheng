@@ -22,7 +22,7 @@ public class AddBankCardActivity_ViewBinding implements Unbinder {
 
   private View view2131230780;
 
-  private View view2131230908;
+  private View view2131230909;
 
   @UiThread
   public AddBankCardActivity_ViewBinding(AddBankCardActivity target) {
@@ -59,7 +59,7 @@ public class AddBankCardActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.iv, "field 'mIv' and method 'onViewClicked'");
     target.mIv = Utils.castView(view, R.id.iv, "field 'mIv'", ImageView.class);
-    view2131230908 = view;
+    view2131230909 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -88,7 +88,7 @@ public class AddBankCardActivity_ViewBinding implements Unbinder {
     view2131230790 = null;
     view2131230780.setOnClickListener(null);
     view2131230780 = null;
-    view2131230908.setOnClickListener(null);
-    view2131230908 = null;
+    view2131230909.setOnClickListener(null);
+    view2131230909 = null;
   }
 }

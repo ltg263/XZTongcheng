@@ -30,6 +30,7 @@ import com.jx.xztongcheng.ui.activity.LoginActivity;
 import com.jx.xztongcheng.ui.activity.ToolCkListActivity;
 import com.jx.xztongcheng.ui.activity.ToolMdListActivity;
 import com.jx.xztongcheng.ui.activity.ToolRkListActivity;
+import com.jx.xztongcheng.ui.activity.ToolXdListActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
 import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.widget.FullScreenDialog;
@@ -186,7 +187,7 @@ public class HomeFragment extends BaseFragment {
     public AMapLocationClientOption mLocationOption = null;
 
 
-    @OnClick({R.id.ll_kjgl1, R.id.ll_zpjgl2, R.id.ll_jjgl3,R.id.tv_md,R.id.tv_rk,R.id.tv_ck})
+    @OnClick({R.id.ll_kjgl1, R.id.ll_zpjgl2, R.id.ll_jjgl3,R.id.tv_md,R.id.tv_rk,R.id.tv_ck,R.id.tv_xd})
     public void onViewClicked(View view) {
         if (!App.isLogin()) {
             ActivityUtils.startActivity(LoginActivity.class);
@@ -232,6 +233,10 @@ public class HomeFragment extends BaseFragment {
                     intent = new Intent(getActivity(), ToolCkListActivity.class);
                     intent.putExtra("expressType", 1);
                     intent.putExtra("fastStatus", 1);
+                    startActivity(intent);
+                    break;
+                case R.id.tv_xd:
+                    intent = new Intent(getActivity(), ToolXdListActivity.class);
                     startActivity(intent);
                     break;
             }
