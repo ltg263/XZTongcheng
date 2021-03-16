@@ -120,6 +120,9 @@ public interface OrderService {
     @POST("order/api/v1/order/recharge/save")
     Observable<BaseResponse<Integer>> OrderRecharge(@Body RequestBody body);
 
+    @POST("order/api/v1/user/courier/helpCustomer/created/express")
+    Observable<BaseResponse<EmptyResponse>> helpCustomerCreateExpress(@Body RequestBody body);
+
     @POST("order/api/v1/order/recharge/pay")
     Observable<BaseResponse<Integer>> OrderPay(@Body RequestBody body);
 }
