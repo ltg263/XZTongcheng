@@ -182,7 +182,7 @@ public class ToolMdListActivity extends BaseActivity {
                                 list.setMailingAddress(data.getExpressAddressDTOS().getMailAddress());
                                 list.setExpressName(data.getExpressDTO().getExpressName());
                                 PrintLabel pl = new PrintLabel();
-                                Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 100 + PrintLabel.y, 40 + PrintLabel.y);
+                                Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 540, 70);
                                 pl.Lable(ToolMdDetailsActivity.printPP_cpcl, bitmapY, list);
                             }
                             a++;

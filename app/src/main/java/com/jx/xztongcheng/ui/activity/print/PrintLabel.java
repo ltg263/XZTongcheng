@@ -33,7 +33,7 @@ public class PrintLabel {
         iPrinter.drawLine(2, 580, 75+y, 580, 900+y, false);//竖线4
 
 
-        iPrinter.drawGraphic(10,10,100+y,40+y,mBitmap);
+        iPrinter.drawGraphic(10,10,540,40+y,mBitmap);
 
         iPrinter.drawText(10, 55+y, getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"),1,0,0,false,false);
 

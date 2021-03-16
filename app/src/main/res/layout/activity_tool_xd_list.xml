@@ -90,30 +90,48 @@
                         android:textSize="@dimen/sp_14" />
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginTop="5dp">
 
                     <TextView
+                        android:id="@+id/tv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="5dp"
                         android:text="地址："
                         android:textColor="@color/black33"
                         android:textSize="@dimen/sp_14" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tv_addressj"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/tv1"
+                        android:padding="5dp"
+                        android:text="请选择地址"
+                        android:textColor="@color/gray99" />
+
+                    <EditText
+                        android:id="@+id/et_addressj"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv1"
                         android:layout_marginStart="@dimen/dp_10"
+                        android:layout_toEndOf="@id/tv1"
                         android:background="@null"
-                        android:hint="请输入寄件人地址"
+                        android:gravity="top"
+                        android:hint="请输入详细地址"
+                        android:maxLength="30"
                         android:maxLines="1"
+                        android:minLines="3"
+                        android:padding="5dp"
                         android:textColor="@color/gray77"
                         android:textColorHint="@color/color_e6e6e6"
                         android:textSize="@dimen/sp_14" />
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -183,30 +201,48 @@
                         android:textSize="@dimen/sp_14" />
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginTop="5dp">
 
                     <TextView
+                        android:id="@+id/tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="5dp"
                         android:text="地址："
                         android:textColor="@color/black33"
                         android:textSize="@dimen/sp_14" />
 
-                    <EditText
+                    <TextView
+                        android:id="@+id/tv_addresss"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/tv2"
+                        android:padding="5dp"
+                        android:text="请选择地址"
+                        android:textColor="@color/gray99" />
+
+                    <EditText
+                        android:id="@+id/et_addresss"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv2"
                         android:layout_marginStart="@dimen/dp_10"
+                        android:layout_toEndOf="@id/tv2"
                         android:background="@null"
-                        android:hint="请输入收件人地址"
+                        android:gravity="top"
+                        android:hint="请输入详细地址"
+                        android:maxLength="30"
                         android:maxLines="1"
+                        android:minLines="3"
+                        android:padding="5dp"
                         android:textColor="@color/gray77"
                         android:textColorHint="@color/color_e6e6e6"
                         android:textSize="@dimen/sp_14" />
-                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout

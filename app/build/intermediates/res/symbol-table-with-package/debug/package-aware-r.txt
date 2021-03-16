@@ -2198,10 +2198,15 @@ mipmap ic_cz
 mipmap ic_delete
 mipmap ic_dh
 mipmap ic_dyj
+mipmap ic_home_ck
+mipmap ic_home_md
+mipmap ic_home_rk
+mipmap ic_home_xd
 mipmap ic_jjgl
 mipmap ic_kf
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_logo
 mipmap ic_md
 mipmap ic_more
 mipmap ic_qd

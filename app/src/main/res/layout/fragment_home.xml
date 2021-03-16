@@ -198,10 +198,11 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
-                        android:src="@mipmap/ic_ywj" />
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_home_md" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -232,10 +233,11 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_40"
                         android:layout_marginLeft="15dp"
-                        android:src="@mipmap/ic_zdgl" />
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_home_rk" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -274,10 +276,11 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginLeft="20dp"
-                        android:src="@mipmap/ic_jjgl" />
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_home_ck" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -309,10 +312,11 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="40dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:layout_marginLeft="20dp"
-                        android:src="@mipmap/ic_jjgl" />
+                        android:layout_marginLeft="10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@mipmap/ic_home_xd" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
