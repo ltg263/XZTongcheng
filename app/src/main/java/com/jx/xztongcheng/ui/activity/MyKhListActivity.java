@@ -8,6 +8,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.UserExclusiveList;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.OrderListBean;
 import com.jx.xztongcheng.net.BaseObserver;
@@ -32,7 +33,7 @@ public class MyKhListActivity extends BaseActivity {
     SwipeRefreshLayout refresh;
     MyKhAdapter mMyKhAdapter;
     int page = 1, pageSize = 20;
-    private List<OrderListBean> beanList;
+    private List<UserExclusiveList.ListBean> beanList;
 
     @Override
     public int intiLayout() {
@@ -84,27 +85,27 @@ public class MyKhListActivity extends BaseActivity {
         Map<String, Object> map = new HashMap<>();
         map.put("page", page);
         map.put("pageSize", pageSize);
-        RetrofitManager.build().create(OrderService.class).getMyKh(map)
-                .compose(RxScheduler.<BaseResponse<EmptyResponse>>observeOnMainThread())
-                .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
-                .subscribe(new BaseObserver<EmptyResponse>() {
+        RetrofitManager.build().create(OrderService.class).getUserExclusiveList(map)
+                .compose(RxScheduler.<BaseResponse<UserExclusiveList>>observeOnMainThread())
+                .as(RxScheduler.<BaseResponse<UserExclusiveList>>bindLifecycle(this))
+                .subscribe(new BaseObserver<UserExclusiveList>() {
                     @Override
-                    public void onSuccess(EmptyResponse response) {
-//                        if (page == 1) {
-//                            beanList = response.getList();
-//                            mMyKhAdapter.setNewData(beanList);
-//                            if (refresh.isRefreshing()) {
-//                                refresh.setRefreshing(false);
-//                            }
-//                        } else {
-//                            if (response.getList().size() == 0) {
-//                                mMyKhAdapter.loadMoreEnd();
-//                            } else {
-//                                mMyKhAdapter.loadMoreComplete();
-//                                beanList.addAll(response.getList());
-//                                mMyKhAdapter.addData(beanList);
-//                            }
-//                        }
+                    public void onSuccess(UserExclusiveList response) {
+                        if (page == 1) {
+                            beanList = response.getList();
+                            mMyKhAdapter.setNewData(beanList);
+                            if (refresh.isRefreshing()) {
+                                refresh.setRefreshing(false);
+                            }
+                        } else {
+                            if (response.getList().size() == 0) {
+                                mMyKhAdapter.loadMoreEnd();
+                            } else {
+                                mMyKhAdapter.loadMoreComplete();
+                                beanList.addAll(response.getList());
+                                mMyKhAdapter.addData(beanList);
+                            }
+                        }
                     }
 
                     @Override

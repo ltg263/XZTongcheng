@@ -32,7 +32,7 @@ public abstract class BaseSubscriber<T> implements Subscriber<BaseResponse<T>> {
         if (status == 0) {//请求成功
             onSuccess(tBaseResponse.getData());
         } else {//失败
-            onFail(tBaseResponse.getStatus(), tBaseResponse.getMesg());
+            onFail(tBaseResponse.getStatus(), tBaseResponse.getSub_mesg());
         }
 
     }

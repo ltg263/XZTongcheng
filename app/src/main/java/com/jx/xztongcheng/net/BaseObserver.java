@@ -46,7 +46,7 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
                 App.clearLogin();
                 ActivityUtils.startActivity(LoginActivity.class);
             }
-            ToastUtils.showShort(tBaseResponse.getMesg());
+            ToastUtils.showShort(tBaseResponse.getSub_mesg());
         }
 
     }

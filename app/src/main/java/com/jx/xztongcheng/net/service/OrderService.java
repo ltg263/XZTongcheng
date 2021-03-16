@@ -1,6 +1,7 @@
 package com.jx.xztongcheng.net.service;
 
 import com.jx.xztongcheng.bean.event.CarListBean;
+import com.jx.xztongcheng.bean.event.UserExclusiveList;
 import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.CoreOrderList;
@@ -88,8 +89,9 @@ public interface OrderService {
     @GET("order/api/v1/order/website/car/list")
     Observable<BaseResponse<CarListBean>> getCarList(@QueryMap Map<String, Object> map);
 
-    @GET("order/api/v1/order/website/car/list")
-    Observable<BaseResponse<EmptyResponse>> getMyKh(@QueryMap Map<String, Object> map);
+
+    @GET("order/api/v1/user/exclusive/user/list")
+    Observable<BaseResponse<UserExclusiveList>> getUserExclusiveList(@QueryMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/update/current/website")
