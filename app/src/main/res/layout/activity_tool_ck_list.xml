@@ -41,6 +41,7 @@
             android:background="@drawable/shape_radius_theme_full_8dp"
             android:gravity="center"
             android:text="扫一扫"
+            android:visibility="invisible"
             android:textColor="@color/white" />
 
     </LinearLayout>

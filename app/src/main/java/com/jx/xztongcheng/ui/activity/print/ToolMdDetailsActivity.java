@@ -262,7 +262,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                             isSending = true;
                             if (isConnected) {
                                 PrintLabel pl = new PrintLabel();
-                                bitmapR = zoomImage(bitmapR,100,40);
+                                bitmapR = zoomImage(bitmapR,100+PrintLabel.y,40+PrintLabel.y);
                                 pl.Lable(printPP_cpcl, bitmapR, coreOrderList);
                             }
                             try {

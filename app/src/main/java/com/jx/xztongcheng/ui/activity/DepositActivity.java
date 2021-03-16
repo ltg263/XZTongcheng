@@ -2,8 +2,6 @@ package com.jx.xztongcheng.ui.activity;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,7 +17,6 @@ import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.bean.request.CashoutSaveBean;
-import com.jx.xztongcheng.bean.request.SaveAuthRequest;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;

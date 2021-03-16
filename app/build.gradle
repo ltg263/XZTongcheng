@@ -26,7 +26,12 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
+/**
+ * 100009aa182cb36766a577b71103c3ba
+ *    MD5:  10:00:09:AA:18:2C:B3:67:66:A5:77:B7:11:03:C3:BA
+ *          SHA1: 3B:18:27:7F:08:0C:D3:A7:7F:CB:7F:6A:A5:A0:7D:96:AC:DE:83:28
+ *          SHA256: 9F:70:18:5B:58:C6:A8:7B:16:2C:FB:B4:71:CD:15:E9:77:6B:14:94:E2:3C:39:7B:13:5A:E9:43:45:07:4E:6E
+ */
 
     signingConfigs {
         release {
