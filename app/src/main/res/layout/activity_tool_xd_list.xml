@@ -467,7 +467,7 @@
                 android:layout_margin="30dp"
                 android:background="@drawable/shape_radius_theme_full_8dp"
                 android:gravity="center"
-                android:text="下单"
+                android:text="确定下单"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

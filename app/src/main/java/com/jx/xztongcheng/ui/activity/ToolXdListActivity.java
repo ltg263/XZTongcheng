@@ -82,7 +82,7 @@ public class ToolXdListActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setToolbar(myToolbar, "下单", true);
+        setToolbar(myToolbar, "待客户下单", true);
         mSv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,10 +166,10 @@ public class ToolXdListActivity extends BaseActivity {
             }
             mCustomerCreateExpress.setInsuredFee(str12);//保价金额
         }
-        mCustomerCreateExpress.setMailType("0");//寄件类型:1,上门取件
-        if(mSv3.isChecked()){
-            mCustomerCreateExpress.setMailType("1");
-        }
+        mCustomerCreateExpress.setMailType("1");//寄件类型:1,上门取件
+//        if(mSv3.isChecked()){
+//            mCustomerCreateExpress.setMailType("1");
+//        }
         mCustomerCreateExpress.setOrderType("1");//	1寄件2收件, 默认输入1
         mCustomerCreateExpress.setPickUpTime(str11+":00");//取件时间, 2020-10-12 13:40:00
 //        mCustomerCreateExpress.setStartAddressId(str6);//寄件地址
