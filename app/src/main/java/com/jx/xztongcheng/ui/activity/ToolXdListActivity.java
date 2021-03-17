@@ -119,13 +119,13 @@ public class ToolXdListActivity extends BaseActivity {
                         });
                 break;
             case R.id.tv_xd:
-                aaaaa();
+                helpCustomerCreateExpress();
                 break;
         }
     }
     String mailProvince,mailCity,mailDistrict;//寄件人地区的ID
     String toProvince,toCity,toDistrict;//收件人地区的ID
-    private void aaaaa() {
+    private void helpCustomerCreateExpress() {
         String str1 = mEtNames.getText().toString();
         String str2 = mEtNamej.getText().toString();
         String str3 = mEtMobilej.getText().toString();
