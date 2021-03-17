@@ -31,6 +31,33 @@ public class OrderSheetInfo {
     private String expressName;
     private String expressNum;
     private String expressWeight;
+    private String waybillNumber;
+    private String amount;
+    private String type;//1线上(不用操作)2现金支付3到付4待收货跨
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setWaybillNumber(String waybillNumber) {
+        this.waybillNumber = waybillNumber;
+    }
+
+    public String getWaybillNumber() {
+        return waybillNumber;
+    }
 
     public String getWebsiteNo() {
         return websiteNo;

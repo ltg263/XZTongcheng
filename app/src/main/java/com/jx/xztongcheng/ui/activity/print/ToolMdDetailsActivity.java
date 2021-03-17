@@ -93,6 +93,10 @@ public class ToolMdDetailsActivity extends BaseActivity {
     TextView mTvDaif;
     @BindView(R.id.tv_df)
     TextView mTvDf;
+    @BindView(R.id.tv_ydh)
+    TextView tv_ydh;
+    @BindView(R.id.tv_time)
+    TextView tv_time;
     // Layout Views
     private int interval;
     private boolean isSending = false;
@@ -174,7 +178,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     public void onSuccess(OrderSheetInfo coreOrderList) {
 //                        mTvZdh.setText(coreOrderList.getWebsiteNo());//站点
                         ToolMdDetailsActivity.this.coreOrderList = coreOrderList;
-                        mTvZdh.setText("享指同城");//站点
+                        mTvZdh.setText("热线电话：400-400-400");//站点
                         tv_websiteName.setText(coreOrderList.getWebsiteName());
                         String sjyxx = coreOrderList.getConsigneeName() + "  " + coreOrderList.getConsigneeMobile() + "\n" + coreOrderList.getMailingAddress();
                         String jjyxx = coreOrderList.getMailingName() + "  " + coreOrderList.getMailingMobile() + "\n" + coreOrderList.getMailingAddress();
@@ -184,7 +188,20 @@ public class ToolMdDetailsActivity extends BaseActivity {
 //                        mTvJjr2.setText("李四 1311111112\n"+coreOrderList.getConsigneeAddress());//寄件人
                         mTvSjr3.setText(sjyxx);//收件人
                         mTvJjr3.setText(jjyxx);//寄件人
-
+                        switch (coreOrderList.getType()){//1线上(不用操作)2现金支付3到付4待收货跨
+                            case "1":
+                                break;
+                            case "2":
+                                mTvXf.setText("现付："+coreOrderList.getAmount()+"元");
+                                break;
+                            case "3":
+                                mTvXf.setText("到付："+coreOrderList.getAmount()+"元");
+                                break;
+                            case "4":
+                                mTvXf.setText("代收："+coreOrderList.getAmount()+"元");
+                                break;
+                        }
+                        tv_ydh.setText(coreOrderList.getWaybillNumber());
 //                        mTvDdxx.setText("运单号：123456   □订单号：Ltp13245");
                         mTvDdxx.setText("运单编号号：" + coreOrderList.getOrderNo());
                         mTvJjnr.setText(coreOrderList.getExpressName());//"内容品名"
@@ -193,6 +210,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         mTvSl.setText("数量：" + coreOrderList.getExpressNum());
                         mTvZl.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
                         mTvGm1.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
+                        tv_time.setText(PrintLabel.getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"));
                     }
 
                     @Override

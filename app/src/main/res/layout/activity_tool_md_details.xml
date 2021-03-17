@@ -82,12 +82,29 @@
                         android:layout_below="@id/tv_zdh"
                         android:background="@color/line_gray" />
 
-                    <ImageView
-                        android:id="@+id/iv"
+                    <RelativeLayout
+                        android:id="@+id/ll"
                         android:layout_width="200dp"
                         android:layout_height="80dp"
                         android:layout_below="@id/view"
-                        android:padding="5dp" />
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp" />
+
+                        <TextView
+                            android:id="@+id/tv_ydh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="" />
+
+                    </RelativeLayout>
 
 
                     <TextView
@@ -95,9 +112,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/view"
-                        android:layout_alignTop="@id/iv"
-                        android:layout_alignBottom="@id/iv"
-                        android:layout_toEndOf="@id/iv"
+                        android:layout_alignTop="@id/ll"
+                        android:layout_alignBottom="@id/ll"
+                        android:layout_toEndOf="@id/ll"
                         android:gravity="center"
                         android:paddingEnd="@dimen/dp_10"
                         android:text="派件站点名"
@@ -344,17 +361,6 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/tv_daif"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:paddingStart="@dimen/dp_10"
-                        android:text="代付："
-                        android:textColor="@color/black33"
-                        android:textSize="12sp" />
-
-                    <TextView
                         android:id="@+id/tv_df"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -364,6 +370,18 @@
                         android:text="到付："
                         android:textColor="@color/black33"
                         android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_daif"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingStart="@dimen/dp_10"
+                        android:text="代收："
+                        android:textColor="@color/black33"
+                        android:textSize="12sp" />
+
 
                 </LinearLayout>
 

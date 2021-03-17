@@ -566,11 +566,20 @@ public class OrderListBean implements Serializable {
         private int profit;
         private ExpressAddressDTOS expressAddressDTOS;
         private String payStatus;
+        private String waybillNumber;
         private String payType;
         private String money;
         private ExpressDTOBean expressDTO;
         private String totalBonus;
         private String totalAmount;
+
+        public String getWaybillNumber() {
+            return waybillNumber;
+        }
+
+        public void setWaybillNumber(String waybillNumber) {
+            this.waybillNumber = waybillNumber;
+        }
 
         public void setMoney(String money) {
             this.money = money;

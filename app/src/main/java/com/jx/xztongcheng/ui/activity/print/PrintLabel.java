@@ -40,7 +40,7 @@ public class PrintLabel {
         iPrinter.drawText(6, 80+y, "热线电话：400-400-400", 2, 0, 0, false, false);
 
         iPrinter.drawBarCode(20,130+y, coreOrderList.getOrderNo(), 1, 0, 2, 70);
-        iPrinter.drawText(50, 210+y, coreOrderList.getOrderNo(), 2, 0, 0, false, false);
+        iPrinter.drawText(50, 210+y, coreOrderList.getWaybillNumber(), 2, 0, 0, false, false);
 
         iPrinter.drawText(390, 150+y,170,140, coreOrderList.getWebsiteName(), 3, 0, 1, false, false);
 
@@ -64,10 +64,26 @@ public class PrintLabel {
         //内容品名
         iPrinter.drawText(2 + 8, 630+y, 43, 200, "内容品名", 2, 0, 0, false, false);
 
-        iPrinter.drawText(2 + 8, 760+y, "现付：", 2, 0, 0, false, false);
 
-        iPrinter.drawText(2 + 8+200, 760+y, "代付：", 2, 0, 0, false, false);
-        iPrinter.drawText(2 + 8+380, 760+y, "到付：", 2, 0, 0, false, false);
+        switch (coreOrderList.getType()){//1线上(不用操作)2现金支付3到付4待收货跨
+            case "1":
+                break;
+            case "2":
+                iPrinter.drawText(2 + 8, 760+y, "现付："+coreOrderList.getAmount()+"元", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+200, 760+y, "到付：", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+380, 760+y, "代收：", 2, 0, 0, false, false);
+                break;
+            case "3":
+                iPrinter.drawText(2 + 8, 760+y, "现付：", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+200, 760+y, "到付："+coreOrderList.getAmount()+"元", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+380, 760+y, "代收：", 2, 0, 0, false, false);
+                break;
+            case "4":
+                iPrinter.drawText(2 + 8, 760+y, "现付：", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+200, 760+y, "到付：", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+380, 760+y, "代收："+coreOrderList.getAmount()+"元", 2, 0, 0, false, false);
+                break;
+        }
 
 
         //内容
