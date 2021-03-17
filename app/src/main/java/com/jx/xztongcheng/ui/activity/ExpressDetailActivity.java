@@ -214,9 +214,9 @@ public class ExpressDetailActivity extends BaseActivity {
         if (addressDTOS != null) {
             tvRemark.setText("备         注 ：" + orderDTOSBean.getRemark());
             tvGetAddress1.setText(addressDTOS.getMailName() + "  " + addressDTOS.getMailMobile());
-            tvGetAddress2.setText(addressDTOS.getMailProvinceStr() + addressDTOS.getMailCityStr() + addressDTOS.getMailAddress());
+            tvGetAddress2.setText(addressDTOS.getMailAddress());
             tvToAddress1.setText(addressDTOS.getToName() + "  " + addressDTOS.getToMobile());
-            tvToAddress2.setText(addressDTOS.getToProvinceStr() + addressDTOS.getToCityStr() + addressDTOS.getToAddress());
+            tvToAddress2.setText(addressDTOS.getToAddress());
             tvContact.setOnClickListener(view -> {
                 PermissionHelper.requestPhone(new PermissionHelper.OnPermissionGrantedListener() {
                     @Override

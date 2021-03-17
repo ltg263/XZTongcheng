@@ -184,17 +184,19 @@ public class ToolXdListActivity extends BaseActivity {
         //寄件人信息
         mCustomerCreateExpress.setMailName(str2);
         mCustomerCreateExpress.setMailMobile(str3);
-        mCustomerCreateExpress.setMailAddress(str6+str8);
+        mCustomerCreateExpress.setMailAddress(str6);
+        mCustomerCreateExpress.setMailAddressText(str8);
         mCustomerCreateExpress.setMailProvince(mailProvince);
-        mCustomerCreateExpress.setMailCity(mailProvince);
-        mCustomerCreateExpress.setMailDistrict(mailProvince);
+        mCustomerCreateExpress.setMailCity(mailCity);
+        mCustomerCreateExpress.setMailDistrict(mailDistrict);
         //收件人信息
         mCustomerCreateExpress.setToName(str2);
         mCustomerCreateExpress.setToMobile(str3);
-        mCustomerCreateExpress.setToAddress(str5+str7);
-        mCustomerCreateExpress.setToProvince(mailProvince);
-        mCustomerCreateExpress.setToCity(mailProvince);
-        mCustomerCreateExpress.setToDistrict(mailProvince);
+        mCustomerCreateExpress.setToAddress(str5);
+        mCustomerCreateExpress.setToAddressText(str7);
+        mCustomerCreateExpress.setToProvince(toProvince);
+        mCustomerCreateExpress.setToCity(toCity);
+        mCustomerCreateExpress.setToDistrict(toDistrict);
 
         showLoading();
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mCustomerCreateExpress));

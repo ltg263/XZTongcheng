@@ -47,6 +47,7 @@ public class CustomerCreateExpress {
      */
 //    @ApiModelProperty("寄件地址")
     String mailAddress;
+    String mailAddressText;
     /**
      * 寄件省份
      */
@@ -87,6 +88,7 @@ public class CustomerCreateExpress {
      */
 //    @ApiModelProperty("收件地址")
     String toAddress;
+    String toAddressText;
     /**
      * 收件省份
      */
@@ -113,6 +115,22 @@ public class CustomerCreateExpress {
 //    @ApiModelProperty("收件纬度")
     BigDecimal toLat;
 
+
+    public void setMailAddressText(String mailAddressText) {
+        this.mailAddressText = mailAddressText;
+    }
+
+    public void setToAddressText(String toAddressText) {
+        this.toAddressText = toAddressText;
+    }
+
+    public String getMailAddressText() {
+        return mailAddressText;
+    }
+
+    public String getToAddressText() {
+        return toAddressText;
+    }
 
     public String getMailName() {
         return mailName;
