@@ -24,7 +24,9 @@ import com.jx.xztongcheng.utils.AddressPickTask;
 import com.jx.xztongcheng.utils.PickerViewUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -70,6 +72,8 @@ public class ToolXdListActivity extends BaseActivity {
     EditText mEtMobilej;
     @BindView(R.id.et_bjj)
     EditText et_bjj;
+    @BindView(R.id.et_je)
+    EditText et_je;
 
     @Override
     public int intiLayout() {
@@ -100,10 +104,10 @@ public class ToolXdListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_addressj:
-                onAddressPicker(mTvAddressj);
+                onAddressPicker(0);
                 break;
             case R.id.tv_addresss:
-                onAddressPicker(mTvAddresss);
+                onAddressPicker(1);
                 break;
             case R.id.tv_time:
                 PickerViewUtils.selectorDate(ToolXdListActivity.this,
@@ -119,7 +123,8 @@ public class ToolXdListActivity extends BaseActivity {
                 break;
         }
     }
-
+    String mailProvince,mailCity,mailDistrict;//寄件人地区的ID
+    String toProvince,toCity,toDistrict;//收件人地区的ID
     private void aaaaa() {
         String str1 = mEtNames.getText().toString();
         String str2 = mEtNamej.getText().toString();
@@ -133,42 +138,65 @@ public class ToolXdListActivity extends BaseActivity {
         String str10 = mEtZl.getText().toString();
         String str11 = mTvTime.getText().toString();
         String str12 = et_bjj.getText().toString();
+        String str13 = et_je.getText().toString();
         if(StringUtils.isEmpty(str1) ||StringUtils.isEmpty(str2)
                 ||StringUtils.isEmpty(str3) ||StringUtils.isEmpty(str4)
                 ||StringUtils.isEmpty(str5) ||StringUtils.isEmpty(str6)
                 ||StringUtils.isEmpty(str7) ||StringUtils.isEmpty(str8)
                 ||StringUtils.isEmpty(str9) ||StringUtils.isEmpty(str10)
-                ||StringUtils.isEmpty(str11)){
+                ||StringUtils.isEmpty(str11)||StringUtils.isEmpty(str13)){
             ToastUtils.showShort("信息填写不完整");
             return;
         }
 
-        showLoading();
         CustomerCreateExpress mCustomerCreateExpress = new CustomerCreateExpress();
-        mCustomerCreateExpress.setConfirm("1");
-        mCustomerCreateExpress.setFastStatus("2");
+        mCustomerCreateExpress.setConfirm("1");//是否阅读快件服务协议 1是2否
+
+        mCustomerCreateExpress.setFastStatus("2");//	是否是加急件1加急件;2普件
         if(mSv1.isChecked()){
             mCustomerCreateExpress.setFastStatus("1");
         }
+
         mCustomerCreateExpress.setInsuredStatus("2");
         if(mSv2.isChecked()){
-            mCustomerCreateExpress.setFastStatus("1");
+            mCustomerCreateExpress.setInsuredStatus("1");//保价状态:1,保价;2,不保价
             if(StringUtils.isEmpty(et_bjj.getText().toString())){
                 ToastUtils.showShort("请输入报价金额");
                 return;
             }
-            mCustomerCreateExpress.setInsuredFee("123456");
+            mCustomerCreateExpress.setInsuredFee(str12);//保价金额
         }
-        mCustomerCreateExpress.setMailType("0");
+        mCustomerCreateExpress.setMailType("0");//寄件类型:1,上门取件
         if(mSv3.isChecked()){
             mCustomerCreateExpress.setMailType("1");
         }
-        mCustomerCreateExpress.setMailType("1");
-        mCustomerCreateExpress.setOrderType("1");
-        mCustomerCreateExpress.setPickUpTime(str11+" 00");
-        mCustomerCreateExpress.setStartAddressId(str6);
+        mCustomerCreateExpress.setOrderType("1");//	1寄件2收件, 默认输入1
+        mCustomerCreateExpress.setPickUpTime(str11+":00");//取件时间, 2020-10-12 13:40:00
+//        mCustomerCreateExpress.setStartAddressId(str6);//寄件地址
+        List<CustomerCreateExpress.ExpressInfoFormsBean> beans = new ArrayList<>();
+        CustomerCreateExpress.ExpressInfoFormsBean bean = new CustomerCreateExpress.ExpressInfoFormsBean();
+        bean.setAmount(str13);//金额
+        bean.setWeight(str10);//重量
+        bean.setExpressName(str9);
+        beans.add(bean);
+        mCustomerCreateExpress.setExpressInfoForms(beans);
 
+        //寄件人信息
+        mCustomerCreateExpress.setMailName(str2);
+        mCustomerCreateExpress.setMailMobile(str3);
+        mCustomerCreateExpress.setMailAddress(str6+str8);
+        mCustomerCreateExpress.setMailProvince(mailProvince);
+        mCustomerCreateExpress.setMailCity(mailProvince);
+        mCustomerCreateExpress.setMailDistrict(mailProvince);
+        //收件人信息
+        mCustomerCreateExpress.setToName(str2);
+        mCustomerCreateExpress.setToMobile(str3);
+        mCustomerCreateExpress.setToAddress(str5+str7);
+        mCustomerCreateExpress.setToProvince(mailProvince);
+        mCustomerCreateExpress.setToCity(mailProvince);
+        mCustomerCreateExpress.setToDistrict(mailProvince);
 
+        showLoading();
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mCustomerCreateExpress));
         RetrofitManager.build().create(OrderService.class)
                 .helpCustomerCreateExpress(body)
@@ -178,6 +206,8 @@ public class ToolXdListActivity extends BaseActivity {
                     @Override
                     public void onSuccess(EmptyResponse id) {
                         hideLoading();
+                        ToastUtils.showShort("下单成功");
+                        finish();
                     }
 
                     @Override
@@ -188,7 +218,7 @@ public class ToolXdListActivity extends BaseActivity {
                 });
     }
 
-    public void onAddressPicker(TextView mTvAddress) {
+    public void onAddressPicker(int type) {
         AddressPickTask task = new AddressPickTask(this);
         task.setHideProvince(false);
         task.setHideCounty(false);
@@ -202,13 +232,29 @@ public class ToolXdListActivity extends BaseActivity {
             @Override
             public void onAddressPicked(Province province, City city, County county) {
                 if (county == null) {
-                    mTvAddress.setText(province.getAreaName() + city.getAreaName());
-//                    addressData.setRegions(province.getAreaName() + city.getAreaName());
-//                    addressData.setDistrictId(city.getAreaId());
+                    if(type==0){
+                        mTvAddressj.setText(province.getAreaName() + city.getAreaName());
+                        mailProvince = province.getAreaId();
+                        mailCity = city.getAreaId();
+//                        mailDistrict = county.getAreaId();
+                    }else{
+                        mTvAddresss.setText(province.getAreaName() + city.getAreaName());
+                        toProvince = province.getAreaId();
+                        toCity = city.getAreaId();
+//                        toDistrict = county.getAreaId();
+                    }
                 } else {
-                    mTvAddress.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
-//                    addressData.setRegions(province.getAreaName() + city.getAreaName() + county.getAreaName());
-//                    addressData.setDistrictId(county.getAreaId());
+                    if(type==0){
+                        mTvAddressj.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                        mailProvince = province.getAreaId();
+                        mailCity = city.getAreaId();
+                        mailDistrict = county.getAreaId();
+                    }else{
+                        mTvAddresss.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                        toProvince = province.getAreaId();
+                        toCity = city.getAreaId();
+                        toDistrict = county.getAreaId();
+                    }
                 }
             }
         });

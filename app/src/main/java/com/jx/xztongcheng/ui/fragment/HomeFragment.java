@@ -20,6 +20,7 @@ import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseFragment;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
+import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -112,7 +113,21 @@ public class HomeFragment extends BaseFragment {
 
                     }
                 });
-
+//        RetrofitManager.build().create(UserService.class)
+//                .getBannerGao("77f0363d7e97bb832d81e108ce8a776e","北京市朝阳区阜通东大街6号")
+//                .compose(RxScheduler.observeOnMainThread())
+//                .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
+//                .subscribe(new BaseObserver<EmptyResponse>() {
+//                    @Override
+//                    public void onSuccess(EmptyResponse emptyResponse) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFail(int code, String error) {
+//
+//                    }
+//                });
     }
 
     private void setBanner() {

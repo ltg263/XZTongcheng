@@ -72,6 +72,9 @@ public interface OrderService {
     @POST("order/api/v1/user/courier/express/core/user/pickup")
     Observable<BaseResponse<EmptyResponse>> pickupOrder(@Field("expressOrderId") int expressOrderId, @Field("code") String code, @Field("url") String url);
 
+    @POST("order/api/v1/user/order/pay")
+    Observable<BaseResponse<EmptyResponse>> orderPya(@Body RequestBody body);
+
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/user/finish")
     Observable<BaseResponse<EmptyResponse>> finish(@Field("expressOrderId") int expressOrderId, @Field("code") String code);

@@ -127,4 +127,28 @@ public class PickerViewUtils {
         void getTime(Date time);
     }
 
+
+    public static void selectorCustomC(Context mContext, final List<String> list, String title, ConditionInterfacd interfacd){
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3 , View v) {
+                interfacd.setIndex(options1);
+            }
+        }) .setOptionsSelectChangeListener(new OnOptionsSelectChangeListener() {
+            @Override
+            public void onOptionsSelectChanged(int options1, int options2, int options3) {
+
+            }
+        })
+                .setTitleText(title)
+                .setDividerColor(Color.BLACK)
+                .setSubmitColor(Color.BLACK)
+                .setCancelColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(16)
+                .build();
+
+        pvOptions.setPicker(list);//添加数据源
+        pvOptions.show();
+    }
 }

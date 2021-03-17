@@ -13,11 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.request.RechargeSaveBean;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
@@ -27,6 +31,7 @@ import com.jx.xztongcheng.net.service.OrderService;
 import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.utils.PermissionHelper;
+import com.jx.xztongcheng.utils.PickerViewUtils;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -36,6 +41,7 @@ import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,13 +69,21 @@ public class PayForImageActivity extends BaseActivity {
     TextView tvWeightPrice;
     @BindView(R.id.tv_price)
     TextView tvPrice;
+    @BindView(R.id.tv_fkfs)
+    TextView tv_fkfs;
     @BindView(R.id.iv_camera)
     ImageView ivCamera;
+    @BindView(R.id.ll_rwm)
+    LinearLayout ll_rwm;
+    @BindView(R.id.ll_dsfy)
+    LinearLayout ll_dsfy;
+    @BindView(R.id.et_dsfy)
+    EditText et_dsfy;
 
     private int orderId;
     private double totalPrice;
     String imgUrl = "";
-
+    String payType = "CASH";
     @Override
     public int intiLayout() {
         return R.layout.activity_pay_for_image;
@@ -82,6 +96,8 @@ public class PayForImageActivity extends BaseActivity {
         totalPrice = getIntent().getDoubleExtra("totalPrice", 0);
 
         tvContent.setText("支付" + totalPrice + "元运费");
+        tv_fkfs.setText("现金支付"+totalPrice+"元");
+
 
     }
 
@@ -117,13 +133,20 @@ public class PayForImageActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.finishGet, R.id.iv_camera})
+    @OnClick({R.id.finishGet, R.id.iv_camera,R.id.tv_fkfs})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.finishGet:
                 if (TextUtils.isEmpty(imgUrl)) {
                     ToastUtils.showShort("请拍摄照片或等待照片上传成功");
                     return;
+                }
+
+                if(payType.equals("COLLECTING_MONEY")){
+                    if(StringUtils.isEmpty(et_dsfy.getText().toString())){
+                        ToastUtils.showShort("请输入待收货款的费用");
+                        return;
+                    }
                 }
                 View view1 = LayoutInflater.from(this).inflate(R.layout.dialog_edit, null);
                 EditText editCode = view1.findViewById(R.id.edit_code);
@@ -133,6 +156,32 @@ public class PayForImageActivity extends BaseActivity {
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                if(!payType.equals("WXAPP")){
+                                    RechargeSaveBean mRechargeSaveBean = new RechargeSaveBean();
+                                    mRechargeSaveBean.setExpressOrderId(orderId);
+                                    mRechargeSaveBean.setPayType(payType);
+                                    if(payType.equals("COLLECTING_MONEY")){
+                                        String dsfy = et_dsfy.getText().toString();
+                                        if(StringUtils.isEmpty(dsfy)){
+                                            ToastUtils.showShort("请输入待收货款的费用");
+                                            return;
+                                        }
+                                        mRechargeSaveBean.setMoney(dsfy);
+                                    }
+                                    RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mRechargeSaveBean));
+
+                                    RetrofitManager.build().create(OrderService.class)
+                                            .orderPya(body)
+                                            .compose(RxScheduler.observeOnMainThread())
+                                            .as(RxScheduler.bindLifecycle(PayForImageActivity.this))
+                                            .subscribe(new BaseObserver<EmptyResponse>() {
+                                                @Override
+                                                public void onSuccess(EmptyResponse emptyResponse) {
+                                                    ToastUtils.showShort("取件成功");
+                                                    finish();
+                                                }
+                                            });
+                                }
                                 RetrofitManager.build().create(OrderService.class)
                                         .pickupOrder(orderId, editCode.getText().toString(), imgUrl)
                                         .compose(RxScheduler.observeOnMainThread())
@@ -158,6 +207,35 @@ public class PayForImageActivity extends BaseActivity {
                 break;
             case R.id.iv_camera:
                 selectImage();
+                break;
+            case R.id.tv_fkfs:
+                List<String> carLists = new ArrayList<>();
+                carLists.add("现金支付"+totalPrice+"元");
+                carLists.add("货到付款"+totalPrice+"元");
+                carLists.add("二维码支付"+totalPrice+"元");
+                carLists.add("待收货款");
+                PickerViewUtils.selectorCustomC(this, carLists, "请选择付款方式", new PickerViewUtils.ConditionInterfacd() {
+                    @Override
+                    public void setIndex(int pos) {
+                        tv_fkfs.setText(carLists.get(pos));
+                        ll_rwm.setVisibility(View.GONE);
+                        ll_dsfy.setVisibility(View.GONE);
+                        if(pos==0){
+                            payType = "CASH";
+                        }
+                        if(pos==1){
+                            payType = "DESTINATION";
+                        }
+                        if(pos==2){
+                            payType = "WXAPP";
+                            ll_rwm.setVisibility(View.VISIBLE);
+                        }
+                        if(pos==3){
+                            payType = "COLLECTING_MONEY";
+                            ll_dsfy.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
                 break;
         }
     }

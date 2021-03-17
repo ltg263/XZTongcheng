@@ -74,6 +74,7 @@ public interface UserService {
     @GET("appliance/api/v1/appliance/ad/list")
     Observable<BaseResponse<BannerListResponse>> getBanner(@Query("seat") int seat);
 
+
     @POST("user/api/v1/user/cash/out/account/save")
     Observable<BaseResponse<EmptyResponse>> addCard(@Body RequestBody body);
 
@@ -113,4 +114,8 @@ public interface UserService {
 
     @DELETE("user/api/v1/user/cash/out/account/remove")
     Observable<BaseResponse> deleteCard(@Query("id") int id);
+
+
+    @GET("https://restapi.amap.com/v3/geocode/geo")
+    Observable<BaseResponse<EmptyResponse>> getBannerGao(@Query("key") String key,@Query("address") String address);
 }

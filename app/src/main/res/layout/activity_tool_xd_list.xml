@@ -268,6 +268,74 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="重量"
+                        android:textColor="@color/black33"
+                        android:textSize="@dimen/sp_14" />
+
+                    <EditText
+                        android:id="@+id/et_zl"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:hint="请输入物品重量"
+                        android:inputType="numberDecimal"
+                        android:padding="@dimen/dp_10"
+                        android:textColor="@color/gray99"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="kg"
+                        android:textColor="@color/black33"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="金额"
+                        android:textColor="@color/black33"
+                        android:textSize="@dimen/sp_14" />
+
+                    <EditText
+                        android:id="@+id/et_je"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_marginEnd="@dimen/dp_10"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="end"
+                        android:inputType="numberDecimal"
+                        android:hint="请输入运费"
+                        android:padding="@dimen/dp_10"
+                        android:textColor="@color/gray99"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="元"
+                        android:textColor="@color/black33"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="物品说明"
                         android:textColor="@color/black33"
                         android:textSize="@dimen/sp_14" />
@@ -288,40 +356,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="重量"
-                        android:textColor="@color/black33"
-                        android:textSize="@dimen/sp_14" />
-
-                    <EditText
-                        android:id="@+id/et_zl"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:layout_marginEnd="@dimen/dp_10"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:gravity="end"
-                        android:inputType="numberDecimal"
-                        android:hint="请输入物品重量"
-                        android:padding="@dimen/dp_10"
-                        android:textColor="@color/gray99"
-                        android:textSize="@dimen/sp_14" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="kg"
-                        android:textColor="@color/black33"
-                        android:textSize="@dimen/sp_14" />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -366,12 +400,12 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:gravity="end"
-                        android:visibility="invisible"
                         android:hint="请输入报价金额(元)"
                         android:inputType="numberDecimal"
                         android:paddingHorizontal="5dp"
                         android:textColor="@color/black33"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:visibility="invisible" />
 
                     <Switch
                         android:id="@+id/sv_1"

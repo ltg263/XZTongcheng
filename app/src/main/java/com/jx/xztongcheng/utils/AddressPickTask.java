@@ -92,7 +92,7 @@ public class AddressPickTask extends AsyncTask<String, Void, ArrayList<Province>
         }
         ArrayList<Province> data = new ArrayList<>();
         try {
-            String json = ConvertUtils.toString(activity.getAssets().open("city.json"));
+            String json = ConvertUtils.toString(activity.getAssets().open("newprovince.json"));
             data.addAll(JSON.parseArray(json, Province.class));
         } catch (Exception e) {
             e.printStackTrace();

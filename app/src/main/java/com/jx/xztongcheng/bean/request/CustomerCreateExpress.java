@@ -1,5 +1,6 @@
 package com.jx.xztongcheng.bean.request;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class CustomerCreateExpress {
@@ -31,6 +32,215 @@ public class CustomerCreateExpress {
     private String remark;
     private String startAddressId;
     private List<ExpressInfoFormsBean> expressInfoForms;
+    /**
+     * 寄件姓名
+     */
+//    @ApiModelProperty("寄件姓名")
+    String mailName;
+    /**
+     * 寄件手机号
+     */
+//    @ApiModelProperty("寄件手机号")
+    String mailMobile;
+    /**
+     * 寄件地址
+     */
+//    @ApiModelProperty("寄件地址")
+    String mailAddress;
+    /**
+     * 寄件省份
+     */
+//    @ApiModelProperty("寄件省份")
+    String mailProvince;
+    /**
+     * 寄件城市
+     */
+//    @ApiModelProperty("寄件城市")
+    String mailCity;
+    /**
+     * 寄件地区
+     */
+//    @ApiModelProperty("寄件地区")
+    String mailDistrict;
+    /**
+     * 寄件经度
+     */
+//    @ApiModelProperty("寄件经度")
+    BigDecimal mailLng;
+    /**
+     * 寄件纬度
+     */
+//    @ApiModelProperty("寄件纬度")
+    BigDecimal mailLat;
+    /**
+     * 收件姓名
+     */
+//    @ApiModelProperty("收件姓名")
+    String toName;
+    /**
+     * 收件手机号
+     */
+//    @ApiModelProperty("收件手机号")
+    String toMobile;
+    /**
+     * 收件地址
+     */
+//    @ApiModelProperty("收件地址")
+    String toAddress;
+    /**
+     * 收件省份
+     */
+//    @ApiModelProperty("收件省份")
+    String toProvince;
+    /**
+     * 收件城市
+     */
+//    @ApiModelProperty("收件城市")
+    String toCity;
+    /**
+     * 收件地区
+     */
+//    @ApiModelProperty("收件地区")
+    String toDistrict;
+    /**
+     * 收件经度
+     */
+//    @ApiModelProperty("收件经度")
+    BigDecimal toLng;
+    /**
+     * 收件纬度
+     */
+//    @ApiModelProperty("收件纬度")
+    BigDecimal toLat;
+
+
+    public String getMailName() {
+        return mailName;
+    }
+
+    public void setMailName(String mailName) {
+        this.mailName = mailName;
+    }
+
+    public String getMailMobile() {
+        return mailMobile;
+    }
+
+    public void setMailMobile(String mailMobile) {
+        this.mailMobile = mailMobile;
+    }
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
+    }
+
+    public String getMailProvince() {
+        return mailProvince;
+    }
+
+    public void setMailProvince(String mailProvince) {
+        this.mailProvince = mailProvince;
+    }
+
+    public String getMailCity() {
+        return mailCity;
+    }
+
+    public void setMailCity(String mailCity) {
+        this.mailCity = mailCity;
+    }
+
+    public String getMailDistrict() {
+        return mailDistrict;
+    }
+
+    public void setMailDistrict(String mailDistrict) {
+        this.mailDistrict = mailDistrict;
+    }
+
+    public BigDecimal getMailLng() {
+        return mailLng;
+    }
+
+    public void setMailLng(BigDecimal mailLng) {
+        this.mailLng = mailLng;
+    }
+
+    public BigDecimal getMailLat() {
+        return mailLat;
+    }
+
+    public void setMailLat(BigDecimal mailLat) {
+        this.mailLat = mailLat;
+    }
+
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
+    }
+
+    public String getToMobile() {
+        return toMobile;
+    }
+
+    public void setToMobile(String toMobile) {
+        this.toMobile = toMobile;
+    }
+
+    public String getToAddress() {
+        return toAddress;
+    }
+
+    public void setToAddress(String toAddress) {
+        this.toAddress = toAddress;
+    }
+
+    public String getToProvince() {
+        return toProvince;
+    }
+
+    public void setToProvince(String toProvince) {
+        this.toProvince = toProvince;
+    }
+
+    public String getToCity() {
+        return toCity;
+    }
+
+    public void setToCity(String toCity) {
+        this.toCity = toCity;
+    }
+
+    public String getToDistrict() {
+        return toDistrict;
+    }
+
+    public void setToDistrict(String toDistrict) {
+        this.toDistrict = toDistrict;
+    }
+
+    public BigDecimal getToLng() {
+        return toLng;
+    }
+
+    public void setToLng(BigDecimal toLng) {
+        this.toLng = toLng;
+    }
+
+    public BigDecimal getToLat() {
+        return toLat;
+    }
+
+    public void setToLat(BigDecimal toLat) {
+        this.toLat = toLat;
+    }
 
     public String getConfirm() {
         return confirm;

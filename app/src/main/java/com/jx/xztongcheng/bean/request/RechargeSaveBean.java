@@ -12,8 +12,26 @@ public class RechargeSaveBean {
     private Integer amount;
     private String payType;
     private Integer rechargeOrderId;
+    private String money;
     private Integer rechargeType;
     private Integer orderId;
+    private Integer expressOrderId;
+
+    public void setExpressOrderId(Integer expressOrderId) {
+        this.expressOrderId = expressOrderId;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public Integer getExpressOrderId() {
+        return expressOrderId;
+    }
+
+    public String getMoney() {
+        return money;
+    }
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
