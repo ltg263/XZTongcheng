@@ -190,8 +190,8 @@ public class ToolXdListActivity extends BaseActivity {
         mCustomerCreateExpress.setMailCity(mailCity);
         mCustomerCreateExpress.setMailDistrict(mailDistrict);
         //收件人信息
-        mCustomerCreateExpress.setToName(str2);
-        mCustomerCreateExpress.setToMobile(str3);
+        mCustomerCreateExpress.setToName(str1);
+        mCustomerCreateExpress.setToMobile(str4);
         mCustomerCreateExpress.setToAddress(str5);
         mCustomerCreateExpress.setToAddressText(str7);
         mCustomerCreateExpress.setToProvince(toProvince);

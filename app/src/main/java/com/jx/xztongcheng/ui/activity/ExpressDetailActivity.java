@@ -232,6 +232,18 @@ public class ExpressDetailActivity extends BaseActivity {
             if (addressDTOS != null)
                 tvGetAddress.setText("取件地址 ：" + addressDTOS.getMailAddress());
         }
+
+        switch (orderDTOSBean.getPayType()){
+            case "CASH":
+                tvPayType.setText("现金支付");
+                break;
+            case "DESTINATION":
+                tvPayType.setText("货到付款");
+                break;
+            case "COLLECTING_MONEY":
+                tvPayType.setText("待收货款:"+orderDTOSBean.getMoney()+"元");
+                break;
+        }
         switch (coreOrderList.getNextTransportStatus()) {
             case 1:
                 tvBtn2.setText("接单");

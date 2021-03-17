@@ -562,7 +562,7 @@
                     android:id="@+id/tv_pay_type"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableRight="@mipmap/ic_right_gray"
+                    android:paddingEnd="@dimen/dp_10"
                     android:gravity="center_vertical"
                     android:text="微信扫码"
                     android:textColor="@color/color_fea41d" />

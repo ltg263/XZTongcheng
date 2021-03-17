@@ -567,9 +567,18 @@ public class OrderListBean implements Serializable {
         private ExpressAddressDTOS expressAddressDTOS;
         private String payStatus;
         private String payType;
+        private String money;
         private ExpressDTOBean expressDTO;
         private String totalBonus;
         private String totalAmount;
+
+        public void setMoney(String money) {
+            this.money = money;
+        }
+
+        public String getMoney() {
+            return money;
+        }
 
         public String getTotalBonus() {
             return totalBonus;
