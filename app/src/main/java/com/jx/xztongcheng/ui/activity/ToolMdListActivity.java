@@ -54,7 +54,7 @@ public class ToolMdListActivity extends BaseActivity {
     @BindView(R.id.title_right_text)
     TextView mTitle;
     ToolMdAdapter timeDataAdapter;
-    int page = 1, pageSize = 20;
+    int page = 1, pageSize = 10;
     @BindView(R.id.tv_ydy)
     TextView mTvYdy;
     @BindView(R.id.tv_wdy)
@@ -62,7 +62,7 @@ public class ToolMdListActivity extends BaseActivity {
     private List<OrderListBean> beanList;
     private List<OrderListBean> beanListDy = new ArrayList<>();
 
-    boolean isDy = false;
+    boolean isPrint = false;
 
 
     @Override
@@ -114,8 +114,8 @@ public class ToolMdListActivity extends BaseActivity {
         mTvYdy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isDy){
-                    isDy = true;
+                if(!isPrint){
+                    isPrint = true;
                     mTvYdy.setBackgroundColor(getResources().getColor(R.color.color_blue_theme));
                     mTvYdy.setTextColor(getResources().getColor(R.color.color_ffffff));
                     mTvWdy.setBackgroundColor(getResources().getColor(R.color.color_ffffff));
@@ -123,6 +123,7 @@ public class ToolMdListActivity extends BaseActivity {
                     tv_print.setText("批量打印");
                     bnt_print.setVisibility(View.GONE);
                     page = 1;
+                    showLoading();
                     loadData();
                 }
             }
@@ -130,8 +131,8 @@ public class ToolMdListActivity extends BaseActivity {
         mTvWdy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isDy){
-                    isDy = false;
+                if(isPrint){
+                    isPrint = false;
                     mTvWdy.setBackgroundColor(getResources().getColor(R.color.color_blue_theme));
                     mTvWdy.setTextColor(getResources().getColor(R.color.color_ffffff));
                     mTvYdy.setBackgroundColor(getResources().getColor(R.color.color_ffffff));
@@ -139,6 +140,7 @@ public class ToolMdListActivity extends BaseActivity {
                     tv_print.setText("批量打印");
                     bnt_print.setVisibility(View.GONE);
                     page = 1;
+                    showLoading();
                     loadData();
                 }
             }
@@ -247,6 +249,8 @@ public class ToolMdListActivity extends BaseActivity {
             }
         }, mRvData);
         timeDataAdapter.disableLoadMoreIfNotFullPage();
+
+        showLoading();
         loadData();
     }
 
@@ -256,13 +260,19 @@ public class ToolMdListActivity extends BaseActivity {
         map.put("pageSize", pageSize);
         map.put("orderType", 1);
         map.put("expressType", 1);
-        map.put("orderStatus", 2);
+        map.put("orderStatus", 2);//1创建;2接单;3进行中;4完成;5评论;6取消
+        if(isPrint){
+            map.put("isPrint", 1);
+        }else{
+            map.put("isPrint", 0);
+        }
         RetrofitManager.build().create(OrderService.class).myOrderList(map)
                 .compose(RxScheduler.<BaseResponse<CoreOrderList>>observeOnMainThread())
                 .as(RxScheduler.<BaseResponse<CoreOrderList>>bindLifecycle(this))
                 .subscribe(new BaseObserver<CoreOrderList>() {
                     @Override
                     public void onSuccess(CoreOrderList coreOrderList) {
+                        hideLoading();
                         if (page == 1) {
                             beanList = coreOrderList.getList();
                             timeDataAdapter.setNewData(beanList);
@@ -283,6 +293,7 @@ public class ToolMdListActivity extends BaseActivity {
                     @Override
                     public void onFail(int code, String msg) {
                         super.onFail(code, msg);
+                        hideLoading();
                         timeDataAdapter.loadMoreFail();
                         if (refresh.isRefreshing()) {
                             refresh.setRefreshing(false);
@@ -321,13 +332,6 @@ public class ToolMdListActivity extends BaseActivity {
 
 
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }
 //{"websiteNo":"990101",

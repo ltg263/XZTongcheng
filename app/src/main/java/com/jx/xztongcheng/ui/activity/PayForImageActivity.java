@@ -84,6 +84,7 @@ public class PayForImageActivity extends BaseActivity {
     private double totalPrice;
     String imgUrl = "";
     String payType = "CASH";
+    String code = "";
     @Override
     public int intiLayout() {
         return R.layout.activity_pay_for_image;
@@ -93,8 +94,8 @@ public class PayForImageActivity extends BaseActivity {
     public void initView() {
         setToolbar(myToolbar, "详情订单", true);
         orderId = getIntent().getIntExtra("orderId", 0);
+        code = getIntent().getStringExtra("code");
         totalPrice = getIntent().getDoubleExtra("totalPrice", 0);
-
         tvContent.setText("支付" + totalPrice + "元运费");
         tv_fkfs.setText("现金支付"+totalPrice+"元");
 
@@ -156,6 +157,10 @@ public class PayForImageActivity extends BaseActivity {
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                if(!editCode.getText().toString().equals(code)){
+                                    ToastUtils.showShort("取件码错误");
+                                    return;
+                                }
                                 if(!payType.equals("WXAPP")){
                                     RechargeSaveBean mRechargeSaveBean = new RechargeSaveBean();
                                     mRechargeSaveBean.setExpressOrderId(orderId);
@@ -169,7 +174,6 @@ public class PayForImageActivity extends BaseActivity {
                                         mRechargeSaveBean.setMoney(dsfy);
                                     }
                                     RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mRechargeSaveBean));
-
                                     RetrofitManager.build().create(OrderService.class)
                                             .orderPya(body)
                                             .compose(RxScheduler.observeOnMainThread())
@@ -177,10 +181,27 @@ public class PayForImageActivity extends BaseActivity {
                                             .subscribe(new BaseObserver<EmptyResponse>() {
                                                 @Override
                                                 public void onSuccess(EmptyResponse emptyResponse) {
-                                                    ToastUtils.showShort("取件成功");
-                                                    finish();
+                                                    RetrofitManager.build().create(OrderService.class)
+                                                            .pickupOrder(orderId, editCode.getText().toString(), imgUrl)
+                                                            .compose(RxScheduler.observeOnMainThread())
+                                                            .as(RxScheduler.bindLifecycle(PayForImageActivity.this))
+                                                            .subscribe(new BaseObserver<EmptyResponse>() {
+                                                                @Override
+                                                                public void onSuccess(EmptyResponse emptyResponse) {
+                                                                    ToastUtils.showShort("取件成功");
+                                                                    finish();
+                                                                }
+
+                                                                @Override
+                                                                public void onFail(int code, String msg) {
+                                                                    super.onFail(code, msg);
+                                                                    ToastUtils.showShort("取件失败");
+                                                                    finish();
+                                                                }
+                                                            });
                                                 }
                                             });
+                                    return;
                                 }
                                 RetrofitManager.build().create(OrderService.class)
                                         .pickupOrder(orderId, editCode.getText().toString(), imgUrl)

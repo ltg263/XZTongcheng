@@ -317,6 +317,7 @@ public class ExpressDetailActivity extends BaseActivity {
                                             Intent intent = new Intent(ExpressDetailActivity.this, PayForImageActivity.class);
                                             intent.putExtra("orderId", orderId);
                                             intent.putExtra("totalPrice", sprice);
+                                            intent.putExtra("code", orderDTOSBean.getCode());
                                             startActivity(intent);
                                         } catch (Exception e) {
                                             e.printStackTrace();
