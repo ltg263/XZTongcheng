@@ -16,8 +16,8 @@ public class DepositLogAdapter extends BaseQuickAdapter<CourierListBaen.ListBean
     @Override
     protected void convert(BaseViewHolder helper, CourierListBaen.ListBean item) {
         helper.setText(R.id.realityAmount,"到账"+item.getRealAmount())
-//                .setText(R.id.info,"（提现"+item.getApplyAmount()+"，其中"+item.getFee()+"为平台手续费）")
-                .setText(R.id.time,item.getHandlerTime());
+                .setText(R.id.info,"(提现"+item.getAmount()+"，其中"+item.getFee()+"为平台手续费)")
+                .setText(R.id.time,item.getCreateTime());
         helper.setGone(R.id.btnCancel,false);
         //状态:1,审核中;2审核失败;3驳回;4成功
         switch (item.getStatus()) {
@@ -35,17 +35,17 @@ public class DepositLogAdapter extends BaseQuickAdapter<CourierListBaen.ListBean
                 break;
         }
         //1,银行卡;2微信;3,支付宝
-        switch (item.getType()) {
-            case 1:
-                helper.setText(R.id.info,"提现到银行卡");
-                break;
-            case 2:
-                helper.setText(R.id.info,"提现到微信");
-                break;
-            case 3:
-                helper.setText(R.id.info,"提现到支付宝");
-                break;
-        }
+//        switch (item.getType()) {
+//            case 1:
+//                helper.setText(R.id.info,"提现到银行卡");
+//                break;
+//            case 2:
+//                helper.setText(R.id.info,"提现到微信");
+//                break;
+//            case 3:
+//                helper.setText(R.id.info,"提现到支付宝");
+//                break;
+//        }
     }
 
 }

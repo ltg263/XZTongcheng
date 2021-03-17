@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.clazz.UserInfo;
 import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.bean.request.CashoutSaveBean;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
@@ -43,7 +45,7 @@ public class DepositActivity extends BaseActivity {
     @BindView(R.id.selectCard)
     TextView selectCard;
 
-    int card =0;
+    int card = 0;
     int type;
     String money;
     @BindView(R.id.slogon)
@@ -110,20 +112,30 @@ public class DepositActivity extends BaseActivity {
                 }
 
                 CashoutSaveBean request = new CashoutSaveBean();
-                request.setRealAmount(etAmount.getText().toString());
+                request.setAmount(etAmount.getText().toString());
                 request.setType("1");
-                request.setAccountId(card+"");
+                request.setAccountId(card + "");
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(request));
 
                 RetrofitManager.build().create(UserService.class)
                         .addCashoutSave(requestBody)
                         .compose(RxScheduler.observeOnMainThread())
-                        .as(RxScheduler.<BaseResponse<EmptyResponse>>bindLifecycle(this))
-                        .subscribe(new BaseObserver<EmptyResponse>() {
+                        .as(RxScheduler.<BaseResponse<Boolean>>bindLifecycle(this))
+                        .subscribe(new BaseObserver<Boolean>() {
                             @Override
-                            public void onSuccess(EmptyResponse emptyResponse) {
-                                ToastUtils.showShort("申请成功");
-                                finish();
+                            public void onSuccess(Boolean mBoolean) {
+                                if (mBoolean) {
+                                    RetrofitManager.build().create(UserService.class).getUserInfo()
+                                            .compose(RxScheduler.<BaseResponse<UserInfo>>observeOnMainThread())
+                                            .subscribe(new BaseObserver<UserInfo>() {
+                                                @Override
+                                                public void onSuccess(UserInfo userInfo) {
+                                                    App.getInstance().setUserInfo(new Gson().toJson(userInfo));
+                                                    ToastUtils.showShort("提现成功进入审核");
+                                                    finish();
+                                                }
+                                            });
+                                }
                             }
 
                             @Override
@@ -141,7 +153,7 @@ public class DepositActivity extends BaseActivity {
             case 2:
                 if (data != null) {
                     if (data.hasExtra("item")) {
-                        AccountLists.ListBean  bean = (AccountLists.ListBean) data.getSerializableExtra("item");
+                        AccountLists.ListBean bean = (AccountLists.ListBean) data.getSerializableExtra("item");
                         selectCard.setText(bean.getBank() + bean.getAccountNo());
                         card = bean.getId();
                     }

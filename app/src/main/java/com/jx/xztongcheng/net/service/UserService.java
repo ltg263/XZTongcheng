@@ -79,7 +79,7 @@ public interface UserService {
     Observable<BaseResponse<EmptyResponse>> addCard(@Body RequestBody body);
 
     @POST("user/api/v1/user/cashout/save")
-    Observable<BaseResponse<EmptyResponse>> addCashoutSave(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> addCashoutSave(@Body RequestBody body);
 
     @GET("user/api/v1/user/cash/out/account/list")
     Observable<BaseResponse<AccountLists>> getBankCard();

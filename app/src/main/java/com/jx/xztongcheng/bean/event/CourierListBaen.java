@@ -49,11 +49,11 @@ public class CourierListBaen {
          * adminId : 5
          */
 
-        private int cashoutId;
+        private String cashoutId;
         private String orderNo;
-        private int userId;
-        private int amount;
-        private int fee;
+        private String userId;
+        private String amount;
+        private String fee;
         private int type;
         private String accountNo;
         private String name;
@@ -64,14 +64,14 @@ public class CourierListBaen {
         private String createTime;
         private String handlerTime;
         private String reason;
-        private int realAmount;
-        private int adminId;
+        private String realAmount;
+        private String adminId;
 
-        public int getCashoutId() {
+        public String getCashoutId() {
             return cashoutId;
         }
 
-        public void setCashoutId(int cashoutId) {
+        public void setCashoutId(String cashoutId) {
             this.cashoutId = cashoutId;
         }
 
@@ -83,27 +83,27 @@ public class CourierListBaen {
             this.orderNo = orderNo;
         }
 
-        public int getUserId() {
+        public String getUserId() {
             return userId;
         }
 
-        public void setUserId(int userId) {
+        public void setUserId(String userId) {
             this.userId = userId;
         }
 
-        public int getAmount() {
+        public String getAmount() {
             return amount;
         }
 
-        public void setAmount(int amount) {
+        public void setAmount(String amount) {
             this.amount = amount;
         }
 
-        public int getFee() {
+        public String getFee() {
             return fee;
         }
 
-        public void setFee(int fee) {
+        public void setFee(String fee) {
             this.fee = fee;
         }
 
@@ -187,19 +187,19 @@ public class CourierListBaen {
             this.reason = reason;
         }
 
-        public int getRealAmount() {
+        public String getRealAmount() {
             return realAmount;
         }
 
-        public void setRealAmount(int realAmount) {
+        public void setRealAmount(String realAmount) {
             this.realAmount = realAmount;
         }
 
-        public int getAdminId() {
+        public String getAdminId() {
             return adminId;
         }
 
-        public void setAdminId(int adminId) {
+        public void setAdminId(String adminId) {
             this.adminId = adminId;
         }
     }

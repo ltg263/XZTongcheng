@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jx.xztongcheng.R;
@@ -313,6 +314,15 @@ public class ToolMdListActivity extends BaseActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ToolMdDetailsActivity.isConnected ) {
+            mTitle.setText(R.string.title_connected_to);
+            mTitle.append(ToolMdDetailsActivity.name);
+        }
     }
 
     @Override
