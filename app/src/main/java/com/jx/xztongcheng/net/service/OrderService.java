@@ -10,6 +10,7 @@ import com.jx.xztongcheng.bean.response.StatisResponse;
 import com.jx.xztongcheng.bean.response.WebSiteReponse;
 import com.jx.xztongcheng.net.BaseResponse;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -82,6 +83,10 @@ public interface OrderService {
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/user/send")
     Observable<BaseResponse<EmptyResponse>> send(@Field("expressOrderId") int expressOrderId);
+
+    @FormUrlEncoded
+    @POST("order/api/v1/user/courier/express/core/update/printStatus")
+    Observable<BaseResponse<EmptyResponse>> updatePrintStatus(@Field("expressOrderIds") List<String> expressOrderIds);
 
     @POST("order/api/v1/user/courier/express/core/user/setting/price")
     Observable<BaseResponse<Double>> settingPrice(@Body RequestBody body);

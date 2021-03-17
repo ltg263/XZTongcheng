@@ -19,15 +19,18 @@ import android.widget.Toast;
 
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.OrderService;
+import com.jx.xztongcheng.ui.activity.ToolMdListActivity;
 import com.qr.print.PrintPP_CPCL;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -95,6 +98,8 @@ public class ToolMdDetailsActivity extends BaseActivity {
     private boolean isSending = false;
     OrderSheetInfo coreOrderList;
 
+    ArrayList<String> expressOrderIds = new ArrayList<>();
+
     @Override
     public int intiLayout() {
         return R.layout.activity_tool_md_details;
@@ -122,6 +127,8 @@ public class ToolMdDetailsActivity extends BaseActivity {
         if (printPP_cpcl == null) {
             printPP_cpcl = new PrintPP_CPCL();
         }
+        expressOrderIds.clear();
+        expressOrderIds.add(getIntent().getStringExtra("id"));
     }
 
     Bitmap bitmap;
@@ -255,31 +262,44 @@ public class ToolMdDetailsActivity extends BaseActivity {
                 }
                 break;
             case R.id.button_send:
-                if (!isSending && coreOrderList != null && bitmap != null) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            isSending = true;
-                            if (isConnected) {
-                                PrintLabel pl = new PrintLabel();
-                                bitmapR = zoomImage(bitmapR,540,70);
-                                pl.Lable(printPP_cpcl, bitmapR, coreOrderList);
+                RetrofitManager.build().create(OrderService.class)
+                        .updatePrintStatus(expressOrderIds)
+                        .compose(RxScheduler.observeOnMainThread())
+                        .as(RxScheduler.bindLifecycle(this))
+                        .subscribe(new BaseObserver<EmptyResponse>() {
+                            @Override
+                            public void onSuccess(EmptyResponse emptyResponse) {
+                                startPrint();
                             }
-                            try {
-                                interval = 0;
-                                Thread.sleep(interval);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                            isSending = false;
-                        }
-                    }).start();
-                }
+                        });
                 break;
         }
     }
 
-    public static Bitmap zoomImage(Bitmap bgimage, double newWidth,double newHeight) {
+    private void startPrint() {
+        if (!isSending && coreOrderList != null && bitmap != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    isSending = true;
+                    if (isConnected) {
+                        PrintLabel pl = new PrintLabel();
+                        bitmapR = zoomImage(bitmapR,540,70);
+                        pl.Lable(printPP_cpcl, bitmapR, coreOrderList);
+                    }
+                    try {
+                        interval = 0;
+                        Thread.sleep(interval);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    isSending = false;
+                }
+            }).start();
+        }
+    }
+
+    public static Bitmap zoomImage(Bitmap bgimage, double newWidth, double newHeight) {
         // 获取这个图片的宽和高
         float width = bgimage.getWidth();
         float height = bgimage.getHeight();

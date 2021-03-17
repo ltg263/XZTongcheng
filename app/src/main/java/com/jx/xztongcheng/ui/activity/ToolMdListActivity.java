@@ -19,6 +19,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.response.CoreOrderList;
+import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.OrderListBean;
 import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.jx.xztongcheng.net.BaseObserver;
@@ -61,7 +62,7 @@ public class ToolMdListActivity extends BaseActivity {
     TextView mTvWdy;
     private List<OrderListBean> beanList;
     private List<OrderListBean> beanListDy = new ArrayList<>();
-
+    ArrayList<String> expressOrderIds = new ArrayList<>();
     boolean isPrint = false;
 
 
@@ -107,14 +108,27 @@ public class ToolMdListActivity extends BaseActivity {
                     return;
 
                 }
-                startPrint();
+                expressOrderIds.clear();
+                for(int i=0;i<beanListDy.size();i++){
+                    expressOrderIds.add(beanListDy.get(i).getExpressOrderDTOS().get(0).getExpressOrderId()+"");
+                }
+                RetrofitManager.build().create(OrderService.class)
+                        .updatePrintStatus(expressOrderIds)
+                        .compose(RxScheduler.observeOnMainThread())
+                        .as(RxScheduler.bindLifecycle(ToolMdListActivity.this))
+                        .subscribe(new BaseObserver<EmptyResponse>() {
+                            @Override
+                            public void onSuccess(EmptyResponse emptyResponse) {
+                                startPrint();
+                            }
+                        });
             }
         });
 
         mTvYdy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isPrint){
+                if (!isPrint) {
                     isPrint = true;
                     mTvYdy.setBackgroundColor(getResources().getColor(R.color.color_blue_theme));
                     mTvYdy.setTextColor(getResources().getColor(R.color.color_ffffff));
@@ -131,7 +145,7 @@ public class ToolMdListActivity extends BaseActivity {
         mTvWdy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isPrint){
+                if (isPrint) {
                     isPrint = false;
                     mTvWdy.setBackgroundColor(getResources().getColor(R.color.color_blue_theme));
                     mTvWdy.setTextColor(getResources().getColor(R.color.color_ffffff));
@@ -166,7 +180,6 @@ public class ToolMdListActivity extends BaseActivity {
         } else {
             new Thread(new Runnable() {
                 int a = 0;
-
                 @Override
                 public void run() {
                     while (a < beanListDy.size()) {
@@ -261,9 +274,9 @@ public class ToolMdListActivity extends BaseActivity {
         map.put("orderType", 1);
         map.put("expressType", 1);
         map.put("orderStatus", 2);//1创建;2接单;3进行中;4完成;5评论;6取消
-        if(isPrint){
+        if (isPrint) {
             map.put("isPrint", 1);
-        }else{
+        } else {
             map.put("isPrint", 0);
         }
         RetrofitManager.build().create(OrderService.class).myOrderList(map)
