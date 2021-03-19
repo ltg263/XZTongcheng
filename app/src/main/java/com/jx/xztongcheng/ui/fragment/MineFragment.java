@@ -1,6 +1,7 @@
 package com.jx.xztongcheng.ui.fragment;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
@@ -35,6 +37,7 @@ import com.jx.xztongcheng.ui.activity.SettingActivity;
 import com.jx.xztongcheng.ui.activity.StasisPartActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
 import com.jx.xztongcheng.utils.GlideImageLoader;
+import com.jx.xztongcheng.widget.FullScreenDialog;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -149,12 +152,24 @@ public class MineFragment extends BaseFragment {
                 .start();
     }
 
+    public void showVerifyDialog() {
+        Dialog dialog = new FullScreenDialog(getContext());
+        dialog.show();
+    }
     @Override
     protected void initData() {
         refreshData();
     }
     @OnClick({R.id.ll_jrsj, R.id.ll_jrsr, R.id.ll_khs, R.id.ll_wallet, R.id.ll_setting, R.id.rl_info, R.id.ll_kjgl, R.id.ll_zpj, R.id.iv_code, R.id.ll_code, R.id.ll_qd, R.id.ll_bzj})
     public void onViewClicked(View view) {
+        if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
+            showVerifyDialog();
+            return;
+        }
+        if (App.getInstance().getUserInfo().getAuthStatus() == 1) {
+            ToastUtils.showShort("正在认证中，请等待认证通过");
+            return;
+        }
         switch (view.getId()) {
             case R.id.ll_jrsj:
                 intent = new Intent(getActivity(), StasisPartActivity.class);

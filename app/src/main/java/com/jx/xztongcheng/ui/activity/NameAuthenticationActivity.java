@@ -3,6 +3,7 @@ package com.jx.xztongcheng.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -43,6 +44,8 @@ import okhttp3.RequestBody;
 
 public class NameAuthenticationActivity extends BaseActivity {
 
+    @BindView(R.id.my_toolbar)
+    Toolbar myToolbar;
 
     @BindView(R.id.iv_card1)
     ImageView ivCard1;
@@ -63,7 +66,7 @@ public class NameAuthenticationActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        setToolbar(myToolbar, "实名认证", true);
     }
 
     @Override

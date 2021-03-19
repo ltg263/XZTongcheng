@@ -63,6 +63,9 @@ public class SettingActivity extends BaseActivity {
                 .subscribe(new BaseObserver<GrabStatusResponse>() {
                     @Override
                     public void onSuccess(GrabStatusResponse emptyResponse) {
+                        if (emptyResponse==null) {
+                            return;
+                        }
                         if (emptyResponse.getGrabStatus() == 1) {
                             svQishou.setChecked(true);
                         } else {

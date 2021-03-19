@@ -16,15 +16,15 @@ import java.lang.Override;
 public class StatisticsPartFragment_ViewBinding implements Unbinder {
   private StatisticsPartFragment target;
 
-  private View view2131231251;
+  private View view2131231264;
 
-  private View view2131231212;
+  private View view2131231225;
 
-  private View view2131231258;
+  private View view2131231272;
 
-  private View view2131231166;
+  private View view2131231178;
 
-  private View view2131231186;
+  private View view2131231198;
 
   @UiThread
   public StatisticsPartFragment_ViewBinding(final StatisticsPartFragment target, View source) {
@@ -33,7 +33,7 @@ public class StatisticsPartFragment_ViewBinding implements Unbinder {
     View view;
     view = Utils.findRequiredView(source, R.id.tv_week, "field 'tvWeek' and method 'onViewClicked'");
     target.tvWeek = Utils.castView(view, R.id.tv_week, "field 'tvWeek'", TextView.class);
-    view2131231251 = view;
+    view2131231264 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -42,7 +42,7 @@ public class StatisticsPartFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_month, "field 'tvMonth' and method 'onViewClicked'");
     target.tvMonth = Utils.castView(view, R.id.tv_month, "field 'tvMonth'", TextView.class);
-    view2131231212 = view;
+    view2131231225 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -51,7 +51,7 @@ public class StatisticsPartFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_year, "field 'tvYear' and method 'onViewClicked'");
     target.tvYear = Utils.castView(view, R.id.tv_year, "field 'tvYear'", TextView.class);
-    view2131231258 = view;
+    view2131231272 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -61,7 +61,7 @@ public class StatisticsPartFragment_ViewBinding implements Unbinder {
     target.rvData = Utils.findRequiredViewAsType(source, R.id.rv_data, "field 'rvData'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.tv_begin_time, "field 'tvBeginTime' and method 'onViewClicked'");
     target.tvBeginTime = Utils.castView(view, R.id.tv_begin_time, "field 'tvBeginTime'", TextView.class);
-    view2131231166 = view;
+    view2131231178 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -70,7 +70,7 @@ public class StatisticsPartFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.tv_end_time, "field 'tvEndTime' and method 'onViewClicked'");
     target.tvEndTime = Utils.castView(view, R.id.tv_end_time, "field 'tvEndTime'", TextView.class);
-    view2131231186 = view;
+    view2131231198 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -95,15 +95,15 @@ public class StatisticsPartFragment_ViewBinding implements Unbinder {
     target.tvEndTime = null;
     target.tvValue = null;
 
-    view2131231251.setOnClickListener(null);
-    view2131231251 = null;
-    view2131231212.setOnClickListener(null);
-    view2131231212 = null;
-    view2131231258.setOnClickListener(null);
-    view2131231258 = null;
-    view2131231166.setOnClickListener(null);
-    view2131231166 = null;
-    view2131231186.setOnClickListener(null);
-    view2131231186 = null;
+    view2131231264.setOnClickListener(null);
+    view2131231264 = null;
+    view2131231225.setOnClickListener(null);
+    view2131231225 = null;
+    view2131231272.setOnClickListener(null);
+    view2131231272 = null;
+    view2131231178.setOnClickListener(null);
+    view2131231178 = null;
+    view2131231198.setOnClickListener(null);
+    view2131231198 = null;
   }
 }

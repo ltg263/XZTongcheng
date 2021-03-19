@@ -8,7 +8,7 @@
         android:id="@+id/iv_close"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_above="@+id/rl_content"
+        android:layout_above="@id/rl_content"
         android:layout_alignRight="@id/rl_content"
         android:layout_marginRight="2dp"
         android:layout_marginBottom="18dp"
@@ -16,53 +16,59 @@
 
     <RelativeLayout
         android:id="@+id/rl_content"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:background="@drawable/shape_radius_white_12">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_radius_white_12"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
             android:text="完成以下任务开始接单"
             android:textColor="@color/black33"
             android:textSize="15sp" />
 
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="49dp"
-            android:layout_marginTop="61dp"
-            android:text="实名认证"
-            android:textColor="#ff333333"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="49dp"
-            android:layout_marginTop="83dp"
-            android:text="请实名认证并通过审核"
-            android:textColor="#ff999999"
-            android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/tv_verify"
-            android:layout_width="72dp"
-            android:layout_height="38dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="63dp"
-            android:layout_marginRight="14dp"
-            android:background="@drawable/shape_radius_theme_full_8dp"
-            android:gravity="center"
-            android:text="立即认证"
-            android:textColor="#ffffffff"
-            android:textSize="10sp" />
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="实名认证"
+                android:textColor="#ff333333"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv"
+                android:text="请实名认证并通过审核"
+                android:textColor="#ff999999"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_verify"
+                android:layout_width="72dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginRight="14dp"
+                android:layout_toEndOf="@id/tv1"
+                android:background="@drawable/shape_radius_theme_full_8dp"
+                android:gravity="center"
+                android:text="立即认证"
+                android:textColor="#ffffffff"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </RelativeLayout>

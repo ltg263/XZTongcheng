@@ -19,11 +19,11 @@ public class RegisterActivity_ViewBinding implements Unbinder {
 
   private View view2131230758;
 
-  private View view2131231228;
+  private View view2131231241;
 
-  private View view2131231189;
+  private View view2131231202;
 
-  private View view2131231208;
+  private View view2131231221;
 
   @UiThread
   public RegisterActivity_ViewBinding(RegisterActivity target) {
@@ -51,7 +51,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
     target.etPass = Utils.findRequiredViewAsType(source, R.id.et_pass, "field 'etPass'", EditText.class);
     view = Utils.findRequiredView(source, R.id.tv_register, "field 'tvRegister' and method 'onViewClicked'");
     target.tvRegister = Utils.castView(view, R.id.tv_register, "field 'tvRegister'", TextView.class);
-    view2131231228 = view;
+    view2131231241 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -61,7 +61,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
     target.cb = Utils.findRequiredViewAsType(source, R.id.cb, "field 'cb'", TextView.class);
     target.tvInfo = Utils.findRequiredViewAsType(source, R.id.tv_info, "field 'tvInfo'", TextView.class);
     view = Utils.findRequiredView(source, R.id.tv_forget, "method 'onViewClicked'");
-    view2131231189 = view;
+    view2131231202 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -69,7 +69,7 @@ public class RegisterActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.tv_login, "method 'onViewClicked'");
-    view2131231208 = view;
+    view2131231221 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -97,11 +97,11 @@ public class RegisterActivity_ViewBinding implements Unbinder {
 
     view2131230758.setOnClickListener(null);
     view2131230758 = null;
-    view2131231228.setOnClickListener(null);
-    view2131231228 = null;
-    view2131231189.setOnClickListener(null);
-    view2131231189 = null;
-    view2131231208.setOnClickListener(null);
-    view2131231208 = null;
+    view2131231241.setOnClickListener(null);
+    view2131231241 = null;
+    view2131231202.setOnClickListener(null);
+    view2131231202 = null;
+    view2131231221.setOnClickListener(null);
+    view2131231221 = null;
   }
 }

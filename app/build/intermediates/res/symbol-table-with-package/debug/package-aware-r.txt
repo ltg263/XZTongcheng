@@ -1620,13 +1620,20 @@ id et_addressj
 id et_addresss
 id et_bj_amount
 id et_bj_price
+id et_bjj
 id et_code
 id et_ddh
+id et_dsfy
 id et_dsje
 id et_express_company
 id et_express_no
+id et_je
 id et_mobile
+id et_mobilej
+id et_mobiles
 id et_name
+id et_namej
+id et_names
 id et_other_price
 id et_package_price
 id et_pass
@@ -1719,11 +1726,13 @@ id line1
 id line3
 id listMode
 id list_item
+id ll
 id ll_bj
 id ll_btm
 id ll_bzj
 id ll_check
 id ll_code
+id ll_dsfy
 id ll_et
 id ll_jjf
 id ll_jjgl3
@@ -1736,6 +1745,7 @@ id ll_kjgl1
 id ll_mobile
 id ll_qd
 id ll_root
+id ll_rwm
 id ll_setting
 id ll_sfzfm
 id ll_sfzzm
@@ -1892,6 +1902,7 @@ id submenuarrow
 id submit_area
 id sv_1
 id sv_2
+id sv_3
 id sv_qishou
 id tab1
 id tab2
@@ -1930,6 +1941,7 @@ id transition_layout_save
 id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
+id tv
 id tv1
 id tv2
 id tvAmount
@@ -1963,6 +1975,7 @@ id tv_dz_s
 id tv_empty
 id tv_end_time
 id tv_express
+id tv_fkfs
 id tv_folder_name
 id tv_forget
 id tv_get_address
@@ -2031,6 +2044,7 @@ id tv_weight
 id tv_weight_price
 id tv_xd
 id tv_xf
+id tv_ydh
 id tv_ydmh
 id tv_ydy
 id tv_year
@@ -2236,6 +2250,7 @@ mipmap btn_theme_stroke
 mipmap default_avatar
 mipmap gou
 mipmap ic_alipay
+mipmap ic_app_logo
 mipmap ic_back
 mipmap ic_bzj
 mipmap ic_cancel

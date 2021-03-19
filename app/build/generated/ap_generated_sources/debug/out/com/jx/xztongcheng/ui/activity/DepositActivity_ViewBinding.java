@@ -19,7 +19,7 @@ public class DepositActivity_ViewBinding implements Unbinder {
 
   private View view2131230754;
 
-  private View view2131231084;
+  private View view2131231094;
 
   private View view2131230779;
 
@@ -47,7 +47,7 @@ public class DepositActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.selectCard, "field 'selectCard' and method 'onViewClicked'");
     target.selectCard = Utils.castView(view, R.id.selectCard, "field 'selectCard'", TextView.class);
-    view2131231084 = view;
+    view2131231094 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -81,8 +81,8 @@ public class DepositActivity_ViewBinding implements Unbinder {
 
     view2131230754.setOnClickListener(null);
     view2131230754 = null;
-    view2131231084.setOnClickListener(null);
-    view2131231084 = null;
+    view2131231094.setOnClickListener(null);
+    view2131231094 = null;
     view2131230779.setOnClickListener(null);
     view2131230779 = null;
   }

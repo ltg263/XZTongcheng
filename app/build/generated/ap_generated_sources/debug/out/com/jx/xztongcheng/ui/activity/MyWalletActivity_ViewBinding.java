@@ -16,9 +16,9 @@ import java.lang.Override;
 public class MyWalletActivity_ViewBinding implements Unbinder {
   private MyWalletActivity target;
 
-  private View view2131230885;
+  private View view2131230892;
 
-  private View view2131230975;
+  private View view2131230985;
 
   @UiThread
   public MyWalletActivity_ViewBinding(MyWalletActivity target) {
@@ -34,7 +34,7 @@ public class MyWalletActivity_ViewBinding implements Unbinder {
     target.myToolbar = Utils.findRequiredViewAsType(source, R.id.my_toolbar, "field 'myToolbar'", Toolbar.class);
     target.tvAmount = Utils.findRequiredViewAsType(source, R.id.tv_amount, "field 'tvAmount'", TextView.class);
     view = Utils.findRequiredView(source, R.id.goToDeposit, "method 'onViewClicked'");
-    view2131230885 = view;
+    view2131230892 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -42,7 +42,7 @@ public class MyWalletActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.logRl, "method 'onViewClicked'");
-    view2131230975 = view;
+    view2131230985 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -62,9 +62,9 @@ public class MyWalletActivity_ViewBinding implements Unbinder {
     target.myToolbar = null;
     target.tvAmount = null;
 
-    view2131230885.setOnClickListener(null);
-    view2131230885 = null;
-    view2131230975.setOnClickListener(null);
-    view2131230975 = null;
+    view2131230892.setOnClickListener(null);
+    view2131230892 = null;
+    view2131230985.setOnClickListener(null);
+    view2131230985 = null;
   }
 }

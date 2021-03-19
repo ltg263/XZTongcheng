@@ -16,7 +16,7 @@ import java.lang.Override;
 public class BindingSiteActivity_ViewBinding implements Unbinder {
   private BindingSiteActivity target;
 
-  private View view2131231167;
+  private View view2131231179;
 
   @UiThread
   public BindingSiteActivity_ViewBinding(BindingSiteActivity target) {
@@ -31,7 +31,7 @@ public class BindingSiteActivity_ViewBinding implements Unbinder {
     target.myToolbar = Utils.findRequiredViewAsType(source, R.id.include, "field 'myToolbar'", Toolbar.class);
     target.rvSite = Utils.findRequiredViewAsType(source, R.id.rv_site, "field 'rvSite'", RecyclerView.class);
     view = Utils.findRequiredView(source, R.id.tv_bind, "method 'onViewClicked'");
-    view2131231167 = view;
+    view2131231179 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -50,7 +50,7 @@ public class BindingSiteActivity_ViewBinding implements Unbinder {
     target.myToolbar = null;
     target.rvSite = null;
 
-    view2131231167.setOnClickListener(null);
-    view2131231167 = null;
+    view2131231179.setOnClickListener(null);
+    view2131231179 = null;
   }
 }

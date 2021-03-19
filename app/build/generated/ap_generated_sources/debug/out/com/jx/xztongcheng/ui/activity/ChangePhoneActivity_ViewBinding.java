@@ -20,7 +20,7 @@ public class ChangePhoneActivity_ViewBinding implements Unbinder {
 
   private View view2131230758;
 
-  private View view2131231180;
+  private View view2131231192;
 
   @UiThread
   public ChangePhoneActivity_ViewBinding(ChangePhoneActivity target) {
@@ -48,7 +48,7 @@ public class ChangePhoneActivity_ViewBinding implements Unbinder {
     target.llEt = Utils.findRequiredViewAsType(source, R.id.ll_et, "field 'llEt'", LinearLayout.class);
     view = Utils.findRequiredView(source, R.id.tv_done, "field 'tvDone' and method 'onViewClicked'");
     target.tvDone = Utils.castView(view, R.id.tv_done, "field 'tvDone'", TextView.class);
-    view2131231180 = view;
+    view2131231192 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -74,7 +74,7 @@ public class ChangePhoneActivity_ViewBinding implements Unbinder {
 
     view2131230758.setOnClickListener(null);
     view2131230758 = null;
-    view2131231180.setOnClickListener(null);
-    view2131231180 = null;
+    view2131231192.setOnClickListener(null);
+    view2131231192 = null;
   }
 }
