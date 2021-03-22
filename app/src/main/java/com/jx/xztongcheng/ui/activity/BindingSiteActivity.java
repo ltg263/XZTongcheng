@@ -71,7 +71,7 @@ public class BindingSiteActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_bind:
-                if (webSiteAdapter != null) {
+                if (webSiteAdapter != null && currentPos!=-1) {
                     WebSiteReponse.ListBean bean = webSiteAdapter.getData().get(currentPos);
                     RetrofitManager.build().create(OrderService.class)
                             .addSite(bean.getWebsiteId())
