@@ -1,7 +1,8 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.os.Bundle;
+import android.content.DialogInterface;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -20,9 +21,10 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
+import com.jx.xztongcheng.utils.DialogHelper;
+import com.jx.xztongcheng.utils.DialogUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SettingActivity extends BaseActivity {
@@ -81,6 +83,11 @@ public class SettingActivity extends BaseActivity {
         svQishou.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(!DialogHelper.isAuthStatus(SettingActivity.this)){
+                    svQishou.setChecked(!b);
+                    Log.w(this.toString(),"实名认证未完成");
+                    return;
+                }
                 RetrofitManager.build().create(UserService.class)
                         .updateGrab(b ? 1 : 2)
                         .compose(RxScheduler.observeOnMainThread())
@@ -117,14 +124,32 @@ public class SettingActivity extends BaseActivity {
                 ActivityUtils.startActivity(BindingSiteActivity.class);
                 break;
             case R.id.ll_verify:
+                if(App.getInstance().getUserInfo().getAuthBandDing()!=1){
+                    DialogUtils.cancelDialog(SettingActivity.this, "绑定站点", "请先绑定站点"
+                            , new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityUtils.startActivity(BindingSiteActivity.class);
+                                }
+                            }).show();
+                    return;
+                }
                 if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
                     ActivityUtils.startActivity(NameAuthenticationActivity.class);
                 }
                 break;
             case R.id.tv_logout:
-                App.clearLogin();
-                ToastUtils.showShort("退出成功");
-                finish();
+                if(App.getInstance().getUserInfo().getAuthBandDing()!=1){
+                    DialogUtils.cancelDialog(SettingActivity.this, "退出登录", "是否退出登录"
+                            , new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    App.clearLogin();
+                                    ToastUtils.showShort("退出成功");
+                                    finish();
+                                }
+                            }).show();
+                }
                 break;
         }
     }

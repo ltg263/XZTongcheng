@@ -33,6 +33,7 @@ import com.jx.xztongcheng.ui.activity.ToolMdListActivity;
 import com.jx.xztongcheng.ui.activity.ToolRkListActivity;
 import com.jx.xztongcheng.ui.activity.ToolXdListActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
+import com.jx.xztongcheng.utils.DialogHelper;
 import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.widget.FullScreenDialog;
 import com.youth.banner.Banner;
@@ -208,58 +209,50 @@ public class HomeFragment extends BaseFragment {
             ActivityUtils.startActivity(LoginActivity.class);
             return;
         }
-        if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
-            showVerifyDialog();
-            return;
-        } else if (App.getInstance().getUserInfo().getAuthStatus() == 1) {
-            ToastUtils.showShort("正在认证中，请等待认证通过");
-            return;
-        } else {
-            switch (view.getId()) {
-                case R.id.ll_kjgl1:
-                    intent = new Intent(getActivity(), ExpressManageActivity.class);
-                    intent.putExtra("expressType", 1);
-                    startActivity(intent);
-                    break;
-                case R.id.ll_zpjgl2:
-                    intent = new Intent(getActivity(), ExpressManageActivity.class);
-                    intent.putExtra("expressType", 2);
-                    startActivity(intent);
-                    break;
-                case R.id.ll_jjgl3:
-                    intent = new Intent(getActivity(), ExpressManageActivity.class);
-                    intent.putExtra("expressType", 1);
-                    intent.putExtra("fastStatus", 1);
-                    startActivity(intent);
-                    break;
-                case R.id.tv_md:
-                    intent = new Intent(getActivity(), ToolMdListActivity.class);
-                    intent.putExtra("expressType", 1);
-                    intent.putExtra("fastStatus", 1);
-                    startActivity(intent);
-                    break;
-                case R.id.tv_rk:
-                    intent = new Intent(getActivity(), ToolRkListActivity.class);
-                    intent.putExtra("expressType", 1);
-                    intent.putExtra("fastStatus", 1);
-                    startActivity(intent);
-                    break;
-                case R.id.tv_ck:
-                    intent = new Intent(getActivity(), ToolCkListActivity.class);
-                    intent.putExtra("expressType", 1);
-                    intent.putExtra("fastStatus", 1);
-                    startActivity(intent);
-                    break;
-                case R.id.tv_xd:
-                    intent = new Intent(getActivity(), ToolXdListActivity.class);
-                    startActivity(intent);
-                    break;
-            }
-        }
-    }
 
-    public void showVerifyDialog() {
-        Dialog dialog = new FullScreenDialog(getContext());
-        dialog.show();
+        if(!DialogHelper.isAuthStatus(getActivity())){
+            Log.w(this.toString(),"实名认证未完成");
+            return;
+        }
+        switch (view.getId()) {
+            case R.id.ll_kjgl1:
+                intent = new Intent(getActivity(), ExpressManageActivity.class);
+                intent.putExtra("expressType", 1);
+                startActivity(intent);
+                break;
+            case R.id.ll_zpjgl2:
+                intent = new Intent(getActivity(), ExpressManageActivity.class);
+                intent.putExtra("expressType", 2);
+                startActivity(intent);
+                break;
+            case R.id.ll_jjgl3:
+                intent = new Intent(getActivity(), ExpressManageActivity.class);
+                intent.putExtra("expressType", 1);
+                intent.putExtra("fastStatus", 1);
+                startActivity(intent);
+                break;
+            case R.id.tv_md:
+                intent = new Intent(getActivity(), ToolMdListActivity.class);
+                intent.putExtra("expressType", 1);
+                intent.putExtra("fastStatus", 1);
+                startActivity(intent);
+                break;
+            case R.id.tv_rk:
+                intent = new Intent(getActivity(), ToolRkListActivity.class);
+                intent.putExtra("expressType", 1);
+                intent.putExtra("fastStatus", 1);
+                startActivity(intent);
+                break;
+            case R.id.tv_ck:
+                intent = new Intent(getActivity(), ToolCkListActivity.class);
+                intent.putExtra("expressType", 1);
+                intent.putExtra("fastStatus", 1);
+                startActivity(intent);
+                break;
+            case R.id.tv_xd:
+                intent = new Intent(getActivity(), ToolXdListActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

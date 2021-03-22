@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
+import com.jx.xztongcheng.ui.activity.BindingSiteActivity;
 import com.jx.xztongcheng.ui.activity.ExpressManageActivity;
 import com.jx.xztongcheng.ui.activity.LoginActivity;
 import com.jx.xztongcheng.ui.activity.MyInfoActivity;
@@ -36,6 +38,7 @@ import com.jx.xztongcheng.ui.activity.PayBZJActivity;
 import com.jx.xztongcheng.ui.activity.SettingActivity;
 import com.jx.xztongcheng.ui.activity.StasisPartActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
+import com.jx.xztongcheng.utils.DialogHelper;
 import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.widget.FullScreenDialog;
 import com.youth.banner.Banner;
@@ -151,23 +154,14 @@ public class MineFragment extends BaseFragment {
                 //必须最后调用的方法，启动轮播图。
                 .start();
     }
-
-    public void showVerifyDialog() {
-        Dialog dialog = new FullScreenDialog(getContext());
-        dialog.show();
-    }
     @Override
     protected void initData() {
         refreshData();
     }
     @OnClick({R.id.ll_jrsj, R.id.ll_jrsr, R.id.ll_khs, R.id.ll_wallet, R.id.ll_setting, R.id.rl_info, R.id.ll_kjgl, R.id.ll_zpj, R.id.iv_code, R.id.ll_code, R.id.ll_qd, R.id.ll_bzj})
     public void onViewClicked(View view) {
-        if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
-            showVerifyDialog();
-            return;
-        }
-        if (App.getInstance().getUserInfo().getAuthStatus() == 1) {
-            ToastUtils.showShort("正在认证中，请等待认证通过");
+        if( view.getId()!=R.id.ll_setting &&!DialogHelper.isAuthStatus(getActivity())){
+            Log.w(this.toString(),"实名认证未完成");
             return;
         }
         switch (view.getId()) {
