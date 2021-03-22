@@ -65,7 +65,7 @@ public class SettingActivity extends BaseActivity {
                 .subscribe(new BaseObserver<GrabStatusResponse>() {
                     @Override
                     public void onSuccess(GrabStatusResponse emptyResponse) {
-                        if (emptyResponse==null) {
+                        if (emptyResponse == null) {
                             return;
                         }
                         if (emptyResponse.getGrabStatus() == 1) {
@@ -83,9 +83,9 @@ public class SettingActivity extends BaseActivity {
         svQishou.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(!DialogHelper.isAuthStatus(SettingActivity.this)){
+                if (!DialogHelper.isAuthStatus(SettingActivity.this)) {
                     svQishou.setChecked(!b);
-                    Log.w(this.toString(),"实名认证未完成");
+                    Log.w(this.toString(), "实名认证未完成");
                     return;
                 }
                 RetrofitManager.build().create(UserService.class)
@@ -124,32 +124,22 @@ public class SettingActivity extends BaseActivity {
                 ActivityUtils.startActivity(BindingSiteActivity.class);
                 break;
             case R.id.ll_verify:
-                if(App.getInstance().getUserInfo().getAuthBandDing()!=1){
-                    DialogUtils.cancelDialog(SettingActivity.this, "绑定站点", "请先绑定站点"
-                            , new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    ActivityUtils.startActivity(BindingSiteActivity.class);
-                                }
-                            }).show();
-                    return;
-                }
-                if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
-                    ActivityUtils.startActivity(NameAuthenticationActivity.class);
+                if (DialogHelper.isBindingStatus(SettingActivity.this)) {
+                    if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
+                        ActivityUtils.startActivity(NameAuthenticationActivity.class);
+                    }
                 }
                 break;
             case R.id.tv_logout:
-                if(App.getInstance().getUserInfo().getAuthBandDing()!=1){
-                    DialogUtils.cancelDialog(SettingActivity.this, "退出登录", "是否退出登录"
-                            , new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    App.clearLogin();
-                                    ToastUtils.showShort("退出成功");
-                                    finish();
-                                }
-                            }).show();
-                }
+                DialogUtils.cancelDialog(SettingActivity.this, "退出登录", "是否退出登录"
+                        , new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                App.clearLogin();
+                                ToastUtils.showShort("退出成功");
+                                finish();
+                            }
+                        }).show();
                 break;
         }
     }

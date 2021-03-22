@@ -21,18 +21,18 @@ public class UserInfo {
     private int sex;
     private String token;
     private int authStatus;
-    private int authBandDing;
+    private int bindingStatus;
     private String todayCount;
     private String todayAmont;
     private String huamanCount;
     private String balance;
 
-    public void setAuthBandDing(int authBandDing) {
-        this.authBandDing = authBandDing;
+    public int getBindingStatus() {
+        return bindingStatus;
     }
 
-    public int getAuthBandDing() {
-        return authBandDing;
+    public void setBindingStatus(int bindingStatus) {
+        this.bindingStatus = bindingStatus;
     }
 
     public String getTodayCount() {

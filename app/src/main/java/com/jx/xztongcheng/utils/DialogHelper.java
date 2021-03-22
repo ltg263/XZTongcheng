@@ -72,8 +72,8 @@ public class DialogHelper {
                 .show();
     }
 
-    public static boolean isAuthStatus(Context mContext){
-        if(App.getInstance().getUserInfo().getAuthBandDing()!=1){
+    public static boolean isBindingStatus(Context mContext){
+        if(App.getInstance().getUserInfo().getBindingStatus()==0){
             DialogUtils.cancelDialog(mContext, "绑定站点", "请先绑定站点"
                     , new DialogInterface.OnClickListener() {
                         @Override
@@ -81,6 +81,21 @@ public class DialogHelper {
                             ActivityUtils.startActivity(BindingSiteActivity.class);
                         }
                     }).show();
+            return false;
+        }
+        if(App.getInstance().getUserInfo().getBindingStatus()==1){
+            ToastUtils.showShort("正在站点申请中，请等待审核通过");
+            return false;
+        }
+        if(App.getInstance().getUserInfo().getBindingStatus()==3){
+            ToastUtils.showShort("站点失败，请联系站点");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isAuthStatus(Context mContext){
+        if(!isBindingStatus(mContext)){
             return false;
         }
         if (App.getInstance().getUserInfo().getAuthStatus() == 0 || App.getInstance().getUserInfo().getAuthStatus() == 3) {
