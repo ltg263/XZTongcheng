@@ -119,7 +119,7 @@ public class ToolCkListActivity extends BaseActivity {
                 .subscribe(new BaseObserver() {
                     @Override
                     public void onSuccess(Object o) {
-                        ToastUtils.showShort("入库成功");
+                        ToastUtils.showShort("出库成功");
                     }
 
                     @Override
