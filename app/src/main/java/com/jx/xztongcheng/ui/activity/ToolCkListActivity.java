@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,6 +54,21 @@ public class ToolCkListActivity extends BaseActivity {
         setToolbar(mToolbar, "订单出库", true);
         mToolbar.setNavigationIcon(R.mipmap.icon_common_back);
 
+        mEtDdh.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                //当actionId == XX_SEND 或者 XX_DONE时都触发
+                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
+                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
+                if ((event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+//                    mEtZl.setFocusable(true);
+//                    mEtZl.setFocusableInTouchMode(true);
+//                    mEtZl.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

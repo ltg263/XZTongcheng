@@ -60,6 +60,11 @@ public class MyWalletActivity extends BaseActivity {
 //                    }
 //                });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         tvAmount.setText(App.getInstance().getUserInfo().getBalance());
     }
 

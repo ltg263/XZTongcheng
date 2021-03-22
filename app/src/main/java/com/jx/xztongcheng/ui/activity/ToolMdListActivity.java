@@ -163,7 +163,7 @@ public class ToolMdListActivity extends BaseActivity {
     }
 
     private void startPrint() {
-        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.banner_yellow)).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
         ToolMdDetailsActivity.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //If the Bluetooth adapter is not supported,programmer is over
         if (ToolMdDetailsActivity.mBluetoothAdapter == null) {
@@ -289,7 +289,7 @@ public class ToolMdListActivity extends BaseActivity {
         map.put("pageSize", pageSize);
         map.put("orderType", 1);
         map.put("expressType", 1);
-        map.put("orderStatus", 2);//1创建;2接单;3进行中;4完成;5评论;6取消
+        map.put("orderStatus", 9);//1创建;2接单;3进行中;4完成;5评论;6取消
         if (isPrint) {
             map.put("isPrint", 1);
         } else {

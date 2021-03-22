@@ -4,8 +4,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -45,25 +47,19 @@ public class ToolRkListActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mEtDdh.addTextChangedListener(new TextWatcher() {
-
+        mEtDdh.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // 输入过程中，还在内存里，没到屏幕上
-                LogUtils.w("CharSequence---------------"+s);
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // 在输入之前会触发的
-                LogUtils.w("beforeTextChanged---------------"+s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // 输入完将要显示到屏幕上时会触发
-                boolean isEmpty = s.toString().trim().isEmpty();
-                LogUtils.w("beforeTextChanged---------------"+s);
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                //当actionId == XX_SEND 或者 XX_DONE时都触发
+                //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
+                //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
+                if ((event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+                    mEtZl.setFocusable(true);
+                    mEtZl.setFocusableInTouchMode(true);
+                    mEtZl.requestFocus();
+                    return true;
+                }
+                return false;
             }
         });
     }
@@ -94,7 +90,6 @@ public class ToolRkListActivity extends BaseActivity {
                 .subscribe(new BaseObserver() {
                     @Override
                     public void onSuccess(Object o) {
-
                         ToastUtils.showShort("入库成功");
                     }
 

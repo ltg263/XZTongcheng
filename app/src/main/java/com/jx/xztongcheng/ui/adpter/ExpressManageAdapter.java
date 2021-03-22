@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.bean.response.CoreOrderList;
 import com.jx.xztongcheng.bean.response.OrderListBean;
+import com.jx.xztongcheng.utils.GlideImageLoader;
 
 import java.util.Locale;
 
@@ -44,6 +45,12 @@ public class ExpressManageAdapter extends BaseQuickAdapter<OrderListBean, BaseVi
                 helper.setText(R.id.tv_price, "￥" + item.getTotalAmount() + "(打赏：￥" + item.getTotalBonus() + "元)");
             }
             helper.setGone(R.id.tv_price, bean.getFee() != 0);
+
+            if(item.getExpressType()==1){
+                helper.setImageResource(R.id.iv_type,R.mipmap.ic_ddxp_kuai);
+            }else{
+                helper.setImageResource(R.id.iv_type,R.mipmap.ic_ddxp_pao);
+            }
 
             TextView tvBtn2 = helper.getView(R.id.tv_status);
             switch (item.getNextTransportStatus()) {

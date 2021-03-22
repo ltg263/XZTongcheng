@@ -39,7 +39,7 @@ public class PrintLabel {
 
         iPrinter.drawText(6, 80+y, "热线电话：400-400-400", 2, 0, 0, false, false);
 
-        iPrinter.drawBarCode(20,130+y, coreOrderList.getOrderNo(), 1, 0, 2, 70);
+        iPrinter.drawBarCode(20,130+y, coreOrderList.getWaybillNumber(), 1, 0, 2, 70);
         iPrinter.drawText(50, 210+y, coreOrderList.getWaybillNumber(), 2, 0, 0, false, false);
 
         iPrinter.drawText(390, 150+y,170,140, coreOrderList.getWebsiteName(), 3, 0, 1, false, false);

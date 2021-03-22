@@ -141,7 +141,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
     @Override
     public void initData() {
 
-        bitmapR = ((BitmapDrawable) getResources().getDrawable(R.mipmap.banner_yellow)).getBitmap();
+        bitmapR = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
         RetrofitManager.build().create(OrderService.class)
                 .myOrderBarcodeInfo(getIntent().getStringExtra("id"))
                 .compose(RxScheduler.observeOnMainThread())

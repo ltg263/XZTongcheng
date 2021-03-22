@@ -47,6 +47,7 @@ public class FullScreenDialog extends Dialog {
         view.findViewById(R.id.tv_verify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dismiss();
                 ActivityUtils.startActivity(NameAuthenticationActivity.class);
             }
         });

@@ -260,6 +260,6 @@ public class ToolXdListActivity extends BaseActivity {
                 }
             }
         });
-        task.execute("北京", "北京", "北京");
+        task.execute("浙江省", "宁波市", "鄞州区");
     }
 }

@@ -161,7 +161,7 @@ public class PayForImageActivity extends BaseActivity {
                                     ToastUtils.showShort("取件码错误");
                                     return;
                                 }
-                                if(!payType.equals("WXAPP")){
+                                if(!payType.equals("WXAPP") && !payType.equals("-1")){
                                     RechargeSaveBean mRechargeSaveBean = new RechargeSaveBean();
                                     mRechargeSaveBean.setExpressOrderId(orderId);
                                     mRechargeSaveBean.setPayType(payType);
@@ -235,6 +235,7 @@ public class PayForImageActivity extends BaseActivity {
                 carLists.add("货到付款"+totalPrice+"元");
                 carLists.add("二维码支付"+totalPrice+"元");
                 carLists.add("待收货款");
+                carLists.add("客户已支付");
                 PickerViewUtils.selectorCustomC(this, carLists, "请选择付款方式", new PickerViewUtils.ConditionInterfacd() {
                     @Override
                     public void setIndex(int pos) {
@@ -254,6 +255,11 @@ public class PayForImageActivity extends BaseActivity {
                         if(pos==3){
                             payType = "COLLECTING_MONEY";
                             ll_dsfy.setVisibility(View.VISIBLE);
+                        }
+                        if(pos==4){
+                            ll_rwm.setVisibility(View.GONE);
+                            ll_dsfy.setVisibility(View.GONE);
+                            payType = "-1";
                         }
                     }
                 });

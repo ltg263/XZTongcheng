@@ -63,11 +63,11 @@ public interface OrderService {
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/storage")
-    Observable<BaseResponse<Object>> coreStorage(@Field("expressOrderNo") String expressOrderNo, @Field("weight") String weight);
+    Observable<BaseResponse<Object>> coreStorage(@Field("waybillNumber") String waybillNumber, @Field("weight") String weight);
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/out/warehouse")
-    Observable<BaseResponse<Object>> outWarehouse(@Field("expressOrderNo") String expressOrderNo, @Field("websiteCarId") String websiteCarId);
+    Observable<BaseResponse<Object>> outWarehouse(@Field("waybillNumber") String waybillNumber, @Field("websiteCarId") String websiteCarId);
 
     @FormUrlEncoded
     @POST("order/api/v1/user/courier/express/core/user/pickup")
