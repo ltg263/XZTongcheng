@@ -67,6 +67,9 @@ public class PrintLabel {
 
         switch (coreOrderList.getType()){//1线上(不用操作)2现金支付3到付4待收货跨
             case "1":
+                iPrinter.drawText(2 + 8, 760+y, "现付：", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+200, 760+y, "到付：", 2, 0, 0, false, false);
+                iPrinter.drawText(2 + 8+380, 760+y, "代收：", 2, 0, 0, false, false);
                 break;
             case "2":
                 iPrinter.drawText(2 + 8, 760+y, "现付："+coreOrderList.getAmount()+"元", 2, 0, 0, false, false);
