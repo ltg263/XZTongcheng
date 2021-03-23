@@ -1,5 +1,6 @@
 package com.jx.xztongcheng.ui.adpter;
 
+import android.util.Log;
 import android.widget.TextView;
 
 import com.blankj.utilcode.constant.TimeConstants;
@@ -52,6 +53,7 @@ public class ExpressManageAdapter extends BaseQuickAdapter<OrderListBean, BaseVi
                 helper.setImageResource(R.id.iv_type,R.mipmap.ic_ddxp_pao);
             }
 
+            Log.w("getNextTransportStatus","item.getNextTransportStatus():"+item.getNextTransportStatus());
             TextView tvBtn2 = helper.getView(R.id.tv_status);
             switch (item.getNextTransportStatus()) {
                 case 1:
@@ -71,6 +73,9 @@ public class ExpressManageAdapter extends BaseQuickAdapter<OrderListBean, BaseVi
                     break;
                 case 6:
                     tvBtn2.setText("正在揽件");
+                    break;
+                case 0:
+                    tvBtn2.setText("已取消");
                     break;
                 default:
                     tvBtn2.setText("已完成");

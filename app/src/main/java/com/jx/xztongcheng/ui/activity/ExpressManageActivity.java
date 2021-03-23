@@ -27,7 +27,7 @@ public class ExpressManageActivity extends BaseActivity {
     Toolbar mToolbar;
 
     private List<BaseFragment> mFragments;
-    private String[] mTitle = new String[4];
+    private String[] mTitle = new String[5];
     private int expressType, fastStatus;
 
 
@@ -54,10 +54,12 @@ public class ExpressManageActivity extends BaseActivity {
         mFragments.add(ExpressManageFragment.newInstance(0, 2, expressType,fastStatus));
         mFragments.add(ExpressManageFragment.newInstance(3, 2, expressType,fastStatus));
         mFragments.add(ExpressManageFragment.newInstance(4, 2, expressType,fastStatus));
+        mFragments.add(ExpressManageFragment.newInstance(6, 2, expressType,fastStatus));
         mTitle[0] = "最新";
         mTitle[1] = "全部";
         mTitle[2] = "进行中";
         mTitle[3] = "已收件";
+        mTitle[4] = "取消";
         viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
