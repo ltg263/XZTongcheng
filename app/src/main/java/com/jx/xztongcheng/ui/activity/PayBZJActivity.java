@@ -52,7 +52,7 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
     private IWXAPI api;
     int payType = 0;
 
-    public static String WX_ID="wx08a41293a322c4a0";
+    public static String WX_ID="wxed2cc4a73e26523b";
     private PaymentPresenter paymentPresenter;
     @Override
     public int intiLayout() {
@@ -177,7 +177,7 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
 //        req.packageValue = payStr.getPackageValue();
 //        req.sign = payStr.getSign();
 //        req.extData = "app data";
-        req.appId = "wx08a41293a322c4a0";
+        req.appId = "wxed2cc4a73e26523b";
         req.partnerId = "";
         req.prepayId = "";
         req.nonceStr = "";

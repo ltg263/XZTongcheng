@@ -65,7 +65,7 @@ public class PaymentPresenter implements PaymentContract.Presenter {
         final String packageValue = paymentParameterBean.getPackageValue();
         final String sign = paymentParameterBean.getSign();
 //        final String extData = paymentParameterBean.getExtData();
-        final IWXAPI api = WXAPIFactory.createWXAPI(mWeakActivity.get(),"wx08a41293a322c4a0");
+        final IWXAPI api = WXAPIFactory.createWXAPI(mWeakActivity.get(),"wxed2cc4a73e26523b");
 
         new Thread(new Runnable() {
             @Override

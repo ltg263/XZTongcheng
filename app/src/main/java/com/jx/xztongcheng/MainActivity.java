@@ -242,6 +242,7 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
     @Override
     public void refreshData(String resp, int type) {
         JWebSocketResp socketResp = new Gson().fromJson(resp, JWebSocketResp.class);
+        Log.w("socketResp.getAction","socketResp.getAction()"+socketResp.getAction());
         String ss = null;
         if (socketResp.getAction() == 4) {
             ToastUtils.showShort("您有新的指派订单");
@@ -255,6 +256,9 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
         } else if (socketResp.getAction() == 7) {
             ToastUtils.showShort("您有新的转单订单");
             ss = "您有新的转单订单";
+        } else if (socketResp.getAction() == 8) {
+            ToastUtils.showShort("您有新的订单");
+            ss = "您有新的订单";
         }
         if (!StringUtils.isEmpty(ss)) {
             TTSUtils.getInstance().speak(ss);
