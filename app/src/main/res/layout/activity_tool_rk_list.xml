@@ -37,12 +37,12 @@
             android:id="@+id/tv_sao"
             android:layout_width="80dp"
             android:layout_height="40dp"
-            android:visibility="gone"
             android:layout_marginEnd="@dimen/dp_10"
             android:background="@drawable/shape_radius_theme_full_8dp"
             android:gravity="center"
             android:text="扫一扫"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -85,8 +85,8 @@
             android:background="@drawable/shape_radius_theme_full_8dp"
             android:gravity="center"
             android:text="称重"
-            android:visibility="gone"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -97,6 +97,15 @@
         android:background="@color/line_gray" />
 
     <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text=""
+        android:textColor="@color/color_666666"
+        android:textSize="14sp" />
+
+    <TextView
         android:id="@+id/tv_rk"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -105,5 +114,6 @@
         android:gravity="center"
         android:text="入库"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="gone" />
 </LinearLayout>

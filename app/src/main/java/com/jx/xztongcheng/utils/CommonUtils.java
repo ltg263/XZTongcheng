@@ -1,12 +1,16 @@
 package com.jx.xztongcheng.utils;
 
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.Utils;
+import com.iflytek.cloud.Setting;
 
 import java.lang.reflect.Field;
 
@@ -166,6 +170,12 @@ public class CommonUtils {
             }
         });
 
+    }
+
+    public static String getAndroid_Id(){
+       String id = Settings.Secure.getString(Utils.getApp().getContentResolver(),Settings.Secure.ANDROID_ID);
+        Log.w("---->>","getAndroid_Id："+id);
+       return id==null?"":id;
     }
 
 }

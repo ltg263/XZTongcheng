@@ -12,6 +12,15 @@ public class LoginRequest extends BaseResponse {
     private String tokenInfo;
     private String username;
     private String verifyCode;
+    private String androidId;
+
+    public void setAndroidId(String androidId) {
+        this.androidId = androidId;
+    }
+
+    public String getAndroidId() {
+        return androidId;
+    }
 
     public String getGrantType() {
         return grantType;

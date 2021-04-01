@@ -41,6 +41,8 @@ public class ToolCkListActivity extends BaseActivity {
     EditText mEtDdh;
     @BindView(R.id.tv_ck)
     TextView mTvCk;
+    @BindView(R.id.tv_status)
+    TextView tv_status;
     private List<String> carLists= new ArrayList<>();
     private List<CarListBean.ListBean> carBeanLists;
 
@@ -64,6 +66,7 @@ public class ToolCkListActivity extends BaseActivity {
 //                    mEtZl.setFocusable(true);
 //                    mEtZl.setFocusableInTouchMode(true);
 //                    mEtZl.requestFocus();
+                    goRk();
                     return true;
                 }
                 return false;
@@ -119,6 +122,8 @@ public class ToolCkListActivity extends BaseActivity {
                 .subscribe(new BaseObserver() {
                     @Override
                     public void onSuccess(Object o) {
+                        tv_status.setText(mEtDdh.getText().toString()+"出库成功");
+                        mEtDdh.setText("");
                         ToastUtils.showShort("出库成功");
                     }
 

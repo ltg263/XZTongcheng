@@ -20,6 +20,7 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
+import com.jx.xztongcheng.utils.CommonUtils;
 import com.jx.xztongcheng.utils.ConstValues;
 import com.jx.xztongcheng.utils.CountDownTimerUtils;
 
@@ -96,6 +97,7 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         LoginRequest bean = new LoginRequest();
         bean.setUsername(etAccount.getText().toString());
+        bean.setAndroidId(CommonUtils.getAndroid_Id());
         bean.setPassword(etVerify.getText().toString());
         bean.setVerifyCode(etVerify.getText().toString());
         bean.setGrantType(type == 0 ? "account_password" : "sms_code" );

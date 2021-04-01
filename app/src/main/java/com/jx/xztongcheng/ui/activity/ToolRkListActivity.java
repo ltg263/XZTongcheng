@@ -32,6 +32,8 @@ public class ToolRkListActivity extends BaseActivity {
     EditText mEtDdh;
     @BindView(R.id.et_zl)
     EditText mEtZl;
+    @BindView(R.id.tv_status)
+    EditText tv_status;
 
     @Override
     public int intiLayout() {
@@ -54,9 +56,10 @@ public class ToolRkListActivity extends BaseActivity {
                 //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
                 //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
                 if ((event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
-                    mEtZl.setFocusable(true);
-                    mEtZl.setFocusableInTouchMode(true);
-                    mEtZl.requestFocus();
+//                    mEtZl.setFocusable(true);
+//                    mEtZl.setFocusableInTouchMode(true);
+//                    mEtZl.requestFocus();
+                    goRk();
                     return true;
                 }
                 return false;
@@ -90,6 +93,8 @@ public class ToolRkListActivity extends BaseActivity {
                 .subscribe(new BaseObserver() {
                     @Override
                     public void onSuccess(Object o) {
+                        tv_status.setText(mEtDdh.getText().toString()+"入库成功");
+                        mEtDdh.setText("");
                         ToastUtils.showShort("入库成功");
                     }
 
