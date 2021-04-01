@@ -12,6 +12,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.ParamData;
 import com.jx.xztongcheng.bean.request.RechargeSaveBean;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -23,6 +24,8 @@ import com.jx.xztongcheng.pay.alipay.PaymentPresenter;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import butterknife.BindView;
 import okhttp3.MediaType;
@@ -111,12 +114,6 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                     @Override
                     public void onSuccess(Integer id) {
                         payOrder(id);
-
-//                        if(payType==1){
-////                            weCahtPay(null);
-//                        }else{
-//                            appPayZfb("");
-//                        }
                     }
 
                     @Override
@@ -127,7 +124,6 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                 });
     }
     private void payOrder(Integer id) {
-
         RechargeSaveBean mRechargeSaveBean = new RechargeSaveBean();
         mRechargeSaveBean.setOrderId(id);
         if(payType==1){
@@ -140,13 +136,13 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                 .OrderPay(body)
                 .compose(RxScheduler.observeOnMainThread())
                 .as(RxScheduler.bindLifecycle(this))
-                .subscribe(new BaseObserver<Integer>() {
+                .subscribe(new BaseObserver<ParamData>() {
                     @Override
-                    public void onSuccess(Integer id) {
+                    public void onSuccess(ParamData mParamData) {
                         if(payType==1){
-                            weCahtPay(null);
+                            weCahtPay(mParamData);
                         }else{
-                            appPayZfb("");
+                            appPayZfb(mParamData.getParam());
                         }
                         hideLoading();
                     }
@@ -166,27 +162,23 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
 
     }
 
-
-    private void weCahtPay(String payStr){
-        PayReq req = new PayReq();
-//        req.appId = payStr.getAppid();
-//        req.partnerId = payStr.getPartnerid();
-//        req.prepayId = payStr.getPrepayid();
-//        req.nonceStr = payStr.getNoncestr();
-//        req.timeStamp = payStr.getTimestamp();
-//        req.packageValue = payStr.getPackageValue();
-//        req.sign = payStr.getSign();
-//        req.extData = "app data";
-        req.appId = "wxed2cc4a73e26523b";
-        req.partnerId = "";
-        req.prepayId = "";
-        req.nonceStr = "";
-        req.timeStamp = "";
-        req.packageValue = "";
-        req.sign = "";
-        req.extData = "app data";
-        api.sendReq(req);
+    private void weCahtPay(ParamData mPayModel) {
+        boolean flag = UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN);
+        if (flag) {
+            PaymentParameterBean mPaymentParameterBean = new PaymentParameterBean();
+            mPaymentParameterBean.setWxAppid(mPayModel.getAppid());
+            mPaymentParameterBean.setPartnerId(mPayModel.getPartnerid());
+            mPaymentParameterBean.setPrepayId(mPayModel.getPrepayid());
+            mPaymentParameterBean.setNonceStr(mPayModel.getNoncestr());
+            mPaymentParameterBean.setTimeStamp(mPayModel.getTimestamp());
+            mPaymentParameterBean.setPackageValue(mPayModel.getPackageX());
+            mPaymentParameterBean.setSign(mPayModel.getSign());
+            paymentPresenter.doWXPay(mPaymentParameterBean);
+        } else {
+            ToastUtils.showShort( "您没有安装微信客户端!");
+        }
     }
+
     private void appPayZfb(String data) {
         PaymentParameterBean mPaymentParameterBean1 = new PaymentParameterBean();
         mPaymentParameterBean1.setOrderInfo(data);

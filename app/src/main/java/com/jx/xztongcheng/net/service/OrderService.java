@@ -1,6 +1,7 @@
 package com.jx.xztongcheng.net.service;
 
 import com.jx.xztongcheng.bean.event.CarListBean;
+import com.jx.xztongcheng.bean.event.ParamData;
 import com.jx.xztongcheng.bean.event.UserExclusiveList;
 import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
@@ -132,5 +133,5 @@ public interface OrderService {
     Observable<BaseResponse<EmptyResponse>> helpCustomerCreateExpress(@Body RequestBody body);
 
     @POST("order/api/v1/order/recharge/pay")
-    Observable<BaseResponse<Integer>> OrderPay(@Body RequestBody body);
+    Observable<BaseResponse<ParamData>> OrderPay(@Body RequestBody body);
 }
