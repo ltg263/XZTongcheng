@@ -151,7 +151,6 @@ public class PayBZJActivity extends BaseActivity  implements PaymentContract.Vie
                     public void onFail(int code, String msg) {
                         super.onFail(code, msg);
                         hideLoading();
-                        weCahtPay(null);
                     }
                 });
 
