@@ -111,6 +111,16 @@ public class ToolMdListActivity extends BaseActivity {
                 expressOrderIds.clear();
                 for(int i=0;i<beanListDy.size();i++){
                     expressOrderIds.add(beanListDy.get(i).getExpressOrderDTOS().get(0).getExpressOrderId()+"");
+                    if(i==0){
+                        if(!StringUtils.isEmpty(beanListDy.get(0).getExpressOrderDTOS().get(0).getAdvertisingImage())){
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    bitmapGg = ToolMdDetailsActivity.getBitmap(beanListDy.get(0).getExpressOrderDTOS().get(0).getAdvertisingImage());
+                                }
+                            }).start();
+                        }
+                    }
                 }
                 RetrofitManager.build().create(OrderService.class)
                         .updatePrintStatus(expressOrderIds)
@@ -160,7 +170,7 @@ public class ToolMdListActivity extends BaseActivity {
             }
         });
     }
-
+    Bitmap bitmapGg =null;
     private void startPrint() {
         Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
         ToolMdDetailsActivity.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -214,12 +224,8 @@ public class ToolMdListActivity extends BaseActivity {
                                 }
                                 PrintLabel pl = new PrintLabel();
                                 Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 540, 70);
-
-                                Bitmap bitmapGg =null;
-
-                                if(!StringUtils.isEmpty(data.getAdvertisingImage())){
-                                    bitmapGg = ToolMdDetailsActivity.zoomImage(
-                                            ToolMdDetailsActivity.getBitmap(data.getAdvertisingImage()),540, 70);
+                                if(bitmapGg!=null){
+                                    bitmapGg = ToolMdDetailsActivity.zoomImage(bitmapGg,540,80);
                                 }
                                 pl.Lable(ToolMdDetailsActivity.printPP_cpcl, bitmapY,bitmapGg, list);
                             }

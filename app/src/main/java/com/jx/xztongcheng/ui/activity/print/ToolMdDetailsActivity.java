@@ -31,8 +31,10 @@ import com.jx.xztongcheng.net.service.OrderService;
 import com.qr.print.PrintPP_CPCL;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -220,7 +222,13 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         mTvGm1.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
                         tv_time.setText(PrintLabel.getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"));
                         if(!StringUtils.isEmpty(coreOrderList.getAdvertisingImage())){
-                            bitmapGg = getBitmap(coreOrderList.getAdvertisingImage());
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    bitmapGg = getBitmap(coreOrderList.getAdvertisingImage());
+                                    Log.w("bitmapGg","bitmapGg:"+bitmapGg);
+                                }
+                            }).start();
                             Glide.with(ToolMdDetailsActivity.this).load(coreOrderList.getAdvertisingImage())
                                     .into(iv_gg);
                         }
@@ -234,26 +242,26 @@ public class ToolMdDetailsActivity extends BaseActivity {
     }
 
     public static Bitmap getBitmap(String url) {
-        Bitmap bm = null;
+        URL fileUrl = null;
+        Bitmap bitmap = null;
+
         try {
-            URL iconUrl = new URL(url);
-            URLConnection conn = iconUrl.openConnection();
-            HttpURLConnection http = (HttpURLConnection) conn;
-
-            int length = http.getContentLength();
-
-            conn.connect();
-            // 获得图像的字符流
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is, length);
-            bm = BitmapFactory.decodeStream(bis);
-            bis.close();
-            is.close();// 关闭流
-        }
-        catch (Exception e) {
+            fileUrl = new URL(url);
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return bm;
+
+        try {
+            HttpURLConnection conn = (HttpURLConnection) fileUrl.openConnection();
+            conn.setDoInput( true);
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            bitmap = BitmapFactory. decodeStream(is);
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
     @Override
@@ -327,7 +335,9 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     if (isConnected) {
                         PrintLabel pl = new PrintLabel();
                         bitmapR = zoomImage(bitmapR,540,70);
-                        bitmapGg = zoomImage(bitmapGg,540,70);
+                        if(bitmapGg!=null){
+                            bitmapGg = zoomImage(bitmapGg,540,80);
+                        }
                         pl.Lable(printPP_cpcl, bitmapR,bitmapGg, coreOrderList);
                     }
                     try {
