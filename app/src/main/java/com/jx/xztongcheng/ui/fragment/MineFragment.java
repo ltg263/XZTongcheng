@@ -1,16 +1,11 @@
 package com.jx.xztongcheng.ui.fragment;
 
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +18,6 @@ import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseFragment;
 import com.jx.xztongcheng.bean.clazz.UserInfo;
 import com.jx.xztongcheng.bean.request.RegisterBean;
-import com.jx.xztongcheng.bean.request.SaveAuthRequest;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
@@ -31,22 +25,18 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
-import com.jx.xztongcheng.ui.activity.BindingSiteActivity;
 import com.jx.xztongcheng.ui.activity.ExpressManageActivity;
 import com.jx.xztongcheng.ui.activity.LoginActivity;
-import com.jx.xztongcheng.ui.activity.MyInfoActivity;
 import com.jx.xztongcheng.ui.activity.MyKhListActivity;
 import com.jx.xztongcheng.ui.activity.MyQrCodeActivity;
 import com.jx.xztongcheng.ui.activity.MyWalletActivity;
 import com.jx.xztongcheng.ui.activity.PayBZJActivity;
-import com.jx.xztongcheng.ui.activity.PayForImageActivity;
 import com.jx.xztongcheng.ui.activity.SettingActivity;
 import com.jx.xztongcheng.ui.activity.StasisPartActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
 import com.jx.xztongcheng.utils.DialogHelper;
 import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.utils.PermissionHelper;
-import com.jx.xztongcheng.widget.FullScreenDialog;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -65,14 +55,10 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import static android.app.Activity.RESULT_OK;
 
 public class MineFragment extends BaseFragment {
 
@@ -94,7 +80,6 @@ public class MineFragment extends BaseFragment {
     TextView tvBalance;
     @BindView(R.id.cv_banner)
     CardView cvBanner;
-    Unbinder unbinder;
 
     private BannerListResponse bannerReponse;
     private List<String> bannerImg1 = new ArrayList<>();
