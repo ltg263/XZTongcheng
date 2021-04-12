@@ -1,15 +1,11 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jx.xztongcheng.R;
@@ -33,7 +29,7 @@ public class ToolRkListActivity extends BaseActivity {
     @BindView(R.id.et_zl)
     EditText mEtZl;
     @BindView(R.id.tv_status)
-    EditText tv_status;
+    TextView tv_status;
 
     @Override
     public int intiLayout() {
