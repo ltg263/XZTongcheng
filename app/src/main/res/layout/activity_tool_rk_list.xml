@@ -37,13 +37,13 @@
         <TextView
             android:id="@+id/tv_sao"
             android:layout_width="80dp"
+            android:visibility="gone"
             android:layout_height="40dp"
             android:layout_marginEnd="@dimen/dp_10"
             android:background="@drawable/shape_radius_theme_full_8dp"
             android:gravity="center"
             android:text="扫一扫"
-            android:textColor="@color/white"
-            android:visibility="gone" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

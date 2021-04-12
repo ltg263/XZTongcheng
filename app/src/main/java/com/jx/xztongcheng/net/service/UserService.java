@@ -129,6 +129,6 @@ public interface UserService {
 
 
     //版本更新
-    @GET("api/v1/home/getVersion")
-    Observable<BaseResponse<VersionBean>> getVersionUpdating(@Query("type") Integer type);
+    @GET("user/api/v1/version/get")
+    Observable<BaseResponse<VersionBean>> getVersionUpdating(@Query("id") Integer type);
 }

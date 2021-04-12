@@ -128,7 +128,7 @@ public class DialogHelper {
     }
     public static void getVersionUpdating(Activity mContext,UploadFileInterface fileInterface) {
         RetrofitManager.build().create(UserService.class)
-                .getVersionUpdating(1)
+                .getVersionUpdating(2)
                 .compose(RxScheduler.observeOnMainThread())
                 .as(RxScheduler.<BaseResponse<VersionBean>>bindLifecycle((LifecycleOwner) mContext))
                 .subscribe(new BaseObserver<VersionBean>() {
@@ -163,7 +163,8 @@ public class DialogHelper {
                 .getInstance()
                 .apkUrl(data.getFileUrl())
                 .updateTitle("发现新版本:V"+data.getVersion())
-                .updateContent("更新内容:"+data.getContent())
+//                .updateContent("更新内容:"+data.getContent())
+                .updateContent("更新内容:系统优化")
                 .uiConfig(uiConfig)
                 .updateConfig(updateConfig)
                 .setMd5CheckResultListener(new Md5CheckResultListener() {
