@@ -587,7 +587,7 @@ public class OrderListBean implements Serializable {
 
 
         public String getAdvertisingImage() {
-            return "https://xztc-oss.nbyjdz.com/banner/2021-04-11/13a01c847bfa4863959d96e911aa3eca.jpg";
+            return advertisingImage;
         }
 
         public void setAdvertisingImage(String advertisingImage) {

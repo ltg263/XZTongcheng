@@ -1,6 +1,8 @@
 package com.jx.xztongcheng.ui.activity;
 
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -83,9 +85,9 @@ public class ToolXdListActivity extends BaseActivity {
         mSv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mSv1.isChecked()){
+                if (!mSv1.isChecked()) {
                     et_bjj.setVisibility(View.INVISIBLE);
-                }else{
+                } else {
                     et_bjj.setVisibility(View.VISIBLE);
                 }
             }
@@ -120,8 +122,10 @@ public class ToolXdListActivity extends BaseActivity {
                 break;
         }
     }
-    String mailProvince,mailCity,mailDistrict;//寄件人地区的ID
-    String toProvince,toCity,toDistrict;//收件人地区的ID
+
+    String mailProvince, mailCity, mailDistrict;//寄件人地区的ID
+    String toProvince, toCity, toDistrict;//收件人地区的ID
+
     private void helpCustomerCreateExpress() {
         String str1 = mEtNames.getText().toString();
         String str2 = mEtNamej.getText().toString();
@@ -136,12 +140,12 @@ public class ToolXdListActivity extends BaseActivity {
         String str11 = mTvTime.getText().toString();
         String str12 = et_bjj.getText().toString();
         String str13 = et_je.getText().toString();
-        if(StringUtils.isEmpty(str1) ||StringUtils.isEmpty(str2)
-                ||StringUtils.isEmpty(str3) ||StringUtils.isEmpty(str4)
-                ||StringUtils.isEmpty(str5) ||StringUtils.isEmpty(str6)
-                ||StringUtils.isEmpty(str7) ||StringUtils.isEmpty(str8)
-                ||StringUtils.isEmpty(str9) ||StringUtils.isEmpty(str10)
-                ||StringUtils.isEmpty(str11)||StringUtils.isEmpty(str13)){
+        if (StringUtils.isEmpty(str1) || StringUtils.isEmpty(str2)
+                || StringUtils.isEmpty(str3) || StringUtils.isEmpty(str4)
+                || StringUtils.isEmpty(str5) || StringUtils.isEmpty(str6)
+                || StringUtils.isEmpty(str7) || StringUtils.isEmpty(str8)
+                || StringUtils.isEmpty(str9) || StringUtils.isEmpty(str10)
+                || StringUtils.isEmpty(str11) || StringUtils.isEmpty(str13)) {
             ToastUtils.showShort("信息填写不完整");
             return;
         }
@@ -150,14 +154,14 @@ public class ToolXdListActivity extends BaseActivity {
         mCustomerCreateExpress.setConfirm("1");//是否阅读快件服务协议 1是2否
 
         mCustomerCreateExpress.setFastStatus("2");//	是否是加急件1加急件;2普件
-        if(mSv1.isChecked()){
+        if (mSv1.isChecked()) {
             mCustomerCreateExpress.setFastStatus("1");
         }
 
         mCustomerCreateExpress.setInsuredStatus("2");
-        if(mSv2.isChecked()){
+        if (mSv2.isChecked()) {
             mCustomerCreateExpress.setInsuredStatus("1");//保价状态:1,保价;2,不保价
-            if(StringUtils.isEmpty(et_bjj.getText().toString())){
+            if (StringUtils.isEmpty(et_bjj.getText().toString())) {
                 ToastUtils.showShort("请输入报价金额");
                 return;
             }
@@ -168,7 +172,7 @@ public class ToolXdListActivity extends BaseActivity {
 //            mCustomerCreateExpress.setMailType("1");
 //        }
         mCustomerCreateExpress.setOrderType("1");//	1寄件2收件, 默认输入1
-        mCustomerCreateExpress.setPickUpTime(str11+":00");//取件时间, 2020-10-12 13:40:00
+        mCustomerCreateExpress.setPickUpTime(str11 + ":00");//取件时间, 2020-10-12 13:40:00
 //        mCustomerCreateExpress.setStartAddressId(str6);//寄件地址
         List<CustomerCreateExpress.ExpressInfoFormsBean> beans = new ArrayList<>();
         CustomerCreateExpress.ExpressInfoFormsBean bean = new CustomerCreateExpress.ExpressInfoFormsBean();
@@ -194,6 +198,7 @@ public class ToolXdListActivity extends BaseActivity {
         mCustomerCreateExpress.setToProvince(toProvince);
         mCustomerCreateExpress.setToCity(toCity);
         mCustomerCreateExpress.setToDistrict(toDistrict);
+        Log.w("mCustomerCreateExpress", "mCustomerCreateExpress:" + mCustomerCreateExpress.toString());
 
         showLoading();
         RequestBody body = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(mCustomerCreateExpress));
@@ -231,24 +236,24 @@ public class ToolXdListActivity extends BaseActivity {
             @Override
             public void onAddressPicked(Province province, City city, County county) {
                 if (county == null) {
-                    if(type==0){
+                    if (type == 0) {
                         mTvAddressj.setText(province.getAreaName() + city.getAreaName());
                         mailProvince = province.getAreaId();
                         mailCity = city.getAreaId();
 //                        mailDistrict = county.getAreaId();
-                    }else{
+                    } else {
                         mTvAddresss.setText(province.getAreaName() + city.getAreaName());
                         toProvince = province.getAreaId();
                         toCity = city.getAreaId();
 //                        toDistrict = county.getAreaId();
                     }
                 } else {
-                    if(type==0){
+                    if (type == 0) {
                         mTvAddressj.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
                         mailProvince = province.getAreaId();
                         mailCity = city.getAreaId();
                         mailDistrict = county.getAreaId();
-                    }else{
+                    } else {
                         mTvAddresss.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
                         toProvince = province.getAreaId();
                         toCity = city.getAreaId();

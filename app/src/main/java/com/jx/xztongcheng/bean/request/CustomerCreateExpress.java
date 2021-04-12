@@ -451,4 +451,40 @@ public class CustomerCreateExpress {
             this.images = images;
         }
     }
+
+    @Override
+    public String toString() {
+        return "CustomerCreateExpress{" +
+                "confirm='" + confirm + '\'' +
+                ", cost='" + cost + '\'' +
+                ", expressBusinessType='" + expressBusinessType + '\'' +
+                ", fastStatus='" + fastStatus + '\'' +
+                ", insuredFee='" + insuredFee + '\'' +
+                ", insuredStatus='" + insuredStatus + '\'' +
+                ", mailType='" + mailType + '\'' +
+                ", orderType='" + orderType + '\'' +
+                ", pickUpTime='" + pickUpTime + '\'' +
+                ", remark='" + remark + '\'' +
+                ", startAddressId='" + startAddressId + '\'' +
+                ", expressInfoForms=" + expressInfoForms +
+                ", mailName='" + mailName + '\'' +
+                ", mailMobile='" + mailMobile + '\'' +
+                ", mailAddress='" + mailAddress + '\'' +
+                ", mailAddressText='" + mailAddressText + '\'' +
+                ", mailProvince='" + mailProvince + '\'' +
+                ", mailCity='" + mailCity + '\'' +
+                ", mailDistrict='" + mailDistrict + '\'' +
+                ", mailLng=" + mailLng +
+                ", mailLat=" + mailLat +
+                ", toName='" + toName + '\'' +
+                ", toMobile='" + toMobile + '\'' +
+                ", toAddress='" + toAddress + '\'' +
+                ", toAddressText='" + toAddressText + '\'' +
+                ", toProvince='" + toProvince + '\'' +
+                ", toCity='" + toCity + '\'' +
+                ", toDistrict='" + toDistrict + '\'' +
+                ", toLng=" + toLng +
+                ", toLat=" + toLat +
+                '}';
+    }
 }
