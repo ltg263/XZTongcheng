@@ -332,7 +332,7 @@ public class OrderListBean implements Serializable {
         private int expressStatus;
         private int expressType;
         private String expressVolume;
-        private int expressWeight;
+        private double expressWeight;
         private int fastStatus;
         private int insuredFee;
         private int profit;
@@ -449,11 +449,11 @@ public class OrderListBean implements Serializable {
             this.expressVolume = expressVolume;
         }
 
-        public int getExpressWeight() {
+        public double getExpressWeight() {
             return expressWeight;
         }
 
-        public void setExpressWeight(int expressWeight) {
+        public void setExpressWeight(double expressWeight) {
             this.expressWeight = expressWeight;
         }
 
