@@ -1,9 +1,6 @@
 package com.jx.xztongcheng.utils;
 
-import android.support.annotation.StringDef;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import androidx.annotation.StringDef;
 
 /**
  * Create by Sxl on 2020/12/7.

@@ -1,9 +1,8 @@
 package com.jx.xztongcheng.ui.fragment;
 
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,12 +14,10 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseFragment;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -35,7 +32,6 @@ import com.jx.xztongcheng.ui.activity.ToolXdListActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
 import com.jx.xztongcheng.utils.DialogHelper;
 import com.jx.xztongcheng.utils.GlideImageLoader;
-import com.jx.xztongcheng.widget.FullScreenDialog;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;

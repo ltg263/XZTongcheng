@@ -1,16 +1,14 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.event.UserExclusiveList;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
-import com.jx.xztongcheng.bean.response.OrderListBean;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;

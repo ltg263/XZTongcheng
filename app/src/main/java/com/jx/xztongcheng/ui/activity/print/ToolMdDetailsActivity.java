@@ -8,7 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +28,6 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.OrderService;
-import com.jx.xztongcheng.ui.activity.ToolMdListActivity;
-import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.qr.print.PrintPP_CPCL;
 
 import java.io.BufferedInputStream;

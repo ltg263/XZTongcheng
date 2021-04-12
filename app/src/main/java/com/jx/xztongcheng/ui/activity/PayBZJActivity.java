@@ -1,6 +1,6 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +21,6 @@ import com.jx.xztongcheng.net.service.OrderService;
 import com.jx.xztongcheng.pay.alipay.PaymentContract;
 import com.jx.xztongcheng.pay.alipay.PaymentParameterBean;
 import com.jx.xztongcheng.pay.alipay.PaymentPresenter;
-import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.socialize.UMShareAPI;

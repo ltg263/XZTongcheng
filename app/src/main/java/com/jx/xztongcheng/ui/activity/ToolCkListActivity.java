@@ -1,18 +1,15 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
-import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
-import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
-import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.jx.xztongcheng.R;
@@ -70,6 +67,25 @@ public class ToolCkListActivity extends BaseActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        mEtDdh.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String cS = s.toString().substring(0,s.toString().length()-1);
+                if(s.toString().indexOf("\n")>0){
+                    mEtDdh.setText(s.toString().replace("\n",""));
+                    mEtDdh.setSelection(mEtDdh.getText().toString().length());
+                    goRk();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }

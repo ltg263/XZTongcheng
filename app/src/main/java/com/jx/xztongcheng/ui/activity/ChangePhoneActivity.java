@@ -1,7 +1,6 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,7 +19,6 @@ import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.utils.CountDownTimerUtils;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ChangePhoneActivity extends BaseActivity {

@@ -1,7 +1,7 @@
 package com.jx.xztongcheng.utils;
 
 import android.os.CountDownTimer;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.widget.TextView;
 
 import com.jx.xztongcheng.R;

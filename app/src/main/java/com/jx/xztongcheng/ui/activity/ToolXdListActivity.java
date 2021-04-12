@@ -1,7 +1,6 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -14,7 +13,6 @@ import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.request.CustomerCreateExpress;
-import com.jx.xztongcheng.bean.request.RechargeSaveBean;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -30,7 +28,6 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.addapp.pickers.entity.City;
 import cn.addapp.pickers.entity.County;

@@ -1,6 +1,10 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -51,7 +55,8 @@ public class ToolRkListActivity extends BaseActivity {
                 //当actionId == XX_SEND 或者 XX_DONE时都触发
                 //或者event.getKeyCode == ENTER 且 event.getAction == ACTION_DOWN时也触发
                 //注意，这是一定要判断event != null。因为在某些输入法上会返回null。
-                if ((event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction())) {
+                Log.w("onEditorAction","onEditorAction:"+event.getKeyCode());
+                if (event != null && KeyEvent.KEYCODE_ENTER == event.getKeyCode() && KeyEvent.ACTION_DOWN == event.getAction()) {
 //                    mEtZl.setFocusable(true);
 //                    mEtZl.setFocusableInTouchMode(true);
 //                    mEtZl.requestFocus();
@@ -59,6 +64,24 @@ public class ToolRkListActivity extends BaseActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+        mEtDdh.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String cS = s.toString().substring(0,s.toString().length()-1);
+                if(s.toString().indexOf("\n")>0){
+                    mEtDdh.setText(s.toString().replace("\n",""));
+                    mEtDdh.setSelection(mEtDdh.getText().toString().length());
+                    goRk();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }

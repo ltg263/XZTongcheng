@@ -11,7 +11,7 @@
 
     <include layout="@layout/my_toolbar" android:id="@+id/include" />
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -157,6 +157,6 @@
                 android:background="@color/line_gray" />
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

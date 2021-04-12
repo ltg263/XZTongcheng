@@ -1,8 +1,8 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +16,6 @@ import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.bean.request.BankCardRequest;
-import com.jx.xztongcheng.bean.response.AddAccount;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.RetrofitManager;

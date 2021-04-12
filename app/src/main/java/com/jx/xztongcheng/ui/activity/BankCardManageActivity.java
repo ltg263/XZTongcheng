@@ -1,8 +1,8 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import com.blankj.utilcode.util.ActivityUtils;

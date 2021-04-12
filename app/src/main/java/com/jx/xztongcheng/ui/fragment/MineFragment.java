@@ -2,7 +2,7 @@ package com.jx.xztongcheng.ui.fragment;
 
 
 import android.content.Intent;
-import android.support.v7.widget.CardView;
+import androidx.cardview.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;

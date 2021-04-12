@@ -3,7 +3,7 @@ package com.jx.xztongcheng.ui.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.widget.ImageView;
 
 import com.jx.xztongcheng.R;

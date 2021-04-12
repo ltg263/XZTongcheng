@@ -1,7 +1,7 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,13 +9,6 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseActivity;
-import com.jx.xztongcheng.bean.clazz.UserInfo;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
-import com.jx.xztongcheng.net.BaseObserver;
-import com.jx.xztongcheng.net.BaseResponse;
-import com.jx.xztongcheng.net.RetrofitManager;
-import com.jx.xztongcheng.net.RxScheduler;
-import com.jx.xztongcheng.net.service.UserService;
 
 import butterknife.BindView;
 import butterknife.OnClick;

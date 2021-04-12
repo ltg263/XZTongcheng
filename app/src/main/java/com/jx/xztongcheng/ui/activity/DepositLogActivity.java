@@ -1,31 +1,20 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.event.CourierListBaen;
-import com.jx.xztongcheng.bean.request.ForgetPasswordRequest;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.adpter.DepositLogAdapter;
-import com.jx.xztongcheng.utils.DialogUtils;
 
 import butterknife.BindView;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 public class DepositLogActivity extends BaseActivity {
 

@@ -1,6 +1,6 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;

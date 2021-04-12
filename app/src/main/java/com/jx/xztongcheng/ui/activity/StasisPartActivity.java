@@ -1,20 +1,18 @@
 package com.jx.xztongcheng.ui.activity;
 
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.ViewGroup;
 
 import com.blankj.utilcode.util.BarUtils;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.base.BaseFragment;
-import com.jx.xztongcheng.ui.fragment.ExpressManageFragment;
 import com.jx.xztongcheng.ui.fragment.StatisticsPartFragment;
 
 import java.util.ArrayList;
