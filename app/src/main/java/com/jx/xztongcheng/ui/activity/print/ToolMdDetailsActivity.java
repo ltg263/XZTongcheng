@@ -190,7 +190,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         ToolMdDetailsActivity.this.coreOrderList = coreOrderList;
                         mTvZdh.setText("热线电话：400-6898-588");//站点
                         tv_websiteName.setText(coreOrderList.getWebsiteName());
-                        String sjyxx = coreOrderList.getConsigneeName() + "  " + coreOrderList.getConsigneeMobile() + "\n" + coreOrderList.getMailingAddress();
+                        String sjyxx = coreOrderList.getConsigneeName() + "  " + coreOrderList.getConsigneeMobile() + "\n" + coreOrderList.getConsigneeAddress();
                         String jjyxx = coreOrderList.getMailingName() + "  " + coreOrderList.getMailingMobile() + "\n" + coreOrderList.getMailingAddress();
                         mTvSjr1.setText(sjyxx);//收件人
                         mTvJjr1.setText(jjyxx);//寄件人
