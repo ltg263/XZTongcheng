@@ -35,7 +35,7 @@ public class PrintLabel {
 
         iPrinter.drawGraphic(10,10,540,40+y,mBitmap);
         if(mBitmapGg!=null){
-            iPrinter.drawGraphic(20,820+y,540,80,mBitmapGg);
+            iPrinter.drawGraphic(10,810+y,540,80,mBitmapGg);
         }
 
         iPrinter.drawText(10, 55+y, getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"),1,0,0,false,false);
