@@ -30,18 +30,13 @@ import com.jx.xztongcheng.ui.fragment.HomeFragment;
 import com.jx.xztongcheng.ui.fragment.MineFragment;
 import com.jx.xztongcheng.utils.CommonUtils;
 import com.jx.xztongcheng.utils.GetLogLatUtils;
-import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.utils.PermissionHelper;
 import com.jx.xztongcheng.utils.TTSUtils;
-import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.List;
 
 import butterknife.BindView;
 
