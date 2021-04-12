@@ -2,13 +2,13 @@ package com.jx.xztongcheng;
 
 import android.content.Intent;
 import android.location.Location;
+import android.util.Log;
+import android.view.MenuItem;
+
 import androidx.annotation.Nullable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import android.util.Log;
-import android.view.MenuItem;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -17,6 +17,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
@@ -171,6 +172,9 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
                         switchFragment(homeFragment);
                         break;
                     case R.id.tab2:
+//                        if (StringUtils.isEmpty(App.getInstance().getTokenId())) {
+//                            ActivityUtils.startActivity(LoginActivity.class);
+//                        }else{}
                         mineFragment.refreshData();
                         switchFragment(mineFragment);
                         break;
