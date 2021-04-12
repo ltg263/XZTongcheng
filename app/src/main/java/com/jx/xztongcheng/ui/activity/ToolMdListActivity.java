@@ -197,6 +197,7 @@ public class ToolMdListActivity extends BaseActivity {
                                 list.setMailingMobile(data.getExpressAddressDTOS().getMailMobile());
                                 list.setMailingAddress(data.getExpressAddressDTOS().getMailAddress());
                                 list.setExpressName(data.getExpressDTO().getExpressName());
+                                list.setAdvertisingImage(data.getAdvertisingImage());
                                 list.setWaybillNumber(data.getWaybillNumber());
                                 list.setAmount(data.getMoney());
                                 list.setType("1");
@@ -214,7 +215,14 @@ public class ToolMdListActivity extends BaseActivity {
                                 }
                                 PrintLabel pl = new PrintLabel();
                                 Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 540, 70);
-                                pl.Lable(ToolMdDetailsActivity.printPP_cpcl, bitmapY, list);
+
+                                Bitmap bitmapGg =null;
+
+                                if(!StringUtils.isEmpty(data.getAdvertisingImage())){
+                                    bitmapGg = ToolMdDetailsActivity.zoomImage(
+                                            ToolMdDetailsActivity.getBitmap(data.getAdvertisingImage()),540, 70);
+                                }
+                                pl.Lable(ToolMdDetailsActivity.printPP_cpcl, bitmapY,bitmapGg, list);
                             }
                             a++;
                             Thread.sleep(1000);

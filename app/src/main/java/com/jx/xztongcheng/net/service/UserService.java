@@ -51,7 +51,10 @@ public interface UserService {
     @GET("user/api/v1/feign/user/account/current/amount")
     Observable<BaseResponse<EmptyResponse>> getCurrentAmount(@Query("type") int type);
 
-    @GET("user/api/v1/user/verify/forget/password")
+//    @GET("user/api/v1/user/verify/forget/password")
+//    Observable<BaseResponse<EmptyResponse>> forgetPassword(@Body RequestBody body);
+
+    @POST("user/api/v1/user/verify/forget/password")
     Observable<BaseResponse<EmptyResponse>> forgetPassword(@Body RequestBody body);
 
     @GET("user/api/v1/user/change/mobile")
@@ -68,8 +71,12 @@ public interface UserService {
         //courier_auth
     Observable<BaseResponse<String>> uploadImage(@PartMap Map<String, RequestBody> map, @Part MultipartBody.Part file);
 
+
     @POST("order/api/v1/user/courier/auth/save")
     Observable<BaseResponse<EmptyResponse>> saveAuth(@Body RequestBody body);
+
+    @POST("user/api/v1/user/update")
+    Observable<BaseResponse<EmptyResponse>> updateAvatar(@Body  RequestBody body);
 
     @GET("appliance/api/v1/appliance/ad/list")
     Observable<BaseResponse<BannerListResponse>> getBanner(@Query("seat") int seat);

@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.StringUtils;
+import com.bumptech.glide.Glide;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
@@ -27,9 +29,14 @@ import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.OrderService;
 import com.jx.xztongcheng.ui.activity.ToolMdListActivity;
+import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.qr.print.PrintPP_CPCL;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -97,6 +104,9 @@ public class ToolMdDetailsActivity extends BaseActivity {
     TextView tv_ydh;
     @BindView(R.id.tv_time)
     TextView tv_time;
+    @BindView(R.id.iv_gg)
+    ImageView iv_gg;
+
     // Layout Views
     private int interval;
     private boolean isSending = false;
@@ -135,8 +145,8 @@ public class ToolMdDetailsActivity extends BaseActivity {
         expressOrderIds.add(getIntent().getStringExtra("id"));
     }
 
-    Bitmap bitmap;
     Bitmap bitmapR;
+    Bitmap bitmapGg;
 
     @Override
     public void initData() {
@@ -155,7 +165,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     @Override
                     public void onNext(ResponseBody responseBody) {
                         InputStream inputStream = responseBody.byteStream();//得到图片的流
-                        bitmap = BitmapFactory.decodeStream(inputStream);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                         mIv.setImageBitmap(bitmap);
                     }
 
@@ -178,7 +188,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     public void onSuccess(OrderSheetInfo coreOrderList) {
 //                        mTvZdh.setText(coreOrderList.getWebsiteNo());//站点
                         ToolMdDetailsActivity.this.coreOrderList = coreOrderList;
-                        mTvZdh.setText("热线电话：400-400-400");//站点
+                        mTvZdh.setText("热线电话：400-6898-588");//站点
                         tv_websiteName.setText(coreOrderList.getWebsiteName());
                         String sjyxx = coreOrderList.getConsigneeName() + "  " + coreOrderList.getConsigneeMobile() + "\n" + coreOrderList.getMailingAddress();
                         String jjyxx = coreOrderList.getMailingName() + "  " + coreOrderList.getMailingMobile() + "\n" + coreOrderList.getMailingAddress();
@@ -211,6 +221,11 @@ public class ToolMdDetailsActivity extends BaseActivity {
                         mTvZl.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
                         mTvGm1.setText("重量：" + coreOrderList.getExpressWeight() + "kg");
                         tv_time.setText(PrintLabel.getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"));
+                        if(!StringUtils.isEmpty(coreOrderList.getAdvertisingImage())){
+                            bitmapGg = getBitmap(coreOrderList.getAdvertisingImage());
+                            Glide.with(ToolMdDetailsActivity.this).load(coreOrderList.getAdvertisingImage())
+                                    .into(iv_gg);
+                        }
                     }
 
                     @Override
@@ -220,17 +235,28 @@ public class ToolMdDetailsActivity extends BaseActivity {
                 });
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // If BT is not on, request that it be enabled
-//        // setupChat() will then be called during onActivityRe//sultsetupChat
-//        if (!mBluetoothAdapter.isEnabled()) {
-//            Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//            startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
-//        }
-//
-//    }
+    public static Bitmap getBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL iconUrl = new URL(url);
+            URLConnection conn = iconUrl.openConnection();
+            HttpURLConnection http = (HttpURLConnection) conn;
+
+            int length = http.getContentLength();
+
+            conn.connect();
+            // 获得图像的字符流
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is, length);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();// 关闭流
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bm;
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -295,7 +321,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
     }
 
     private void startPrint() {
-        if (!isSending && coreOrderList != null && bitmap != null) {
+        if (!isSending && coreOrderList != null) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -303,7 +329,8 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     if (isConnected) {
                         PrintLabel pl = new PrintLabel();
                         bitmapR = zoomImage(bitmapR,540,70);
-                        pl.Lable(printPP_cpcl, bitmapR, coreOrderList);
+                        bitmapGg = zoomImage(bitmapGg,540,70);
+                        pl.Lable(printPP_cpcl, bitmapR,bitmapGg, coreOrderList);
                     }
                     try {
                         interval = 0;

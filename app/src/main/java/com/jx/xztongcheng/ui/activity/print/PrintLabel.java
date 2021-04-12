@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class PrintLabel {
     public static int y = 30;
-    public static void Lable(PrintPP_CPCL iPrinter, Bitmap mBitmap,OrderSheetInfo coreOrderList) {
+    public static void Lable(PrintPP_CPCL iPrinter, Bitmap mBitmap,Bitmap mBitmapGg,OrderSheetInfo coreOrderList) {
         Log.w("coreOrderList","coreOrderList:"+coreOrderList.toString());
 //        if(true){
 //            return;
@@ -34,10 +34,13 @@ public class PrintLabel {
 
 
         iPrinter.drawGraphic(10,10,540,40+y,mBitmap);
+        if(mBitmapGg!=null){
+            iPrinter.drawGraphic(20,820+y,900,80,mBitmapGg);
+        }
 
         iPrinter.drawText(10, 55+y, getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"),1,0,0,false,false);
 
-        iPrinter.drawText(6, 80+y, "热线电话：400-400-400", 2, 0, 0, false, false);
+        iPrinter.drawText(6, 80+y, "热线电话：400-6898-588", 2, 0, 0, false, false);
 
         iPrinter.drawBarCode(20,130+y, coreOrderList.getWaybillNumber(), 1, 0, 2, 70);
         iPrinter.drawText(50, 210+y, coreOrderList.getWaybillNumber(), 2, 0, 0, false, false);

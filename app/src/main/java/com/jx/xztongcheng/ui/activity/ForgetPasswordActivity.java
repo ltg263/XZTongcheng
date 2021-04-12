@@ -69,6 +69,7 @@ public class ForgetPasswordActivity extends BaseActivity {
                 String pw1 = etPassword.getText().toString().trim();
                 String pw2 = etPassword2.getText().toString().trim();
                 String code = etVerify.getText().toString().trim();
+                String username = etAccount.getText().toString().trim();
                 if (TextUtils.isEmpty(pw1) || TextUtils.isEmpty(pw2) || TextUtils.isEmpty(code)) {
                     ToastUtils.showShort("请输入完整内容");
                     return;
@@ -80,6 +81,8 @@ public class ForgetPasswordActivity extends BaseActivity {
                 ForgetPasswordRequest request = new ForgetPasswordRequest();
                 request.setPassword(pw1);
                 request.setSmsCode(code);
+                request.setUsername(username);
+                request.setUsernameType(1);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(request));
                 RetrofitManager.build().create(UserService.class)
                         .forgetPassword(requestBody)
@@ -89,6 +92,8 @@ public class ForgetPasswordActivity extends BaseActivity {
                             @Override
                             public void onSuccess(EmptyResponse emptyResponse) {
                                 ToastUtils.showShort("修改成功");
+                                finish();
+                                readyGoActivity(LoginActivity.class);
                             }
 
                             @Override

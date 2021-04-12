@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_10"
-                        android:text="热线电话：400-400-400"
+                        android:text="热线电话：400-6898-588"
                         android:textColor="@color/color_333333"
                         android:textSize="@dimen/sp_14" />
 
@@ -211,7 +211,7 @@
                                 android:gravity="top"
                                 android:minLines="3"
                                 android:padding="@dimen/dp_10"
-                                android:text="姓名：123456\n这是地址"
+                                android:text=""
                                 android:textColor="@color/black33"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -233,7 +233,7 @@
                                     android:layout_weight="1"
                                     android:gravity="top"
                                     android:padding="@dimen/dp_10"
-                                    android:text="姓名：123456\n这是地址"
+                                    android:text=""
                                     android:textColor="@color/black33"
                                     android:textSize="14sp" />
 
@@ -288,7 +288,7 @@
                                     android:layout_weight="1"
                                     android:gravity="top"
                                     android:padding="@dimen/dp_10"
-                                    android:text="购买内容"
+                                    android:text=""
                                     android:textColor="@color/black33"
                                     android:textSize="14sp" />
 
@@ -386,15 +386,20 @@
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/shape_line_1db" />
 
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/line_gray" />
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_line_1db">
+
+                    <ImageView
+                        android:id="@+id/iv_gg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:layout_margin="5dp"
+                        android:adjustViewBounds="true" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/tv_ddxx"
@@ -402,7 +407,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:padding="5dp"
-                    android:text="运单号：123456"
+                    android:text=""
                     android:textColor="@color/black33"
                     android:textSize="@dimen/sp_14"
                     android:visibility="gone" />

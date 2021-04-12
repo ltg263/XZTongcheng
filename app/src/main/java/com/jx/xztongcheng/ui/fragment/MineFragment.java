@@ -4,6 +4,7 @@ package com.jx.xztongcheng.ui.fragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,7 +22,10 @@ import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
 import com.jx.xztongcheng.base.BaseFragment;
 import com.jx.xztongcheng.bean.clazz.UserInfo;
+import com.jx.xztongcheng.bean.request.RegisterBean;
+import com.jx.xztongcheng.bean.request.SaveAuthRequest;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
+import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
@@ -35,24 +39,40 @@ import com.jx.xztongcheng.ui.activity.MyKhListActivity;
 import com.jx.xztongcheng.ui.activity.MyQrCodeActivity;
 import com.jx.xztongcheng.ui.activity.MyWalletActivity;
 import com.jx.xztongcheng.ui.activity.PayBZJActivity;
+import com.jx.xztongcheng.ui.activity.PayForImageActivity;
 import com.jx.xztongcheng.ui.activity.SettingActivity;
 import com.jx.xztongcheng.ui.activity.StasisPartActivity;
 import com.jx.xztongcheng.ui.activity.WebViewWithBackActivity;
 import com.jx.xztongcheng.utils.DialogHelper;
 import com.jx.xztongcheng.utils.GlideImageLoader;
+import com.jx.xztongcheng.utils.PermissionHelper;
 import com.jx.xztongcheng.widget.FullScreenDialog;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.uber.autodispose.AutoDispose;
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+import static android.app.Activity.RESULT_OK;
 
 public class MineFragment extends BaseFragment {
 
@@ -192,6 +212,7 @@ public class MineFragment extends BaseFragment {
                 ActivityUtils.startActivity(SettingActivity.class);
                 break;
             case R.id.rl_info:
+                selectImage();
 //                ActivityUtils.startActivity(MyInfoActivity.class);
                 break;
             case R.id.ll_qd:
@@ -232,6 +253,10 @@ public class MineFragment extends BaseFragment {
                             tvJrsj.setText(TextUtils.isEmpty(userInfo.getTodayCount()) ? "0" : userInfo.getTodayCount());
                             tvJrsk.setText(TextUtils.isEmpty(userInfo.getTodayAmont()) ? "0" : userInfo.getTodayAmont());
                             tvKhs.setText(TextUtils.isEmpty(userInfo.getHuamanCount()) ? "0" : userInfo.getHuamanCount());
+                            if(!TextUtils.isEmpty(userInfo.getWebsiteName())){
+                                tv_dh.setText(userInfo.getWebsiteName()+"-"+userInfo.getNickname());
+                            }
+                            GlideImageLoader.loadImageViewWithCirclr(getActivity(), userInfo.getAvatar(), ivHead);
                         }
                     });
         }
@@ -242,4 +267,89 @@ public class MineFragment extends BaseFragment {
         super.onResume();
         refreshData();
     }
+
+    private void selectImage() {
+        PermissionHelper.requestCAMERA(() -> {
+            PictureSelector.create(getActivity())
+                    .openGallery(PictureMimeType.ofImage())//全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio
+                    .maxSelectNum(1)// 最大图片选择数量 int
+                    .minSelectNum(1)// 最小选择数量 int
+                    .imageSpanCount(4)// 每行显示个数 int
+                    .selectionMode(PictureConfig.SINGLE)// 多选 or 单选 PictureConfig.MULTIPLE or PictureConfig.SINGLE
+                    .previewImage(true)// 是否可预览图片 true or false
+                    .isCamera(true)// 是否显示拍照按钮 true or false
+                    .enableCrop(true)// 是否裁剪 true or false
+                    .compress(true)// 是否压缩 true or false
+                    .withAspectRatio(16, 10)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                    .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
+                    .hideBottomControls(true)// 是否显示uCrop工具栏，默认不显示 true or false
+                    .isGif(false)// 是否显示gif图片 true or false
+                    .freeStyleCropEnabled(true)// 裁剪框是否可拖拽 true or false
+                    .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
+        });
+    }
+    public void updateAvatar(Intent data){
+        List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+        uploadImage(selectList.get(0).getCompressPath());
+    }
+    private void uploadImage(final String imgPath) {
+        File file = new File(imgPath);//访问手机端的文件资源，保证手机端sdcdrd中必须有这个文件
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        Map<String, RequestBody> map = new HashMap<>();
+        map.put("prefix", RequestBody.create(null, "courier_auth"));
+        showLoading();
+        ToastUtils.showShort("图片上传中...");
+        RetrofitManager.build().create(UserService.class).uploadImage(map, body)
+                .compose(RxScheduler.<BaseResponse<String>>observeOnMainThread())
+                .as(AutoDispose.<BaseResponse<String>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
+                .subscribe(new BaseObserver<String>() {
+
+                               @Override
+                               public void onSuccess(String s) {
+                                   hideLoading();
+//                                   imgUrl = s;
+                                   updateAvatar(s);
+                               }
+
+                               @Override
+                               public void onFail(int code, String msg) {
+//                                super.onFail(code, msg);
+                                   hideLoading();
+                                   ToastUtils.showShort("图片上传失败");
+                               }
+                           }
+                );
+    }
+
+    private void updateAvatar(String s) {
+        RegisterBean request = new RegisterBean();
+        request.setAvatar(s);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(request));
+        RetrofitManager.build().create(UserService.class)
+                .updateAvatar(requestBody)
+                .compose(RxScheduler.<BaseResponse<EmptyResponse>>observeOnMainThread())
+                .as(AutoDispose.<BaseResponse<EmptyResponse>>autoDisposable(AndroidLifecycleScopeProvider.from(this)))
+                .subscribe(new BaseObserver<EmptyResponse>() {
+
+                               @Override
+                               public void onSuccess(EmptyResponse s) {
+                                   refreshData();
+                                   ToastUtils.showShort("图片上传成功");
+                               }
+
+                               @Override
+                               public void onFail(int code, String msg) {
+//                                super.onFail(code, msg);
+                                   hideLoading();
+                                   ToastUtils.showShort("图片更新失败");
+                               }
+                           }
+                );
+    }
+
+
 }

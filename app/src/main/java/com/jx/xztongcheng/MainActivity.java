@@ -1,6 +1,8 @@
 package com.jx.xztongcheng;
 
+import android.content.Intent;
 import android.location.Location;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -28,12 +30,18 @@ import com.jx.xztongcheng.ui.fragment.HomeFragment;
 import com.jx.xztongcheng.ui.fragment.MineFragment;
 import com.jx.xztongcheng.utils.CommonUtils;
 import com.jx.xztongcheng.utils.GetLogLatUtils;
+import com.jx.xztongcheng.utils.GlideImageLoader;
 import com.jx.xztongcheng.utils.PermissionHelper;
 import com.jx.xztongcheng.utils.TTSUtils;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.entity.LocalMedia;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -264,5 +272,19 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
             TTSUtils.getInstance().speak(ss);
         }
         EventBus.getDefault().post(new ExpressEvent());
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode) {
+            case RESULT_OK:
+                switch (requestCode) {
+                    case PictureConfig.CHOOSE_REQUEST:
+                        mineFragment.updateAvatar(data);
+                        break;
+                    default:
+                }
+                break;
+        }
     }
 }

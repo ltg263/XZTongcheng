@@ -25,7 +25,16 @@ public class UserInfo {
     private String todayCount;
     private String todayAmont;
     private String huamanCount;
+    private String websiteName;
     private String balance;
+
+    public void setWebsiteName(String websiteName) {
+        this.websiteName = websiteName;
+    }
+
+    public String getWebsiteName() {
+        return websiteName;
+    }
 
     public int getBindingStatus() {
         return bindingStatus;

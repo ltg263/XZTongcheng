@@ -40,6 +40,7 @@ public class OrderListBean implements Serializable {
     private String cost;
     private int transferStatus;
     private String transferMobile;
+    private String couponAmount;
     private int isPrint = -1;
 
     public void setIsPrint(int isPrint) {
@@ -134,9 +135,12 @@ public class OrderListBean implements Serializable {
         return appointmentTime;
     }
 
+
     public void setAppointmentTime(String appointmentTime) {
         this.appointmentTime = appointmentTime;
     }
+
+
 
     public int getNextTransportStatus() {
         return nextTransportStatus;
@@ -264,6 +268,13 @@ public class OrderListBean implements Serializable {
 
     public void setGeneralOrderAmount(int generalOrderAmount) {
         this.generalOrderAmount = generalOrderAmount;
+    }
+
+    public String getCouponAmount() {
+        return couponAmount;
+    }
+    public void setCouponAmount(String couponAmount) {
+        this.couponAmount = couponAmount;
     }
 
     public String getUpdateTime() {
@@ -536,6 +547,7 @@ public class OrderListBean implements Serializable {
     }
     public static class ExpressOrderDTOSBean implements Serializable{
 
+        private String advertisingImage;
         private int expressOrderId;
         private String orderNo;
         private String code;
@@ -573,6 +585,14 @@ public class OrderListBean implements Serializable {
         private String totalBonus;
         private String totalAmount;
 
+
+        public String getAdvertisingImage() {
+            return "https://xztc-oss.nbyjdz.com/banner/2021-04-11/13a01c847bfa4863959d96e911aa3eca.jpg";
+        }
+
+        public void setAdvertisingImage(String advertisingImage) {
+            this.advertisingImage = advertisingImage;
+        }
         public String getWaybillNumber() {
             return waybillNumber;
         }

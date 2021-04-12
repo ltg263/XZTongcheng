@@ -10,6 +10,15 @@ public class RegisterBean {
     private String tokenInfo;
     private String username;
     private String verifyCode;
+    private String avatar;
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
 
     public String getGrantType() {
         return grantType;

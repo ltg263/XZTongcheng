@@ -82,7 +82,7 @@ public class ToolXdListActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setToolbar(myToolbar, "待客户下单", true);
+        setToolbar(myToolbar, "代客户下单", true);
         mSv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

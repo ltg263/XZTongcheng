@@ -145,7 +145,7 @@ public class PayForImageActivity extends BaseActivity {
 
                 if(payType.equals("COLLECTING_MONEY")){
                     if(StringUtils.isEmpty(et_dsfy.getText().toString())){
-                        ToastUtils.showShort("请输入待收货款的费用");
+                        ToastUtils.showShort("请输入代收货款的费用");
                         return;
                     }
                 }
@@ -168,7 +168,7 @@ public class PayForImageActivity extends BaseActivity {
                                     if(payType.equals("COLLECTING_MONEY")){
                                         String dsfy = et_dsfy.getText().toString();
                                         if(StringUtils.isEmpty(dsfy)){
-                                            ToastUtils.showShort("请输入待收货款的费用");
+                                            ToastUtils.showShort("请输入代收货款的费用");
                                             return;
                                         }
                                         mRechargeSaveBean.setMoney(dsfy);
@@ -234,7 +234,7 @@ public class PayForImageActivity extends BaseActivity {
                 carLists.add("现金支付"+totalPrice+"元");
                 carLists.add("货到付款"+totalPrice+"元");
                 carLists.add("二维码支付"+totalPrice+"元");
-                carLists.add("待收货款");
+                carLists.add("代收货款");
                 carLists.add("客户已支付");
                 PickerViewUtils.selectorCustomC(this, carLists, "请选择付款方式", new PickerViewUtils.ConditionInterfacd() {
                     @Override

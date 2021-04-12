@@ -98,7 +98,7 @@ public class HomeFragment extends BaseFragment {
 
     private void loadBanner() {
         RetrofitManager.build().create(UserService.class)
-                .getBanner(5)
+                .getBanner(1)
                 .compose(RxScheduler.observeOnMainThread())
                 .as(RxScheduler.<BaseResponse<BannerListResponse>>bindLifecycle(this))
                 .subscribe(new BaseObserver<BannerListResponse>() {

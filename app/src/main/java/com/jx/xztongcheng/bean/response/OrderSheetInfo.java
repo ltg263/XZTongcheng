@@ -32,8 +32,17 @@ public class OrderSheetInfo {
     private String expressNum;
     private String expressWeight;
     private String waybillNumber;
+    private String advertisingImage;
     private String amount;
     private String type;//1线上(不用操作)2现金支付3到付4待收货跨
+
+    public void setAdvertisingImage(String advertisingImage) {
+        this.advertisingImage = advertisingImage;
+    }
+
+    public String getAdvertisingImage() {
+        return "https://xztc-oss.nbyjdz.com/banner/2021-04-11/13a01c847bfa4863959d96e911aa3eca.jpg";
+    }
 
     public void setAmount(String amount) {
         this.amount = amount;

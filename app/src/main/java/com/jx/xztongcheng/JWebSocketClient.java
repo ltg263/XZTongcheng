@@ -23,6 +23,8 @@ public class JWebSocketClient extends WebSocketClient {
         //链接完成
         void onConnect();
 
+
+
         //鉴权完成
         void authFinish(int status);
 
@@ -30,7 +32,7 @@ public class JWebSocketClient extends WebSocketClient {
         void refreshData(String resp, int type);
     }
 
-    private static final String url = "ws://47.110.11.208:10013/ws/user/" + App.getInstance().getUserInfo().getUserId();
+    private static final String url = "wss://xztc.nbyjdz.com/ws/user/" + App.getInstance().getUserInfo().getUserId();
     private static final long HEART_BEAT_RATE = 3 * 1000;//每隔30秒进行一次对长连接的心跳检测
     private WebSocketConnectListener webSocketConnectListener;
 

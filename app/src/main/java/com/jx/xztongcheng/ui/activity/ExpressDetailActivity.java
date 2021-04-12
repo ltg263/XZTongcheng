@@ -106,6 +106,8 @@ public class ExpressDetailActivity extends BaseActivity {
     LinearLayout llKdxx;
     @BindView(R.id.tv_express)
     TextView tvExpress;
+    @BindView(R.id.coup_price)
+    TextView coupPrice;
 
     private AMap aMap;
     private int orderId;
@@ -241,7 +243,7 @@ public class ExpressDetailActivity extends BaseActivity {
                 tvPayType.setText("货到付款");
                 break;
             case "COLLECTING_MONEY":
-                tvPayType.setText("待收货款:"+orderDTOSBean.getMoney()+"元");
+                tvPayType.setText("代收货款:"+orderDTOSBean.getMoney()+"元");
                 break;
         }
         switch (coreOrderList.getNextTransportStatus()) {
@@ -251,6 +253,7 @@ public class ExpressDetailActivity extends BaseActivity {
                     DialogUtils.cancelDialog(ExpressDetailActivity.this, "接受订单", "确认接受订单吗？"
                             , new DialogInterface.OnClickListener() {
                                 @Override
+
                                 public void onClick(DialogInterface dialog, int which) {
                                     RetrofitManager.build().create(OrderService.class).receiveExpress(coreOrderList.getExpressGeneralOrderId())
                                             .compose(RxScheduler.<BaseResponse<EmptyResponse>>observeOnMainThread())
@@ -451,6 +454,7 @@ public class ExpressDetailActivity extends BaseActivity {
         etPrice.setText(coreOrderList.getFee() + "");
         etPackagePrice.setText(coreOrderList.getPackageFee());
         etOtherPrice.setText(coreOrderList.getOtherFee());
+        coupPrice.setText(coreOrderList.getCouponAmount());
     }
 
     private void finishOrder(String toString) {
