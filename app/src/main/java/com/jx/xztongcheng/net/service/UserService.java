@@ -3,6 +3,7 @@ package com.jx.xztongcheng.net.service;
 import com.jx.xztongcheng.bean.clazz.UserInfo;
 import com.jx.xztongcheng.bean.event.AccountLists;
 import com.jx.xztongcheng.bean.event.CourierListBaen;
+import com.jx.xztongcheng.bean.event.VersionBean;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.GrabStatusResponse;
@@ -125,4 +126,9 @@ public interface UserService {
 
     @GET("https://restapi.amap.com/v3/geocode/geo")
     Observable<BaseResponse<EmptyResponse>> getBannerGao(@Query("key") String key,@Query("address") String address);
+
+
+    //版本更新
+    @GET("api/v1/home/getVersion")
+    Observable<BaseResponse<VersionBean>> getVersionUpdating(@Query("type") Integer type);
 }

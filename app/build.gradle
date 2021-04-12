@@ -124,4 +124,5 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
 
     implementation 'com.github.addappcn:android-pickers:1.0.3'
+    implementation 'com.teprinciple:updateapputilsx:2.3.0'
 }

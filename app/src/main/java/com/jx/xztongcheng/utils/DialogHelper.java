@@ -2,22 +2,33 @@ package com.jx.xztongcheng.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AlertDialog;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.app.App;
-import com.jx.xztongcheng.bean.response.EmptyResponse;
+import com.jx.xztongcheng.bean.event.VersionBean;
 import com.jx.xztongcheng.net.BaseObserver;
 import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
-import com.jx.xztongcheng.net.service.OrderService;
+import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.activity.BindingSiteActivity;
 import com.jx.xztongcheng.widget.FullScreenDialog;
+
+import constant.UiType;
+import listener.Md5CheckResultListener;
+import listener.UpdateDownloadListener;
+import model.UiConfig;
+import model.UpdateConfig;
+import update.UpdateAppUtils;
 
 /**
  * Created by ShiXL on 2018/2/9.
@@ -110,5 +121,104 @@ public class DialogHelper {
         return true;
     }
 
+
+    public interface UploadFileInterface{
+        void succeed(String path);
+        void failure();
+    }
+    public static void getVersionUpdating(Activity mContext,UploadFileInterface fileInterface) {
+        RetrofitManager.build().create(UserService.class)
+                .getVersionUpdating(1)
+                .compose(RxScheduler.observeOnMainThread())
+                .as(RxScheduler.<BaseResponse<VersionBean>>bindLifecycle((LifecycleOwner) mContext))
+                .subscribe(new BaseObserver<VersionBean>() {
+                    @Override
+                    public void onSuccess(VersionBean t) {
+                        goUpdating(mContext,t,fileInterface);
+                    }
+
+                    @Override
+                    public void onFail(int code, String error) {
+
+                    }
+                });
+
+    }
+
+    public static void goUpdating(Context mContext, VersionBean data, UploadFileInterface fileInterface) {
+        if(data.getVersion().equals(getVersionName(mContext))){
+            fileInterface.failure();
+            return;
+        }
+        UpdateAppUtils.init(mContext);
+        UpdateConfig updateConfig = new UpdateConfig();
+        updateConfig.setCheckWifi(true);
+        updateConfig.setNeedCheckMd5(false);
+        updateConfig.setNotifyImgRes(R.mipmap.ic_app_logo);
+        UiConfig uiConfig = new UiConfig();
+        uiConfig.setUiType(UiType.PLENTIFUL);
+        uiConfig.setUpdateLogoImgRes(R.mipmap.ic_app_logo);
+        uiConfig.setUpdateBtnBgRes(R.drawable.shape_radius_theme_full_8dp);
+        UpdateAppUtils
+                .getInstance()
+                .apkUrl(data.getFileUrl())
+                .updateTitle("发现新版本:V"+data.getVersion())
+                .updateContent("更新内容:"+data.getContent())
+                .uiConfig(uiConfig)
+                .updateConfig(updateConfig)
+                .setMd5CheckResultListener(new Md5CheckResultListener() {
+                    @Override
+                    public void onResult(boolean result) {
+
+                    }
+                })
+                .setUpdateDownloadListener(new UpdateDownloadListener() {
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onDownload(int progress) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                    }
+
+                })
+                .update();
+    }
+
+    /**
+     * 获取版本名称
+     *
+     * @param context 上下文
+     *
+     * @return 版本名称
+     */
+    public static String getVersionName(Context context) {
+
+        //获取包管理器
+        PackageManager pm = context.getPackageManager();
+        //获取包信息
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            //返回版本号
+            return packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
 
 }

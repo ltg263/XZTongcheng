@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
+            android:maxLines="1"
             android:hint="请输入运单编号"
             android:padding="@dimen/dp_10"
             android:textColor="@color/black33"

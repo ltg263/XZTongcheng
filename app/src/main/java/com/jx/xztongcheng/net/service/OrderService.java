@@ -3,6 +3,7 @@ package com.jx.xztongcheng.net.service;
 import com.jx.xztongcheng.bean.event.CarListBean;
 import com.jx.xztongcheng.bean.event.ParamData;
 import com.jx.xztongcheng.bean.event.UserExclusiveList;
+import com.jx.xztongcheng.bean.event.VersionBean;
 import com.jx.xztongcheng.bean.response.OrderSheetInfo;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
 import com.jx.xztongcheng.bean.response.CoreOrderList;
@@ -134,4 +135,5 @@ public interface OrderService {
 
     @POST("order/api/v1/order/recharge/pay")
     Observable<BaseResponse<ParamData>> OrderPay(@Body RequestBody body);
+
 }

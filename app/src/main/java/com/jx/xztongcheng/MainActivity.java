@@ -29,6 +29,7 @@ import com.jx.xztongcheng.bean.event.LoginEvent;
 import com.jx.xztongcheng.ui.fragment.HomeFragment;
 import com.jx.xztongcheng.ui.fragment.MineFragment;
 import com.jx.xztongcheng.utils.CommonUtils;
+import com.jx.xztongcheng.utils.DialogHelper;
 import com.jx.xztongcheng.utils.GetLogLatUtils;
 import com.jx.xztongcheng.utils.PermissionHelper;
 import com.jx.xztongcheng.utils.TTSUtils;
@@ -75,6 +76,19 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
         jWebSocketClient = new JWebSocketClient();
         jWebSocketClient.setWebSocketConnectListener(this);
         jWebSocketClient.doConnect();
+
+
+        DialogHelper.getVersionUpdating(this, new DialogHelper.UploadFileInterface() {
+            @Override
+            public void succeed(String path) {
+
+            }
+
+            @Override
+            public void failure() {
+
+            }
+        });
 
     }
 
