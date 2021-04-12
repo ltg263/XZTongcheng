@@ -72,6 +72,7 @@
         <activity android:name=".ui.activity.PayForImageActivity" />
         <activity android:name=".ui.activity.PayBZJActivity" />
         <activity android:name=".ui.activity.ChangePhoneActivity" />
+        <activity android:name=".ui.activity.CaptureZActivity" />
         <activity android:name=".ui.activity.ToolRkListActivity" />
         <activity android:name=".ui.activity.ToolCkListActivity" />
         <activity android:name=".ui.activity.ToolCarListActivity" />
