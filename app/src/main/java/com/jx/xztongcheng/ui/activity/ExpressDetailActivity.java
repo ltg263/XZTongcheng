@@ -6,7 +6,11 @@ import androidx.core.widget.NestedScrollView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -112,6 +116,9 @@ public class ExpressDetailActivity extends BaseActivity {
     private OrderListBean coreOrderList;
     private String payType = "WXSCAN";
 
+    private int calculationType = 0;//折扣  2 满减
+    private double discount = 0.0;
+
     @Override
     public int intiLayout() {
         return R.layout.activity_express_detail;
@@ -123,6 +130,23 @@ public class ExpressDetailActivity extends BaseActivity {
         setToolbar(myToolbar, "快递详情", true);
 
         initMap();
+
+        etPrice.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                String cS = s.toString().substring(0,s.toString().length()-1);
+                if(calculationType==1 && discount!=0){
+                    coupPrice.setText(""+(Double.valueOf(s.toString())*discount));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
 
     }
 
@@ -191,6 +215,8 @@ public class ExpressDetailActivity extends BaseActivity {
                     public void onSuccess(OrderListBean c) {
                         if (c != null && c.getExpressOrderDTOS() != null && c.getExpressOrderDTOS().size() > 0) {
                             coreOrderList = c;
+                            calculationType = c.getCalculationType();
+                            discount = c.getDiscount();
                             refreshUI();
                         }
                     }

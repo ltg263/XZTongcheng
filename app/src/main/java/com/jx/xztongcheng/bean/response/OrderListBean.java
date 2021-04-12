@@ -40,8 +40,34 @@ public class OrderListBean implements Serializable {
     private String cost;
     private int transferStatus;
     private String transferMobile;
-    private String couponAmount;
+    private double discount;
     private int isPrint = -1;
+
+    private String couponAmount;
+    private int calculationType;
+
+    public void setCalculationType(int calculationType) {
+        this.calculationType = calculationType;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public int getCalculationType() {
+        return calculationType;
+    }
+
+    public String getCouponAmount() {
+        return couponAmount;
+    }
+    public void setCouponAmount(String couponAmount) {
+        this.couponAmount = couponAmount;
+    }
 
     public void setIsPrint(int isPrint) {
         this.isPrint = isPrint;
@@ -268,13 +294,6 @@ public class OrderListBean implements Serializable {
 
     public void setGeneralOrderAmount(int generalOrderAmount) {
         this.generalOrderAmount = generalOrderAmount;
-    }
-
-    public String getCouponAmount() {
-        return couponAmount;
-    }
-    public void setCouponAmount(String couponAmount) {
-        this.couponAmount = couponAmount;
     }
 
     public String getUpdateTime() {
@@ -566,7 +585,7 @@ public class OrderListBean implements Serializable {
         private double fee;
         private double packageFee;
         private double insuredFee;
-        private int otherFee;
+        private double otherFee;
         private int checkStatus;
         private String updateTime;
         private int cancelUserId;
@@ -778,11 +797,11 @@ public class OrderListBean implements Serializable {
             this.insuredFee = insuredFee;
         }
 
-        public int getOtherFee() {
+        public double getOtherFee() {
             return otherFee;
         }
 
-        public void setOtherFee(int otherFee) {
+        public void setOtherFee(double otherFee) {
             this.otherFee = otherFee;
         }
 

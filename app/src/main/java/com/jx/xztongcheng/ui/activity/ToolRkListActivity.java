@@ -1,6 +1,7 @@
 package com.jx.xztongcheng.ui.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +10,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -23,6 +26,8 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.OrderService;
+import com.yzq.zxinglibrary.android.CaptureActivity;
+import com.yzq.zxinglibrary.common.Constant;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -95,13 +100,12 @@ public class ToolRkListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_sao:
-
                 //动态权限申请
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
                 } else {
-//                    Intent intent = new Intent(this, CaptureActivity.class);
-//                    startActivityForResult(intent, RESULT_SUCCESS);
+                    Intent intent = new Intent(this, CaptureActivity.class);
+                    startActivityForResult(intent, RESULT_SUCCESS);
                 }
                 break;
             case R.id.tv_weight:
@@ -135,5 +139,18 @@ public class ToolRkListActivity extends BaseActivity {
                         super.onFail(code, msg);
                     }
                 });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Log.w("onAcitvity:","拿到了返回值");//日志封装可以忽略
+        if (requestCode == RESULT_SUCCESS) {
+            if (data != null) {
+                String content = data.getStringExtra(Constant.CODED_CONTENT);
+                Log.w("onAcitvity:","二维码返回结果为："+content);
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
