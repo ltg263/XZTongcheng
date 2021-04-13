@@ -99,10 +99,10 @@ public class ToolCkListActivity extends BaseActivity {
         loadData();
     }
 
-    @OnClick({R.id.tv_sao, R.id.tv_ck, R.id.tv_rk})
+    @OnClick({R.id.iv_sao, R.id.tv_ck, R.id.tv_rk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_sao:
+            case R.id.iv_sao:
 
                 //动态权限申请
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

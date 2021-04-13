@@ -96,10 +96,10 @@ public class ToolRkListActivity extends BaseActivity {
     }
 
     public static final int RESULT_SUCCESS = 1;
-    @OnClick({R.id.tv_sao, R.id.tv_weight, R.id.tv_rk})
+    @OnClick({R.id.iv_sao, R.id.tv_weight, R.id.tv_rk})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_sao:
+            case R.id.iv_sao:
                 //动态权限申请
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
