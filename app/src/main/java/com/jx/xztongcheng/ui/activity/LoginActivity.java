@@ -3,6 +3,7 @@ package com.jx.xztongcheng.ui.activity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -41,6 +42,8 @@ public class LoginActivity extends BaseActivity {
     EditText etAccount;
     @BindView(R.id.et_verify)
     EditText etVerify;
+    @BindView(R.id.et_password)
+    EditText etPassword;
     @BindView(R.id.auth_code)
     TextView authCode;
     @BindView(R.id.tv_info)
@@ -49,6 +52,10 @@ public class LoginActivity extends BaseActivity {
     TextView tvPhone;
     @BindView(R.id.tv_code)
     TextView tvCode;
+    @BindView(R.id.ll_yzm)
+    LinearLayout ll_yzm;
+    @BindView(R.id.ll_password)
+    LinearLayout ll_password;
 
     private int type = 0;
 
@@ -98,9 +105,13 @@ public class LoginActivity extends BaseActivity {
         LoginRequest bean = new LoginRequest();
         bean.setUsername(etAccount.getText().toString());
         bean.setAndroidId(CommonUtils.getAndroid_Id());
-        bean.setPassword(etVerify.getText().toString());
-        bean.setVerifyCode(etVerify.getText().toString());
-        bean.setGrantType(type == 0 ? "account_password" : "sms_code" );
+        if (type == 0) {
+            bean.setPassword(etPassword.getText().toString());
+            bean.setGrantType("account_password");
+        }else {
+            bean.setVerifyCode(etVerify.getText().toString());
+            bean.setGrantType("sms_code" );
+        }
         SPUtils.getInstance().put(ConstValues.TOKENID, "");
         final RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), new Gson().toJson(bean));
         RetrofitManager.build().create(UserService.class)
@@ -118,8 +129,8 @@ public class LoginActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onFail(int code, String error) {
-
+                    public void onFail(int code, String msg) {
+                        super.onFail(code, msg);
                     }
                 });
     }
@@ -131,15 +142,19 @@ public class LoginActivity extends BaseActivity {
             tvCode.setTextSize(18);
             tvPhone.setTextColor(getResources().getColor(R.color.black33));
             tvCode.setTextColor(getResources().getColor(R.color.black66));
-            etVerify.setHint("请输入密码");
-            authCode.setVisibility(View.GONE);
+            ll_yzm.setVisibility(View.GONE);
+            ll_password.setVisibility(View.VISIBLE);
+//            etVerify.setHint("请输入密码");
+//            authCode.setVisibility(View.GONE);
         } else {
             tvPhone.setTextSize(18);
             tvCode.setTextSize(22);
             tvPhone.setTextColor(getResources().getColor(R.color.black66));
             tvCode.setTextColor(getResources().getColor(R.color.black33));
-            etVerify.setHint("请输入验证码");
-            authCode.setVisibility(View.VISIBLE);
+            ll_yzm.setVisibility(View.VISIBLE);
+            ll_password.setVisibility(View.GONE);
+//            etVerify.setHint("请输入验证码");
+//            authCode.setVisibility(View.VISIBLE);
         }
     }
 
