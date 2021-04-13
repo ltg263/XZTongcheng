@@ -104,7 +104,12 @@ public class ToolRkListActivity extends BaseActivity {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
                 } else {
+                    String weight = mEtZl.getText().toString();
                     Intent intent = new Intent(this, CaptureZActivity.class);
+                    intent.putExtra("type",1);
+                    if(!StringUtils.isEmpty(weight)){
+                        intent.putExtra("weight",weight);
+                    }
                     startActivityForResult(intent, RESULT_SUCCESS);
                 }
                 break;

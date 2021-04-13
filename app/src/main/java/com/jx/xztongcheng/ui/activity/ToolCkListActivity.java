@@ -1,14 +1,18 @@
 package com.jx.xztongcheng.ui.activity;
 
-import androidx.appcompat.widget.Toolbar;
-
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -99,6 +103,16 @@ public class ToolCkListActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_sao:
+
+                //动态权限申请
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+                } else {
+                    Intent intent = new Intent(this, CaptureZActivity.class);
+                    intent.putExtra("type",0);
+                    intent.putExtra("websiteCarId",websiteCarId);
+                    startActivityForResult(intent, ToolRkListActivity.RESULT_SUCCESS);
+                }
                 break;
             case R.id.tv_ck:
 //                startActivity(new Intent(this,ToolCarListActivity.class));

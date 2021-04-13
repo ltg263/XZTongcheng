@@ -162,7 +162,7 @@ public class ToolXdListActivity extends BaseActivity {
         if (mSv2.isChecked()) {
             mCustomerCreateExpress.setInsuredStatus("1");//保价状态:1,保价;2,不保价
             if (StringUtils.isEmpty(et_bjj.getText().toString())) {
-                ToastUtils.showShort("请输入报价金额");
+                ToastUtils.showShort("请输入保价金额");
                 return;
             }
             mCustomerCreateExpress.setInsuredFee(str12);//保价金额
