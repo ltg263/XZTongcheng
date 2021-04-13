@@ -223,7 +223,7 @@ public class ToolMdListActivity extends BaseActivity {
 
                                 }
                                 PrintLabel pl = new PrintLabel();
-                                Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 540, 70);
+                                Bitmap bitmapY = ToolMdDetailsActivity.zoomImage(bitmap, 500, 70);
                                 if(bitmapGg!=null){
                                     bitmapGg = ToolMdDetailsActivity.zoomImage(bitmapGg,540,80);
                                 }

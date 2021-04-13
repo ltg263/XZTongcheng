@@ -33,7 +33,7 @@ public class PrintLabel {
         iPrinter.drawLine(2, 580, 75+y, 580, 900+y, false);//竖线4
 
 
-        iPrinter.drawGraphic(10,10,540,40+y,mBitmap);
+        iPrinter.drawGraphic(10,10,500,40+y,mBitmap);
         if(mBitmapGg!=null){
             iPrinter.drawGraphic(10,810+y,540,80,mBitmapGg);
         }

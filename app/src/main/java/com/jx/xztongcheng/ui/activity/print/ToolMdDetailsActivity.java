@@ -334,7 +334,7 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     isSending = true;
                     if (isConnected) {
                         PrintLabel pl = new PrintLabel();
-                        bitmapR = zoomImage(bitmapR,540,70);
+                        bitmapR = zoomImage(bitmapR,500,70);
                         if(bitmapGg!=null){
                             bitmapGg = zoomImage(bitmapGg,540,80);
                         }
