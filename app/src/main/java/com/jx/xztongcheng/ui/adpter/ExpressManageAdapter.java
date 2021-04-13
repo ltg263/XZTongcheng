@@ -35,8 +35,8 @@ public class ExpressManageAdapter extends BaseQuickAdapter<OrderListBean, BaseVi
                         .setText(R.id.tv_to_address2, bean.getExpressAddressDTOS().getToProvinceStr() + bean.getExpressAddressDTOS().getToCityStr());
                 helper.setGone(R.id.tv_get_distance, bean.getExpressAddressDTOS().getDistance() != 0)
                         .setGone(R.id.tv_to_distance, bean.getExpressAddressDTOS().getDistrict() != 0);
-                helper.setText(R.id.tv_get_distance, bean.getExpressAddressDTOS().getDistance() + "km");
-                helper.setText(R.id.tv_to_distance, bean.getExpressAddressDTOS().getDistrict() + "km");
+                helper.setText(R.id.tv_get_distance, bean.getExpressAddressDTOS().getDistance() + "m");
+                helper.setText(R.id.tv_to_distance, bean.getExpressAddressDTOS().getDistrict() + "m");
                 helper.setText(R.id.tv_time, getFriendlyTimeSpanByNow(TimeUtils.string2Millis(item.getAppointmentTime())) + "送达");
             }
             helper.setText(R.id.tv_content, bean.getRemark());
@@ -73,6 +73,9 @@ public class ExpressManageAdapter extends BaseQuickAdapter<OrderListBean, BaseVi
                     break;
                 case 6:
                     tvBtn2.setText("正在揽件");
+                    break;
+                case 10:
+                    tvBtn2.setText("发往下一站");
                     break;
                 case 0:
                     tvBtn2.setText("已取消");

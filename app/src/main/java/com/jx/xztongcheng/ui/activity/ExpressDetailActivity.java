@@ -506,6 +506,9 @@ public class ExpressDetailActivity extends BaseActivity {
             case 5:
                 tvBtn2.setText("送至站点");
                 break;
+            case 10:
+                tvBtn2.setText("发往下一站");
+                break;
             case 0:
                 tvBtn2.setText("已取消");
                 break;

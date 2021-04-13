@@ -24,8 +24,8 @@ public class ExpressMultiManageAdapter extends BaseQuickAdapter<OrderListBean.Ex
                         .setText(R.id.tv_to_address2, bean.getExpressAddressDTOS().getToProvinceStr() + bean.getExpressAddressDTOS().getToCityStr());
                 helper.setGone(R.id.tv_get_distance, bean.getExpressAddressDTOS().getDistance() != 0)
                         .setGone(R.id.tv_to_distance, bean.getExpressAddressDTOS().getDistrict() != 0);
-                helper.setText(R.id.tv_get_distance, bean.getExpressAddressDTOS().getDistance() + "km");
-                helper.setText(R.id.tv_to_distance, bean.getExpressAddressDTOS().getDistance() + "km");
+                helper.setText(R.id.tv_get_distance, bean.getExpressAddressDTOS().getDistance() + "m");
+                helper.setText(R.id.tv_to_distance, bean.getExpressAddressDTOS().getDistance() + "m");
                 helper.setText(R.id.tv_time, bean.getExpressAddressDTOS().getTime() + "分钟内送达");
             }
             helper.setText(R.id.tv_content, bean.getRemark());
