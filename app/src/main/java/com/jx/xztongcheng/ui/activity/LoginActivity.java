@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_phone, R.id.tv_code, R.id.auth_code, R.id.tv_forget, R.id.tv_register, R.id.tv_login})
+    @OnClick({R.id.tv_phone, R.id.tv_code, R.id.auth_code, R.id.tv_forget, R.id.tv_register, R.id.tv_login,R.id.ll_yhxy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_phone:
@@ -97,6 +97,9 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.tv_login:
                 login();
+                break;
+            case R.id.ll_yhxy:
+                readyGoActivity(WebViewActivity.class);
                 break;
         }
     }

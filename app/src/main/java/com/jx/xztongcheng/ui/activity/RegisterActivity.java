@@ -60,7 +60,7 @@ public class RegisterActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.auth_code, R.id.tv_register, R.id.tv_forget, R.id.tv_login})
+    @OnClick({R.id.auth_code, R.id.tv_register, R.id.tv_forget, R.id.tv_login,R.id.ll_yhxy})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.auth_code:
@@ -74,6 +74,9 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.tv_login:
                 readyGoActivity(LoginActivity.class);
+                break;
+            case R.id.ll_yhxy:
+                readyGoActivity(WebViewActivity.class);
                 break;
         }
     }

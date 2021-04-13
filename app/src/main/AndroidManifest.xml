@@ -95,6 +95,7 @@
         <activity android:name=".ui.activity.DepositActivity" />
         <activity android:name=".ui.activity.MyKhListActivity" />
         <activity android:name=".ui.activity.ToolXdListActivity" />
+        <activity android:name=".ui.activity.WebViewActivity" />
         <activity android:name=".ui.activity.MyWalletActivity" />
         <activity android:name=".ui.activity.ForgetPasswordActivity" />
 
