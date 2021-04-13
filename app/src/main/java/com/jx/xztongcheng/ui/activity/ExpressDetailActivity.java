@@ -11,9 +11,11 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
 import com.jx.xztongcheng.base.BaseActivity;
+import com.jx.xztongcheng.bean.event.AddressLagBean;
 import com.jx.xztongcheng.bean.event.ExpressEvent;
 import com.jx.xztongcheng.bean.request.SettingPriceRequest;
 import com.jx.xztongcheng.bean.response.EmptyResponse;
@@ -38,14 +41,21 @@ import com.jx.xztongcheng.net.BaseResponse;
 import com.jx.xztongcheng.net.RetrofitManager;
 import com.jx.xztongcheng.net.RxScheduler;
 import com.jx.xztongcheng.net.service.OrderService;
+import com.jx.xztongcheng.net.service.UserService;
 import com.jx.xztongcheng.ui.fragment.SwitchMapFragment;
 import com.jx.xztongcheng.utils.DialogUtils;
 import com.jx.xztongcheng.utils.PermissionHelper;
+import com.jx.xztongcheng.utils.PopupWindowA;
 import com.jx.xztongcheng.widget.MyMapView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -190,20 +200,84 @@ public class ExpressDetailActivity extends BaseActivity {
         tvExpress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LatLonPoint latLonPoint = new LatLonPoint(coreOrderList.getLat(), coreOrderList.getLng());
-                PoiItem poiItem = new PoiItem("", latLonPoint, "", "");
-                if (poiItem != null) {
-                    if (!AppUtils.isAppInstalled("com.autonavi.minimap")
-                            && !AppUtils.isAppInstalled("com.baidu.BaiduMap")
-                            && !AppUtils.isAppInstalled("com.tencent.map")) {
-                        ToastUtils.showShort("当前未安装地图软件");
-                    } else {
-                        SwitchMapFragment switchMapFragment = SwitchMapFragment.newInstance(poiItem);
-                        switchMapFragment.show(getSupportFragmentManager(), "SwitchPayDialogFragment");
+                popupWindw();
+            }
+        });
+    }
+
+    PopupWindowA window;
+    private void popupWindw() {
+        window = new PopupWindowA(this, new PopupWindowA.GiveDialogInterface() {
+            @Override
+            public void btnConfirm(int type) {
+                window.dismiss();
+                if(type==2){
+                    LatLonPoint latLonPoint = new LatLonPoint(coreOrderList.getLat(), coreOrderList.getLng());
+                    PoiItem poiItem = new PoiItem(tvGetAddress2.getText().toString(), latLonPoint, "", "");
+                    if (poiItem != null) {
+                        if (!AppUtils.isAppInstalled("com.autonavi.minimap")
+                                && !AppUtils.isAppInstalled("com.baidu.BaiduMap")
+                                && !AppUtils.isAppInstalled("com.tencent.map")) {
+                            ToastUtils.showShort("当前未安装地图软件");
+                        } else {
+                            SwitchMapFragment switchMapFragment = SwitchMapFragment.newInstance(poiItem);
+                            switchMapFragment.show(getSupportFragmentManager(), "SwitchPayDialogFragment");
+                        }
                     }
+                }else {
+                    getQuJianDiZhi();
                 }
             }
         });
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        window.setOutsideTouchable(true);
+        window.showAtLocation(tvName, Gravity.BOTTOM,  0, 0);
+    }
+    private void getQuJianDiZhi(){
+        RetrofitManager.build().create(UserService.class)
+                .getBannerGao("77f0363d7e97bb832d81e108ce8a776e",tvGetAddress2.getText().toString())
+                .compose(RxScheduler.observeOnMainThread())
+                .as(RxScheduler.bindLifecycle(this))
+                .subscribe(new Observer<AddressLagBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(AddressLagBean addressLagBean) {
+                        if(addressLagBean.getStatus().equals("1") && addressLagBean.getGeocodes()!=null && addressLagBean.getGeocodes().size()>0){
+                            String location = addressLagBean.getGeocodes().get(0).getLocation();
+                            String[] locationA = location.split(",");
+                            LatLonPoint latLonPoint = new LatLonPoint(Double.valueOf(locationA[1]),Double.valueOf(locationA[0]));
+                            PoiItem poiItem = new PoiItem(tvGetAddress2.getText().toString(), latLonPoint, "", "");
+                            if (poiItem != null) {
+                                if (!AppUtils.isAppInstalled("com.autonavi.minimap")
+                                        && !AppUtils.isAppInstalled("com.baidu.BaiduMap")
+                                        && !AppUtils.isAppInstalled("com.tencent.map")) {
+                                    ToastUtils.showShort("当前未安装地图软件");
+                                } else {
+                                    SwitchMapFragment switchMapFragment = SwitchMapFragment.newInstance(poiItem);
+                                    switchMapFragment.show(getSupportFragmentManager(), "SwitchPayDialogFragment");
+                                }
+                            }
+                        }else{
+                            ToastUtils.showShort("未获取到寄件人定位信息");
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.w("locationA","e"+e.toString());
+                        ToastUtils.showShort("未获取到寄件人定位信息");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void refreshData() {

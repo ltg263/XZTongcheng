@@ -103,7 +103,8 @@ public class SwitchMapFragment extends BottomSheetDialogFragment {
             case R.id.gaodeTv:
                 //                Toast.makeText(this, AppUtils.isInstallApp("com.autonavi.minimap") ? "高德已安装" : "高德未安装", Toast.LENGTH_SHORT).show();
                 if (AppUtils.isAppInstalled("com.autonavi.minimap")) {
-                    naviIntent = new Intent("android.intent.action.VIEW", Uri.parse("androidamap://route?sourceApplication=appName&slat=&slon=&sname=我的位置&dlat=" + poiItem.getLatLonPoint().getLatitude() + "&dlon=" + poiItem.getLatLonPoint().getLongitude() + "&dname=&dev=0&t=2"));
+                    naviIntent = new Intent("android.intent.action.VIEW", Uri.parse("androidamap://route?sourceApplication=appName&slat=&slon=&sname=我的位置&dlat=" +
+                            poiItem.getLatLonPoint().getLatitude() + "&dlon=" + poiItem.getLatLonPoint().getLongitude() + "&dname="+poiItem.getPoiId()+"&dev=0&t=2"));
                     context.startActivity(naviIntent);
                 } else Toast.makeText(context, "高德地图未安装", Toast.LENGTH_SHORT).show();
                 break;

@@ -2,6 +2,7 @@ package com.jx.xztongcheng.net.service;
 
 import com.jx.xztongcheng.bean.clazz.UserInfo;
 import com.jx.xztongcheng.bean.event.AccountLists;
+import com.jx.xztongcheng.bean.event.AddressLagBean;
 import com.jx.xztongcheng.bean.event.CourierListBaen;
 import com.jx.xztongcheng.bean.event.VersionBean;
 import com.jx.xztongcheng.bean.response.BannerListResponse;
@@ -125,7 +126,7 @@ public interface UserService {
 
 
     @GET("https://restapi.amap.com/v3/geocode/geo")
-    Observable<BaseResponse<EmptyResponse>> getBannerGao(@Query("key") String key,@Query("address") String address);
+    Observable<AddressLagBean> getBannerGao(@Query("key") String key, @Query("address") String address);
 
 
     //版本更新
