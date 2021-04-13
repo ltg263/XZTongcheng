@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
             }
         });
 
-        setCurrent(1);
+        setCurrent(0);
 
     }
 
