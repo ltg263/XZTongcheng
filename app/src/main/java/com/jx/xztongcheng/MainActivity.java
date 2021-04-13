@@ -14,6 +14,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -27,6 +28,7 @@ import com.jx.xztongcheng.base.BaseActivity;
 import com.jx.xztongcheng.bean.clazz.JWebSocketResp;
 import com.jx.xztongcheng.bean.event.ExpressEvent;
 import com.jx.xztongcheng.bean.event.LoginEvent;
+import com.jx.xztongcheng.ui.activity.LoginActivity;
 import com.jx.xztongcheng.ui.fragment.HomeFragment;
 import com.jx.xztongcheng.ui.fragment.MineFragment;
 import com.jx.xztongcheng.utils.CommonUtils;
@@ -174,9 +176,10 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
                     case R.id.tab2:
 //                        if (StringUtils.isEmpty(App.getInstance().getTokenId())) {
 //                            ActivityUtils.startActivity(LoginActivity.class);
+////                            bottomView.setSelectedItemId(bottomView.getMenu().getItem(0).getItemId());
 //                        }else{}
-                        mineFragment.refreshData();
-                        switchFragment(mineFragment);
+                            mineFragment.refreshData();
+                            switchFragment(mineFragment);
                         break;
                     default:
                 }
@@ -184,7 +187,7 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
             }
         });
 
-        setCurrent(0);
+        setCurrent(1);
 
     }
 
