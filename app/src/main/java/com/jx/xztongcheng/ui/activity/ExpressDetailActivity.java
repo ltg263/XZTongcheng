@@ -90,6 +90,8 @@ public class ExpressDetailActivity extends BaseActivity {
     EditText etExpressCompany;
     @BindView(R.id.et_express_no)
     EditText etExpressNo;
+    @BindView(R.id.et_waybill_number)
+    EditText et_waybill_number;
     @BindView(R.id.et_weight)
     EditText etWeight;
     @BindView(R.id.et_price)
@@ -519,6 +521,7 @@ public class ExpressDetailActivity extends BaseActivity {
             llKdxx.setVisibility(View.GONE);
             setEditTextable(etExpressCompany, true);
             setEditTextable(etExpressNo, true);
+            setEditTextable(et_waybill_number, true);
             setEditTextable(etWeight, true);
             setEditTextable(etBjAmount, true);
             setEditTextable(etBjPrice, true);
@@ -530,6 +533,7 @@ public class ExpressDetailActivity extends BaseActivity {
             llKdxx.setVisibility(View.VISIBLE);
             setEditTextable(etExpressCompany, false);
             setEditTextable(etExpressNo, false);
+            setEditTextable(et_waybill_number, false);
             setEditTextable(etWeight, false);
             setEditTextable(etBjAmount, false);
             setEditTextable(etBjPrice, false);
@@ -542,6 +546,7 @@ public class ExpressDetailActivity extends BaseActivity {
         etBjAmount.setText(coreOrderList.getCost());
         etBjPrice.setText(coreOrderList.getInsuredFee());
         etExpressNo.setText(coreOrderList.getExpressNo());
+        et_waybill_number.setText(orderDTOSBean.getWaybillNumber());
         etWeight.setText(coreOrderList.getWeight());
         etDsje.setText(coreOrderList.getTotalBonus() + "");
         etPrice.setText(coreOrderList.getFee() + "");
