@@ -211,31 +211,22 @@ public class ExpressDetailActivity extends BaseActivity {
             @Override
             public void btnConfirm(int type) {
                 window.dismiss();
+                String address = tvGetAddress2.getText().toString();
                 if(type==2){
-                    LatLonPoint latLonPoint = new LatLonPoint(coreOrderList.getLat(), coreOrderList.getLng());
-                    PoiItem poiItem = new PoiItem(tvGetAddress2.getText().toString(), latLonPoint, "", "");
-                    if (poiItem != null) {
-                        if (!AppUtils.isAppInstalled("com.autonavi.minimap")
-                                && !AppUtils.isAppInstalled("com.baidu.BaiduMap")
-                                && !AppUtils.isAppInstalled("com.tencent.map")) {
-                            ToastUtils.showShort("当前未安装地图软件");
-                        } else {
-                            SwitchMapFragment switchMapFragment = SwitchMapFragment.newInstance(poiItem);
-                            switchMapFragment.show(getSupportFragmentManager(), "SwitchPayDialogFragment");
-                        }
-                    }
-                }else {
-                    getQuJianDiZhi();
+                    address = tvToAddress2.getText().toString();
                 }
+
+                goDiZhi(address);
             }
         });
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         window.setOutsideTouchable(true);
         window.showAtLocation(tvName, Gravity.BOTTOM,  0, 0);
     }
-    private void getQuJianDiZhi(){
+
+    private void goDiZhi(String address) {
         RetrofitManager.build().create(UserService.class)
-                .getBannerGao("77f0363d7e97bb832d81e108ce8a776e",tvGetAddress2.getText().toString())
+                .getBannerGao("77f0363d7e97bb832d81e108ce8a776e",address)
                 .compose(RxScheduler.observeOnMainThread())
                 .as(RxScheduler.bindLifecycle(this))
                 .subscribe(new Observer<AddressLagBean>() {
@@ -250,7 +241,7 @@ public class ExpressDetailActivity extends BaseActivity {
                             String location = addressLagBean.getGeocodes().get(0).getLocation();
                             String[] locationA = location.split(",");
                             LatLonPoint latLonPoint = new LatLonPoint(Double.valueOf(locationA[1]),Double.valueOf(locationA[0]));
-                            PoiItem poiItem = new PoiItem(tvGetAddress2.getText().toString(), latLonPoint, "", "");
+                            PoiItem poiItem = new PoiItem(address, latLonPoint, "", "");
                             if (poiItem != null) {
                                 if (!AppUtils.isAppInstalled("com.autonavi.minimap")
                                         && !AppUtils.isAppInstalled("com.baidu.BaiduMap")
@@ -279,6 +270,7 @@ public class ExpressDetailActivity extends BaseActivity {
                     }
                 });
     }
+
 
     private void refreshData() {
         RetrofitManager.build().create(OrderService.class).getOrderDetail(orderId)

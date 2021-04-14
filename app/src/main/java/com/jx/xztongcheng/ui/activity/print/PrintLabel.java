@@ -40,7 +40,7 @@ public class PrintLabel {
 
         iPrinter.drawText(10, 55+y, getTimeToYMD(System.currentTimeMillis(),"yyyy-MM-dd HH:mm:ss"),1,0,0,false,false);
 
-        iPrinter.drawText(6, 80+y, "热线电话：400-6898-588", 2, 0, 0, false, false);
+        iPrinter.drawText(6, 80+y, "客户服务电话：400-6898-588", 2, 0, 0, false, false);
 
         iPrinter.drawBarCode(20,130+y, coreOrderList.getWaybillNumber(), 1, 0, 2, 70);
         iPrinter.drawText(50, 210+y, coreOrderList.getWaybillNumber(), 2, 0, 0, false, false);
