@@ -466,7 +466,7 @@
                         <ImageView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@mipmap/ic_qd" />
+                            android:src="@mipmap/ic_sz" />
 
                         <TextView
                             android:layout_width="wrap_content"
