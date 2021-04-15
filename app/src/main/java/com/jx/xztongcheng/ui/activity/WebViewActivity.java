@@ -29,7 +29,7 @@ public class WebViewActivity extends BaseActivity {
     public void initView() {
         setWebViewClient();
         String type = getIntent().getStringExtra("type");
-        setToolbar(myToolbar, "设置", true);
+        setToolbar(myToolbar, "快递协议", true);
         setWebViewClient();
         mWeb.loadUrl("https://xztc.nbyjdz.com/html/admin/xy/index.html");
     }
