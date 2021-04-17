@@ -198,7 +198,8 @@ public class ToolMdListActivity extends BaseActivity {
                                 OrderSheetInfo list = new OrderSheetInfo();
                                 OrderListBean.ExpressOrderDTOSBean data = beanListDy.get(a).getExpressOrderDTOS().get(0);
                                 list.setOrderNo(data.getOrderNo());
-                                list.setWebsiteName(beanListDy.get(a).getWebsiteName());
+//                                list.setWebsiteName(beanListDy.get(a).getWebsiteName());
+                                list.setWebsiteName(data.getExpressAddressDTOS().getToWebsiteName());
                                 list.setConsigneeName(data.getExpressAddressDTOS().getToName());
                                 list.setConsigneeMobile(data.getExpressAddressDTOS().getToMobile());
                                 list.setConsigneeAddress(data.getExpressAddressDTOS().getToAddress());

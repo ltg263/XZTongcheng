@@ -33,6 +33,7 @@ public class ExpressAddressDTOS implements Serializable {
     private String toCityStr;
     private String toDistrict;
     private String toDistrictStr;
+    private String toWebsiteName;
     private double toLat;
     private double toLng;
     private String toMobile;
@@ -42,6 +43,14 @@ public class ExpressAddressDTOS implements Serializable {
     private String updateTime;
     private String virtualMobile1;
     private String virtualMobile2;
+
+    public String getToWebsiteName() {
+        return toWebsiteName;
+    }
+
+    public void setToWebsiteName(String toWebsiteName) {
+        this.toWebsiteName = toWebsiteName;
+    }
 
     public String getCreateTime() {
         return createTime;

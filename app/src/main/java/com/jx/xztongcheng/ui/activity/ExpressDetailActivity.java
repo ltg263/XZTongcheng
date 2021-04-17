@@ -2,11 +2,6 @@ package com.jx.xztongcheng.ui.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import androidx.core.widget.NestedScrollView;
-import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,12 +15,18 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
+
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.PhoneUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.Gson;
 import com.jx.xztongcheng.R;
@@ -49,9 +50,6 @@ import com.jx.xztongcheng.utils.PopupWindowA;
 import com.jx.xztongcheng.widget.MyMapView;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import io.reactivex.Observer;
@@ -150,7 +148,7 @@ public class ExpressDetailActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 //                String cS = s.toString().substring(0,s.toString().length()-1);
-                if(calculationType==1 && discount!=0){
+                if(!StringUtils.isEmpty(s) && calculationType==1 && discount!=0){
                     coupPrice.setText(""+(Double.valueOf(s.toString())*discount));
                 }
             }
