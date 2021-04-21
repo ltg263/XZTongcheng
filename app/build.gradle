@@ -14,6 +14,12 @@ android {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）1304.60
             abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
+        multiDexEnabled true
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: "com.jx.xztongcheng",
+                JPUSH_APPKEY : "df223d6f96e30f85e88ad27f", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可
+        ]
 
     }
 
@@ -103,6 +109,9 @@ dependencies {
     implementation 'com.amap.api:3dmap:5.1.0'
     implementation 'com.amap.api:location:3.3.0'
     implementation 'com.amap.api:search:5.1.0'
+    //极光推送
+    implementation 'cn.jiguang.sdk:jpush:4.0.6'  // 此处以JPush 4.0.6 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.7.6'  // 此处以JCore 2.7.6 版本为例。
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.contrarywind:Android-PickerView:4.1.7'

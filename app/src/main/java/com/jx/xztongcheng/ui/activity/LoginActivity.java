@@ -108,6 +108,7 @@ public class LoginActivity extends BaseActivity {
         LoginRequest bean = new LoginRequest();
         bean.setUsername(etAccount.getText().toString());
         bean.setAndroidId(CommonUtils.getAndroid_Id());
+        bean.setRegistrationId(SPUtils.getInstance().getString("registrationId"));
         if (type == 0) {
             bean.setPassword(etPassword.getText().toString());
             bean.setGrantType("account_password");

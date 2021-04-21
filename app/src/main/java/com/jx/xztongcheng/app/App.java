@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.jx.xztongcheng.bean.clazz.UserInfo;
 import com.jx.xztongcheng.utils.ConstValues;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * Create by Sxl on 2020/10/15.
@@ -26,6 +28,8 @@ public class App extends Application {
         if (INSTANCE == null)
             INSTANCE = this;
         Utils.init(this);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     public static App getInstance() {

@@ -13,6 +13,15 @@ public class LoginRequest extends BaseResponse {
     private String username;
     private String verifyCode;
     private String androidId;
+    private String registrationId;
+
+    public String getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(String registrationId) {
+        this.registrationId = registrationId;
+    }
 
     public void setAndroidId(String androidId) {
         this.androidId = androidId;

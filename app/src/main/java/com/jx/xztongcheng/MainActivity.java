@@ -76,9 +76,9 @@ public class MainActivity extends BaseActivity implements JWebSocketClient.WebSo
 
         TTSUtils.getInstance().init();
 
-        jWebSocketClient = new JWebSocketClient();
-        jWebSocketClient.setWebSocketConnectListener(this);
-        jWebSocketClient.doConnect();
+//        jWebSocketClient = new JWebSocketClient();
+//        jWebSocketClient.setWebSocketConnectListener(this);
+//        jWebSocketClient.doConnect();
 
 
         DialogHelper.getVersionUpdating(this, new DialogHelper.UploadFileInterface() {
