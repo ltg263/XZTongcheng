@@ -42,7 +42,8 @@ public class ConstValues {
      * 服务器后台地址
      */
 //    public static final String BASE_URL = "http://192.168.3.177:9015/";
-    public static final String BASE_URL = "http://xztc.nbyjdz.com/";
+//    public static final String BASE_URL = "http://xztc.nbyjdz.com/";
+    public static final String BASE_URL = "http://xztc.zjxiangzhi.com/";
     //public static final String BASE_URL = "https://y.nbyangliao.com/nuozhiyu/";
 
 
