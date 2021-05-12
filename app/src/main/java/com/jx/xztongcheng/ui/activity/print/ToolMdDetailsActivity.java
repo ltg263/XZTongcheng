@@ -106,6 +106,8 @@ public class ToolMdDetailsActivity extends BaseActivity {
     TextView tv_time;
     @BindView(R.id.iv_gg)
     ImageView iv_gg;
+    @BindView(R.id.iv_type)
+    ImageView iv_type;
 
     // Layout Views
     private int interval;
@@ -151,7 +153,6 @@ public class ToolMdDetailsActivity extends BaseActivity {
     @Override
     public void initData() {
 
-        bitmapR = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
         RetrofitManager.build().create(OrderService.class)
                 .myOrderBarcodeInfo(getIntent().getStringExtra("id"))
                 .compose(RxScheduler.observeOnMainThread())
@@ -187,6 +188,13 @@ public class ToolMdDetailsActivity extends BaseActivity {
                     @Override
                     public void onSuccess(OrderSheetInfo coreOrderList) {
 //                        mTvZdh.setText(coreOrderList.getWebsiteNo());//站点
+                        if(coreOrderList.getExpressOrderType()==1){
+                            bitmapR = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo_c)).getBitmap();
+                            Glide.with(ToolMdDetailsActivity.this).load(R.mipmap.ic_logo_c).into(iv_type);
+                        }else{
+                            bitmapR = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
+                            Glide.with(ToolMdDetailsActivity.this).load(R.mipmap.ic_logo).into(iv_type);
+                        }
                         ToolMdDetailsActivity.this.coreOrderList = coreOrderList;
                         mTvZdh.setText("客户服务电话：400-6898-588");//站点
                         tv_websiteName.setText(coreOrderList.getWebsiteName());

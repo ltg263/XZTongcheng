@@ -595,6 +595,7 @@ public class OrderListBean implements Serializable {
         private int insuredStatus;
         private int courierUserId;
         private int profit;
+        private int expressOrderType;
         private ExpressAddressDTOS expressAddressDTOS;
         private String payStatus;
         private String waybillNumber;
@@ -604,6 +605,13 @@ public class OrderListBean implements Serializable {
         private String totalBonus;
         private String totalAmount;
 
+        public void setExpressOrderType(int expressOrderType) {
+            this.expressOrderType = expressOrderType;
+        }
+
+        public int getExpressOrderType() {
+            return expressOrderType;
+        }
 
         public String getAdvertisingImage() {
             return advertisingImage;

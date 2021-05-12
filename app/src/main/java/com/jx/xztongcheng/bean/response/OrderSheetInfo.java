@@ -28,6 +28,7 @@ public class OrderSheetInfo {
     private String mailingName;
     private String mailingMobile;
     private String mailingAddress;
+    private int expressOrderType;
     private String expressName;
     private String expressNum;
     private String expressWeight;
@@ -35,6 +36,14 @@ public class OrderSheetInfo {
     private String advertisingImage;
     private String amount;
     private String type;//1线上(不用操作)2现金支付3到付4待收货跨
+
+    public void setExpressOrderType(int expressOrderType) {
+        this.expressOrderType = expressOrderType;
+    }
+
+    public int getExpressOrderType() {
+        return expressOrderType;
+    }
 
     public void setAdvertisingImage(String advertisingImage) {
         this.advertisingImage = advertisingImage;

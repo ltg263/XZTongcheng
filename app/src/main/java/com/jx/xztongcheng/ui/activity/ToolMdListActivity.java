@@ -172,7 +172,6 @@ public class ToolMdListActivity extends BaseActivity {
     }
     Bitmap bitmapGg =null;
     private void startPrint() {
-        Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
         ToolMdDetailsActivity.mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //If the Bluetooth adapter is not supported,programmer is over
         if (ToolMdDetailsActivity.mBluetoothAdapter == null) {
@@ -198,6 +197,10 @@ public class ToolMdListActivity extends BaseActivity {
                                 OrderSheetInfo list = new OrderSheetInfo();
                                 OrderListBean.ExpressOrderDTOSBean data = beanListDy.get(a).getExpressOrderDTOS().get(0);
                                 list.setOrderNo(data.getOrderNo());
+                                Bitmap bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo)).getBitmap();
+                                if(data.getExpressOrderId()!=1){
+                                    bitmap = ((BitmapDrawable) getResources().getDrawable(R.mipmap.ic_logo_c)).getBitmap();
+                                }
 //                                list.setWebsiteName(beanListDy.get(a).getWebsiteName());
                                 list.setWebsiteName(data.getExpressAddressDTOS().getToWebsiteName());
                                 list.setConsigneeName(data.getExpressAddressDTOS().getToName());
